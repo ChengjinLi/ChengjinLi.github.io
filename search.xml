@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title><![CDATA[朴素贝叶斯分类及其应用]]></title>
-    <url>%2F2017%2F10%2F01%2Fmachine-learning-classification-navie-bayes-navie-bayes%2F</url>
+    <url>%2F2017%2F10%2F01%2Fnavie-bayes%2F</url>
     <content type="text"><![CDATA[朴素贝叶斯1朴素贝叶斯2朴素贝叶斯3朴素贝叶斯4朴素贝叶斯5朴素贝叶斯6####### 朴素贝叶斯7$$ e = mc^2$$without default primary success info warning danger]]></content>
       <categories>
         <category>Machine Learning</category>
@@ -13,7 +13,7 @@
   </entry>
   <entry>
     <title><![CDATA[TensorFlow安装教程]]></title>
-    <url>%2F2017%2F09%2F21%2Fmachine-learning-deep-learning-tensorflow-tensorflow-install-tutorial%2F</url>
+    <url>%2F2017%2F09%2F21%2Ftensorflow-install-tutorial%2F</url>
     <content type="text"></content>
       <categories>
         <category>TensorFlow</category>
@@ -23,74 +23,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Numpy教程]]></title>
-    <url>%2F2017%2F09%2F21%2Fmachine-learning-numpy-2017-09-21-numpy-using-tutorial%2F</url>
-    <content type="text"></content>
-      <categories>
-        <category>Numpy</category>
-      </categories>
-      <tags>
-        <tag>Numpy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Python使用教程]]></title>
-    <url>%2F2017%2F08%2F21%2Fpython-python-using-tutorial%2F</url>
-    <content type="text"></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[C++常用语法教程]]></title>
-    <url>%2F2017%2F08%2F20%2Fcpp-cpp-using-tutorial%2F</url>
-    <content type="text"></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hive常用命令教程]]></title>
-    <url>%2F2017%2F08%2F11%2Fbig-data-hive-hive-command-tutorial%2F</url>
-    <content type="text"></content>
-      <categories>
-        <category>Tool</category>
-      </categories>
-      <tags>
-        <tag>Hive</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[HBase常用命令教程]]></title>
-    <url>%2F2017%2F08%2F10%2Fbig-data-hbase-hbase-command-tutorial%2F</url>
-    <content type="text"></content>
-      <categories>
-        <category>Tool</category>
-      </categories>
-      <tags>
-        <tag>HBase</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hadoop Shell常用命令教程]]></title>
-    <url>%2F2017%2F08%2F09%2Fbig-data-hadoop-hadoop-fs-command-tutorial%2F</url>
-    <content type="text"></content>
-      <categories>
-        <category>Tool</category>
-      </categories>
-      <tags>
-        <tag>Hadoop</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Linux 常用命令教程]]></title>
-    <url>%2F2017%2F08%2F08%2Ftool-linux-Linux-commond-tutorial%2F</url>
+    <url>%2F2017%2F08%2F08%2FLinux-commond-tutorial%2F</url>
     <content type="text"></content>
       <categories>
         <category>Tool</category>
@@ -101,7 +35,7 @@
   </entry>
   <entry>
     <title><![CDATA[LaTeX 使用教程]]></title>
-    <url>%2F2017%2F08%2F07%2Ftool-LaTeX-using-tutorial%2F</url>
+    <url>%2F2017%2F08%2F07%2FLaTeX-using-tutorial%2F</url>
     <content type="text"></content>
       <categories>
         <category>Tool</category>
@@ -112,7 +46,7 @@
   </entry>
   <entry>
     <title><![CDATA[SVN常用命令教程]]></title>
-    <url>%2F2017%2F08%2F06%2Ftool-svn-command-tutorial%2F</url>
+    <url>%2F2017%2F08%2F06%2Fsvn-command-tutorial%2F</url>
     <content type="text"></content>
       <categories>
         <category>Tool</category>
@@ -123,7 +57,7 @@
   </entry>
   <entry>
     <title><![CDATA[git常用命令教程]]></title>
-    <url>%2F2017%2F08%2F05%2Ftool-git-command-tutorial%2F</url>
+    <url>%2F2017%2F08%2F05%2Fgit-command-tutorial%2F</url>
     <content type="text"></content>
       <categories>
         <category>Tool</category>
@@ -134,7 +68,7 @@
   </entry>
   <entry>
     <title><![CDATA[Vim常用命令教程]]></title>
-    <url>%2F2017%2F08%2F04%2Ftool-vim-2017-08-04-vim-command-tutorial%2F</url>
+    <url>%2F2017%2F08%2F04%2Fvim-command-tutorial%2F</url>
     <content type="text"></content>
       <categories>
         <category>Tool</category>
@@ -145,7 +79,7 @@
   </entry>
   <entry>
     <title><![CDATA[本地挂载服务器文件夹工具---「sshfs」的安装及使用]]></title>
-    <url>%2F2017%2F08%2F03%2Ftool-sshfs-install-and-using-on-mac%2F</url>
+    <url>%2F2017%2F08%2F03%2Fsshfs-install-and-using-on-mac%2F</url>
     <content type="text"><![CDATA[对于习惯在本地使用「IDE」工具进行编辑而不习惯在服务器上使用 「vim」 进行编辑的同学，下面介绍一个非常方便的在本地挂载服务器文件夹的工具 「sshfs」。下面介绍在「Mac」(系统版本：macOS Sierra 10.12.6)下的安装及使用方法： 安装「sshfs」安装 Homebrew 先确定是否已经安装「Homebrew」，在命令行执行如下命令：1brew -v 输出示例：12Homebrew &gt;1.2.0 (no git repository)Homebrew/homebrew-core (git revision 9cf7; last commit 2017-09-22) 如果没有安装，则执行如下命令进行安装，在命令行执行如下命令：1ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; 安装 「sshfs」 的依赖 「osxfuse」执行如下命令：1brew install caskroom/cask/osxfuse 安装 「sshfs」执行如下命令：1brew install sshfs 使用 「sshfs」 挂载执行如下命令：1sshfs -C -o reconnect user@hostname:remote_dir local_dir 参数说明如下： user: 远程连接用户名 hostname: 远程连接的主机名 remote_dir: 远程目录 local_dir: 本地目录 查看挂载情况1df -h local_dir 使用 「umount」 取消挂载1umount local_dir 相关问题如过我们的Mac休眠或重启, 发现挂载的失败了, 进入目录：1ls local_dir 会提示如下类似信息：1ls: local_dir: Input/output error 取消挂载1umount local_dir 又会提示1umount: local_dir: not currently mounted 这个时候, 我们不得不关闭进程了, 可以先通过命令查看进程1pgrep -lf sshfs 然后杀掉相应的挂载进程, 或者直接杀掉所有挂载进程1pkill -9 sshfs 之后重新挂载响应的目录即可 相关链接：http://www.jianshu.com/p/8723ba79f35a]]></content>
       <categories>
         <category>Tool</category>
@@ -156,7 +90,7 @@
   </entry>
   <entry>
     <title><![CDATA[Markdown 使用教程]]></title>
-    <url>%2F2017%2F08%2F02%2Ftool-markdown-Markdown-using-tutorial%2F</url>
+    <url>%2F2017%2F08%2F02%2FMarkdown-using-tutorial%2F</url>
     <content type="text"><![CDATA[标题语法：1# 标题内容 说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。 示例： 123456# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题 示例显示效果： 一级标题二级标题三级标题四级标题五级标题六级标题 斜体、粗体、加粗斜体、删除线语法：1234*斜体***粗体*****加粗斜体***~~删除线~~ 示例显示效果： 斜体粗体加粗斜体删除线 链接自动链接语法：1&lt;链接地址&gt; 说明：Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，Markdown 就会自动把它转成链接。示例：1&lt;https://chengjinli.github.io/&gt; 示例显示效果： https://chengjinli.github.io/ 超链接语法：1[链接文字](链接地址 &quot;链接标题&quot;) 说明：()中的””之间可以为链接指定title，title属性可加可不加。title属性的效果是鼠标悬停在链接上会出现指定的 title 文字。链接地址与链接标题前有一个空格。示例：1[MJ&apos;s Learning Notes](https://chengjinli.github.io/) 示例显示效果： MJ’s Learning Notes 列表有序列表语法：1数字加一个英文句点 示例：121. 无序列表12. 无序列表2 示例显示效果： 无序列表1 无序列表2 无序列表语法：1*，+，- 加上列表内容 示例：123456* 无序列表1* 无序列表2+ 无序列表3+ 无序列表4- 无序列表5- 无序列表6 示例显示效果： 无序列表1 无序列表2 无序列表3 无序列表4 无序列表5 无序列表6 引用插入图片语法：1![图片Alt](图片地址 &quot;图片Title&quot;) 说明：[]中写图片Alt，如果图片因为某些原因不能显示，就用定义的图片Alt文字来代替图片。()里写图片地址，()图片Title表示鼠标悬停在图片上时出现的文字。 Alt 和 Title 都不是必须的，可以省略，但建议写上。示例：1![头像](https://chengjinli.github.io/images/MJ.jpg &quot;MJ&quot;) 示例显示效果： LaTeX公式流程图表格分割线代码目录锚点注脚]]></content>
       <categories>
         <category>Tool</category>
@@ -167,7 +101,7 @@
   </entry>
   <entry>
     <title><![CDATA[使用Hexo + Next + github/coding 搭建个人静态博客]]></title>
-    <url>%2F2017%2F08%2F01%2Ftool-hexo-next-use-hexo-next-github-and-coding-build-static-blog%2F</url>
+    <url>%2F2017%2F08%2F01%2Fuse-hexo-next-github-and-coding-build-static-blog%2F</url>
     <content type="text"><![CDATA[博客框架使用 Hexo主题使用 NexT代码托管使用 Coding Next主题添加鼠标心形点击特效1、 在themes\next\source\js\src\目录下新建love.js,代码如下:1!function(e,t,a)&#123;function n()&#123;c(&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &apos;&apos;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;),o(),r()&#125;function r()&#123;for(var e=0;e&lt;d.length;e++)d[e].alpha&lt;=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText=&quot;left:&quot;+d[e].x+&quot;px;top:&quot;+d[e].y+&quot;px;opacity:&quot;+d[e].alpha+&quot;;transform:scale(&quot;+d[e].scale+&quot;,&quot;+d[e].scale+&quot;) rotate(45deg);background:&quot;+d[e].color+&quot;;z-index:99999&quot;);requestAnimationFrame(r)&#125;function o()&#123;var t=&quot;function&quot;==typeof e.onclick&amp;&amp;e.onclick;e.onclick=function(e)&#123;t&amp;&amp;t(),i(e)&#125;&#125;function i(e)&#123;var a=t.createElement(&quot;div&quot;);a.className=&quot;heart&quot;,d.push(&#123;el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()&#125;),t.body.appendChild(a)&#125;function c(e)&#123;var a=t.createElement(&quot;style&quot;);a.type=&quot;text/css&quot;;try&#123;a.appendChild(t.createTextNode(e))&#125;catch(t)&#123;a.styleSheet.cssText=e&#125;t.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;function s()&#123;return&quot;rgb(&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;)&quot;&#125;var d=[];e.requestAnimationFrame=function()&#123;return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e)&#123;setTimeout(e,1e3/60)&#125;&#125;(),n()&#125;(window,document); 2、 在themes\next\layout\_layout.swig文件的最下方，&lt;/body&gt;前面添加如下代码：1&lt;script type=&quot;text/javascript&quot; src=&quot;/js/src/love.js&quot;&gt;&lt;/script&gt;]]></content>
       <categories>
         <category>Tool</category>

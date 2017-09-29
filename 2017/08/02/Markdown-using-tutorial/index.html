@@ -69,19 +69,19 @@
 
 
 
-<meta name="description" content="标题语法：1# 标题内容 说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。">
+<meta name="description" content="标题语法：1不同数量的# 标题内容 说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。">
 <meta name="keywords" content="Markdown">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Markdown 使用教程">
 <meta property="og:url" content="http://yoursite.com/2017/08/02/Markdown-using-tutorial/index.html">
 <meta property="og:site_name" content="MJ&#39;s Learning Notes">
-<meta property="og:description" content="标题语法：1# 标题内容 说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。">
+<meta property="og:description" content="标题语法：1不同数量的# 标题内容 说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chengjinli.github.io/images/MJ.jpg">
-<meta property="og:updated_time" content="2017-09-29T13:58:44.000Z">
+<meta property="og:updated_time" content="2017-09-29T15:45:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Markdown 使用教程">
-<meta name="twitter:description" content="标题语法：1# 标题内容 说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。">
+<meta name="twitter:description" content="标题语法：1不同数量的# 标题内容 说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。">
 <meta name="twitter:image" content="https://chengjinli.github.io/images/MJ.jpg">
 
 
@@ -383,7 +383,7 @@
       
 
       
-        <h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># 标题内容</div></pre></td></tr></table></figure></p>
+        <h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">不同数量的# 标题内容</div></pre></td></tr></table></figure></p>
 <p>说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。<br><a id="more"></a></p>
 <p>示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 一级标题</div><div class="line">## 二级标题</div><div class="line">### 三级标题</div><div class="line">#### 四级标题</div><div class="line">#####  五级标题</div><div class="line">######  六级标题</div></pre></td></tr></table></figure>
@@ -433,13 +433,108 @@
 <li>无序列表6</li>
 </ul>
 </blockquote>
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![图片Alt](图片地址 &quot;图片Title&quot;)</div></pre></td></tr></table></figure></p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><h2 id="单层引用"><a href="#单层引用" class="headerlink" title="单层引用"></a>单层引用</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;加上被引用的内容</div></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; 一行内容的引用</div></pre></td></tr></table></figure></p>
+<p>示例显示效果：</p>
+<blockquote>
+<p>一行内容的引用</p>
+</blockquote>
+<h2 id="多层引用"><a href="#多层引用" class="headerlink" title="多层引用"></a>多层引用</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">不同数量的&gt;加上被引用的内容</div></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;第3层引用</div><div class="line"></div><div class="line">&gt;&gt;第2层引用</div><div class="line"></div><div class="line">&gt;第1层引用</div></pre></td></tr></table></figure></p>
+<p>示例显示效果：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>第3层引用</p>
+</blockquote>
+<p>第2层引用</p>
+</blockquote>
+<p>第1层引用</p>
+</blockquote>
+<h2 id="引用其他元素"><a href="#引用其他元素" class="headerlink" title="引用其他元素"></a>引用其他元素</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：</div></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; ### 三级标题</div><div class="line">&gt; 1. 第一行列表内容</div><div class="line">&gt; 2. 第二行列表内容</div><div class="line">&gt; </div><div class="line">&gt; 插入代码的例子</div><div class="line">&gt; `print (&quot;MJ&quot;)`</div></pre></td></tr></table></figure></p>
+<p>示例显示效果：</p>
+<blockquote>
+<h3 id="三级标题-1"><a href="#三级标题-1" class="headerlink" title="三级标题"></a>三级标题</h3><ol>
+<li>第一行列表内容</li>
+<li>第二行列表内容</li>
+</ol>
+<p><code>print (&quot;MJ&quot;)</code></p>
+</blockquote>
+<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![图片Alt](图片地址 &quot;图片Title&quot;)</div></pre></td></tr></table></figure></p>
 <p>说明：[]中写图片Alt，如果图片因为某些原因不能显示，就用定义的图片Alt文字来代替图片。()里写图片地址，()图片Title表示鼠标悬停在图片上时出现的文字。 Alt 和 Title 都不是必须的，可以省略，但建议写上。<br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![头像](https://chengjinli.github.io/images/MJ.jpg &quot;MJ&quot;)</div></pre></td></tr></table></figure></p>
 <p>示例显示效果：</p>
 <blockquote>
 <p><img src="https://chengjinli.github.io/images/MJ.jpg" alt="头像" title="MJ"></p>
 </blockquote>
-<h1 id="LaTeX公式"><a href="#LaTeX公式" class="headerlink" title="LaTeX公式"></a>LaTeX公式</h1><h1 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h1><h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><h1 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h1><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h1 id="锚点"><a href="#锚点" class="headerlink" title="锚点"></a>锚点</h1><h1 id="注脚"><a href="#注脚" class="headerlink" title="注脚"></a>注脚</h1>
+<h1 id="LaTeX公式"><a href="#LaTeX公式" class="headerlink" title="LaTeX公式"></a>LaTeX公式</h1><h2 id="行内公式"><a href="#行内公式" class="headerlink" title="行内公式"></a>行内公式</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$公式$</div></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。</div></pre></td></tr></table></figure></p>
+<p>示例显示效果：</p>
+<blockquote>
+<p>质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。</p>
+</blockquote>
+<h2 id="正行公式"><a href="#正行公式" class="headerlink" title="正行公式"></a>正行公式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$$公式$$</div></pre></td></tr></table></figure>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$$\sum_&#123;i=1&#125;^n a_i=0$$</div><div class="line">$$f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 $$</div><div class="line">$$\sum^&#123;j-1&#125;_&#123;k=0&#125;&#123;\widehat&#123;\gamma&#125;_&#123;kj&#125; z_k&#125;$$</div></pre></td></tr></table></figure></p>
+<p>示例显示效果：</p>
+<blockquote>
+<p>$$\sum_{i=1}^n a_i=0$$</p>
+<p>$$f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2$$</p>
+</blockquote>
+<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><p>语法说明：</p>
+<ol>
+<li>不管是哪种方式，第一行为表头，第二行分隔表头和主体部分，第三行开始每一行为一个表格行。</li>
+<li>列于列之间用管道符“|”隔开。原生方式的表格每一行的两边也要有管道符。</li>
+<li>第二行还可以为不同的列指定对齐方向。默认为左对齐，在 “-” 右边加上 “:” 为右对齐，在 “-” 两侧同时加上 “:” 为居中对齐。</li>
+</ol>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">|年|月|日|</div><div class="line">|-|:-:|-:|</div><div class="line">|2015|5|5|</div><div class="line">|2016|6|6|</div><div class="line">|2017|7|7|</div></pre></td></tr></table></figure></p>
+<p>示例显示效果：</p>
+<table>
+<thead>
+<tr>
+<th>年</th>
+<th style="text-align:center">月</th>
+<th style="text-align:right">日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2015</td>
+<td style="text-align:center">5</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td>2016</td>
+<td style="text-align:center">6</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:center">7</td>
+<td style="text-align:right">7</td>
+</tr>
+</tbody>
+</table>
+<h1 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h1><p>语法：<br>你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：<br>示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">* * *</div><div class="line">***</div><div class="line">*****</div><div class="line">- - -</div></pre></td></tr></table></figure></p>
+<p>示例显示效果：</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="行内代码"><a href="#行内代码" class="headerlink" title="行内代码"></a>行内代码</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">`代码`</div></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python语言里的函数`print()`怎么使用？</div></pre></td></tr></table></figure></p>
+<p>示例显示效果：</p>
+<blockquote>
+<p>python语言里的函数<code>print()</code>怎么使用？</p>
+</blockquote>
+<h2 id="多行代码"><a href="#多行代码" class="headerlink" title="多行代码"></a>多行代码</h2><p>语法：<br>```<br>第1行代码<br>第2行代码<br>```</p>
+<p>示例：<br>```<br>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    print(“MJ”)<br>```</p>
+<p>示例显示效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    print(&quot;MJ&quot;)</div></pre></td></tr></table></figure></p>
+<h2 id="缩进式代码"><a href="#缩进式代码" class="headerlink" title="缩进式代码"></a>缩进式代码</h2><p>语法：<br>缩进 4 个空格或是 1 个制表符，一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">   	print(&quot;MJ&quot;)</div></pre></td></tr></table></figure></p>
+<p>示例显示效果:</p>
+<pre><code>if __name__ == &apos;__main__&apos;:
+    print(&quot;MJ&quot;)
+</code></pre><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h1 id="锚点"><a href="#锚点" class="headerlink" title="锚点"></a>锚点</h1><h1 id="注脚"><a href="#注脚" class="headerlink" title="注脚"></a>注脚</h1>
       
     </div>
     
@@ -715,7 +810,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#标题"><span class="nav-number">1.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一级标题"><span class="nav-number">2.</span> <span class="nav-text">一级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二级标题"><span class="nav-number">2.1.</span> <span class="nav-text">二级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三级标题"><span class="nav-number">2.1.1.</span> <span class="nav-text">三级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#四级标题"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">四级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#五级标题"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">五级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#六级标题"><span class="nav-number">2.1.1.1.1.1.</span> <span class="nav-text">六级标题</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斜体、粗体、加粗斜体、删除线"><span class="nav-number">3.</span> <span class="nav-text">斜体、粗体、加粗斜体、删除线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链接"><span class="nav-number">4.</span> <span class="nav-text">链接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动链接"><span class="nav-number">4.1.</span> <span class="nav-text">自动链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超链接"><span class="nav-number">4.2.</span> <span class="nav-text">超链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表"><span class="nav-number">5.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#有序列表"><span class="nav-number">5.1.</span> <span class="nav-text">有序列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无序列表"><span class="nav-number">5.2.</span> <span class="nav-text">无序列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用"><span class="nav-number">6.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#插入图片"><span class="nav-number">7.</span> <span class="nav-text">插入图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LaTeX公式"><span class="nav-number">8.</span> <span class="nav-text">LaTeX公式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流程图"><span class="nav-number">9.</span> <span class="nav-text">流程图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表格"><span class="nav-number">10.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分割线"><span class="nav-number">11.</span> <span class="nav-text">分割线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">12.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">13.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锚点"><span class="nav-number">14.</span> <span class="nav-text">锚点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注脚"><span class="nav-number">15.</span> <span class="nav-text">注脚</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#标题"><span class="nav-number">1.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一级标题"><span class="nav-number">2.</span> <span class="nav-text">一级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二级标题"><span class="nav-number">2.1.</span> <span class="nav-text">二级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三级标题"><span class="nav-number">2.1.1.</span> <span class="nav-text">三级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#四级标题"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">四级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#五级标题"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">五级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#六级标题"><span class="nav-number">2.1.1.1.1.1.</span> <span class="nav-text">六级标题</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斜体、粗体、加粗斜体、删除线"><span class="nav-number">3.</span> <span class="nav-text">斜体、粗体、加粗斜体、删除线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链接"><span class="nav-number">4.</span> <span class="nav-text">链接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动链接"><span class="nav-number">4.1.</span> <span class="nav-text">自动链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超链接"><span class="nav-number">4.2.</span> <span class="nav-text">超链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表"><span class="nav-number">5.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#有序列表"><span class="nav-number">5.1.</span> <span class="nav-text">有序列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无序列表"><span class="nav-number">5.2.</span> <span class="nav-text">无序列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用"><span class="nav-number">6.</span> <span class="nav-text">引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单层引用"><span class="nav-number">6.1.</span> <span class="nav-text">单层引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多层引用"><span class="nav-number">6.2.</span> <span class="nav-text">多层引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用其他元素"><span class="nav-number">6.3.</span> <span class="nav-text">引用其他元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三级标题-1"><span class="nav-number">6.3.1.</span> <span class="nav-text">三级标题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#插入图片"><span class="nav-number">7.</span> <span class="nav-text">插入图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LaTeX公式"><span class="nav-number">8.</span> <span class="nav-text">LaTeX公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#行内公式"><span class="nav-number">8.1.</span> <span class="nav-text">行内公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正行公式"><span class="nav-number">8.2.</span> <span class="nav-text">正行公式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表格"><span class="nav-number">9.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分割线"><span class="nav-number">10.</span> <span class="nav-text">分割线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">11.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#行内代码"><span class="nav-number">11.1.</span> <span class="nav-text">行内代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多行代码"><span class="nav-number">11.2.</span> <span class="nav-text">多行代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩进式代码"><span class="nav-number">11.3.</span> <span class="nav-text">缩进式代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">12.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锚点"><span class="nav-number">13.</span> <span class="nav-text">锚点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注脚"><span class="nav-number">14.</span> <span class="nav-text">注脚</span></a></li></ol></div>
             
 
           </div>
@@ -1258,6 +1353,26 @@ var jiathis_config={
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

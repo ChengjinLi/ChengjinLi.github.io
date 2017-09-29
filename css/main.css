@@ -452,6 +452,9 @@ body {
     width: 900px;
   }
 }
+.main {
+  padding-bottom: 150px;
+}
 .main-inner {
   margin: 0 auto;
   width: calc(100% - 252px);
@@ -462,6 +465,9 @@ body {
   }
 }
 .footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
   width: 100%;
   min-height: 50px;
 }
@@ -971,8 +977,7 @@ pre .javascript .function {
   position: relative;
   top: -1px;
   margin: 0 10px;
-  padding: 0 10px;
-  line-height: 30px;
+  padding: 0 11px;
 }
 @media (max-width: 767px) {
   .page-number-basic,
@@ -1023,6 +1028,7 @@ pre .javascript .function {
     margin-bottom: 10px;
     border-top: 0;
     border-bottom: 1px solid #eee;
+    padding: 0 10px;
   }
   .pagination .prev:hover,
   .pagination .next:hover,
@@ -1439,15 +1445,9 @@ pre .javascript .function {
   display: none;
 }
 .posts-expand .post-title {
-  font-size: 26px;
   text-align: center;
   word-break: break-word;
   font-weight: 400;
-}
-@media (max-width: 767px) {
-  .posts-expand .post-title {
-    font-size: 22px;
-  }
 }
 .posts-expand .post-title-link {
   display: inline-block;
@@ -1819,7 +1819,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff0dff;
+  background: #55c120;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2632,6 +2632,16 @@ pre .javascript .function {
 }
 .main:after {
   clear: both;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .main {
+    padding-bottom: 100px;
+  }
+}
+@media (max-width: 767px) {
+  .main {
+    padding-bottom: 100px;
+  }
 }
 .container .main-inner {
   width: 75%;

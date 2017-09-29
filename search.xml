@@ -1,347 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[Markdown 使用教程]]></title>
-      <url>/2017/09/22/Markdown-using-tutorial/</url>
-      <content type="html"><![CDATA[<h1 id="1、标题"><a href="#1、标题" class="headerlink" title="1、标题"></a>1、标题</h1><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># 标题内容</div></pre></td></tr></table></figure></p>
-<p>说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。<br>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 一级标题</div><div class="line">## 二级标题</div><div class="line">### 三级标题</div><div class="line">#### 四级标题</div><div class="line">#####  五级标题</div><div class="line">######  六级标题</div></pre></td></tr></table></figure>
-<p>示例显示效果：</p>
-<blockquote>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
-<h1 id="2、斜体、粗体、加粗斜体、删除线"><a href="#2、斜体、粗体、加粗斜体、删除线" class="headerlink" title="2、斜体、粗体、加粗斜体、删除线"></a>2、斜体、粗体、加粗斜体、删除线</h1><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*斜体*</div><div class="line">**粗体**</div><div class="line">***加粗斜体***</div><div class="line">~~删除线~~</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p><em>斜体</em><br><strong>粗体</strong><br><strong><em>加粗斜体</em></strong><br><del>删除线</del></p>
-</blockquote>
-<h1 id="3、链接"><a href="#3、链接" class="headerlink" title="3、链接"></a>3、链接</h1><h2 id="3-1、-自动链接"><a href="#3-1、-自动链接" class="headerlink" title="3.1、  自动链接"></a>3.1、  自动链接</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;链接地址&gt;</div></pre></td></tr></table></figure></p>
-<p>说明：Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，Markdown 就会自动把它转成链接。<br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;https://chengjinli.github.io/&gt;</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p><a href="https://chengjinli.github.io/" target="_blank" rel="external">https://chengjinli.github.io/</a></p>
-</blockquote>
-<h2 id="3-2、-超链接"><a href="#3-2、-超链接" class="headerlink" title="3.2、 超链接"></a>3.2、 超链接</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[链接文字](链接地址 &quot;链接标题&quot;)</div></pre></td></tr></table></figure></p>
-<p>说明：()中的””之间可以为链接指定title，title属性可加可不加。title属性的效果是鼠标悬停在链接上会出现指定的 title 文字。链接地址与链接标题前有一个空格。<br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[MJ&apos;s Learning Notes](https://chengjinli.github.io/)</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p><a href="https://chengjinli.github.io/" target="_blank" rel="external">MJ’s Learning Notes</a></p>
-</blockquote>
-<h1 id="4、-列表"><a href="#4、-列表" class="headerlink" title="4、 列表"></a>4、 列表</h1><h2 id="4-1、-有序列表"><a href="#4-1、-有序列表" class="headerlink" title="4.1、 有序列表"></a>4.1、 有序列表</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">数字加一个英文句点</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. 无序列表1</div><div class="line">2. 无序列表2</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<ol>
-<li>无序列表1</li>
-<li>无序列表2</li>
-</ol>
-</blockquote>
-<h2 id="4-2、-无序列表"><a href="#4-2、-无序列表" class="headerlink" title="4.2、 无序列表"></a>4.2、 无序列表</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*，+，- 加上列表内容</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">* 无序列表1</div><div class="line">* 无序列表2</div><div class="line">+ 无序列表3</div><div class="line">+ 无序列表4</div><div class="line">- 无序列表5</div><div class="line">- 无序列表6</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<ul>
-<li>无序列表1</li>
-<li>无序列表2</li>
-</ul>
-<ul>
-<li>无序列表3</li>
-<li>无序列表4</li>
-</ul>
-<ul>
-<li>无序列表5</li>
-<li>无序列表6</li>
-</ul>
-</blockquote>
-<h1 id="5-引用"><a href="#5-引用" class="headerlink" title="5. 引用"></a>5. 引用</h1><h1 id="6-插入图片"><a href="#6-插入图片" class="headerlink" title="6. 插入图片"></a>6. 插入图片</h1><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![图片Alt](图片地址 &quot;图片Title&quot;)</div></pre></td></tr></table></figure></p>
-<p>说明：[]中写图片Alt，如果图片因为某些原因不能显示，就用定义的图片Alt文字来代替图片。()里写图片地址，()图片Title表示鼠标悬停在图片上时出现的文字。 Alt 和 Title 都不是必须的，可以省略，但建议写上。<br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![头像](https://chengjinli.github.io/images/MJ.jpg &quot;MJ&quot;)</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p><img src="https://chengjinli.github.io/images/MJ.jpg" alt="头像" title="MJ"></p>
-</blockquote>
-<h1 id="7-LaTeX公式"><a href="#7-LaTeX公式" class="headerlink" title="7. LaTeX公式"></a>7. LaTeX公式</h1><h1 id="8-流程图"><a href="#8-流程图" class="headerlink" title="8. 流程图"></a>8. 流程图</h1><h1 id="9-表格"><a href="#9-表格" class="headerlink" title="9. 表格"></a>9. 表格</h1><h1 id="10-分割线"><a href="#10-分割线" class="headerlink" title="10. 分割线"></a>10. 分割线</h1><h1 id="11-代码"><a href="#11-代码" class="headerlink" title="11. 代码"></a>11. 代码</h1><h1 id="12-目录"><a href="#12-目录" class="headerlink" title="12. 目录"></a>12. 目录</h1><h1 id="13-锚点"><a href="#13-锚点" class="headerlink" title="13. 锚点"></a>13. 锚点</h1><h1 id="14-注脚"><a href="#14-注脚" class="headerlink" title="14. 注脚"></a>14. 注脚</h1>]]></content>
-      
-        <categories>
-            
-            <category> Tool </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Markdown </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[本地挂载服务器文件夹工具---「sshfs」的安装及使用]]></title>
-      <url>/2017/09/22/sshfs-install-and-using-on-mac/</url>
-      <content type="html"><![CDATA[<p>对于习惯在本地使用「<strong>IDE</strong>」工具进行编辑而不习惯在服务器上使用 「<strong>vim</strong>」 进行编辑的同学，下面介绍一个非常方便的在本地挂载服务器文件夹的工具 「<strong>sshfs</strong>」。下面介绍在「<strong>Mac</strong>」(系统版本：macOS Sierra 10.12.6)下的安装及使用方法：</p>
-<h1 id="1、安装「sshfs」"><a href="#1、安装「sshfs」" class="headerlink" title="1、安装「sshfs」"></a>1、安装「<strong>sshfs</strong>」</h1><h3 id="1-1、-安装-Homebrew"><a href="#1-1、-安装-Homebrew" class="headerlink" title="1.1、 安装 Homebrew"></a>1.1、 安装 <a href="https://brew.sh/index_zh-cn.html" target="_blank" rel="external">Homebrew</a></h3><p>先确定是否已经安装「<strong>Homebrew</strong>」，在命令行执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew -v</div></pre></td></tr></table></figure></p>
-<p>输出示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Homebrew &gt;1.2.0 (no git repository)</div><div class="line">Homebrew/homebrew-core (git revision 9cf7; last commit 2017-09-22)</div></pre></td></tr></table></figure></p>
-<p>如果没有安装，则执行如下命令进行安装，在命令行执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure></p>
-<h3 id="1-2、-安装-「sshfs」-的依赖-「osxfuse」"><a href="#1-2、-安装-「sshfs」-的依赖-「osxfuse」" class="headerlink" title="1.2、 安装 「sshfs」 的依赖 「osxfuse」"></a>1.2、 安装 「<strong>sshfs</strong>」 的依赖 「<strong>osxfuse</strong>」</h3><p>执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install caskroom/cask/osxfuse</div></pre></td></tr></table></figure></p>
-<h3 id="1-3、-安装-「sshfs」"><a href="#1-3、-安装-「sshfs」" class="headerlink" title="1.3、 安装 「sshfs」"></a>1.3、 安装 「<strong>sshfs</strong>」</h3><p>执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install sshfs</div></pre></td></tr></table></figure></p>
-<h1 id="2、-使用-「sshfs」-挂载"><a href="#2、-使用-「sshfs」-挂载" class="headerlink" title="2、 使用 「sshfs」 挂载"></a>2、 使用 「<strong>sshfs</strong>」 挂载</h1><p>执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sshfs -C -o reconnect user@hostname:remote_dir local_dir</div></pre></td></tr></table></figure></p>
-<p>参数说明如下：</p>
-<ul>
-<li>user: 远程连接用户名</li>
-<li>hostname: 远程连接的主机名</li>
-<li>remote_dir: 远程目录</li>
-<li>local_dir: 本地目录</li>
-</ul>
-<h1 id="4、查看挂载情况"><a href="#4、查看挂载情况" class="headerlink" title="4、查看挂载情况"></a>4、查看挂载情况</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df -h local_dir</div></pre></td></tr></table></figure>
-<h1 id="5、使用-「umount」-取消挂载"><a href="#5、使用-「umount」-取消挂载" class="headerlink" title="5、使用 「umount」 取消挂载"></a>5、使用 「<strong>umount</strong>」 取消挂载</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">umount local_dir</div></pre></td></tr></table></figure>
-<h1 id="6、-相关问题"><a href="#6、-相关问题" class="headerlink" title="6、 相关问题"></a>6、 相关问题</h1><p>如过我们的Mac休眠或重启, 发现挂载的失败了, 进入目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls local_dir</div></pre></td></tr></table></figure></p>
-<p>会提示如下类似信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls: local_dir: Input/output error</div></pre></td></tr></table></figure></p>
-<p>取消挂载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">umount local_dir</div></pre></td></tr></table></figure></p>
-<p>又会提示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">umount: local_dir: not currently mounted</div></pre></td></tr></table></figure></p>
-<p>这个时候, 我们不得不关闭进程了, 可以先通过命令查看进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pgrep -lf sshfs</div></pre></td></tr></table></figure></p>
-<p>然后杀掉相应的挂载进程, 或者直接杀掉所有挂载进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pkill -9 sshfs</div></pre></td></tr></table></figure></p>
-<p>之后重新挂载响应的目录即可</p>
-<p>相关链接：<a href="http://www.jianshu.com/p/8723ba79f35a" target="_blank" rel="external">http://www.jianshu.com/p/8723ba79f35a</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> Tool </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> sshfs </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[学习笔记---《TensorFlow安装教程》]]></title>
-      <url>/2017/09/21/tensorflow-install-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> TensorFlow </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> TensorFlow </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[学习笔记---《Numpy教程》]]></title>
-      <url>/2017/09/21/numpy-using-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> Numpy </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Numpy </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[学习笔记---《C++常用语法教程》]]></title>
-      <url>/2017/09/21/c-plus-plus-using-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> C++ </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> C++ </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[学习笔记---《Python教程》]]></title>
-      <url>/2017/09/21/python-using-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> Python </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Python </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[学习笔记---《Hadoop Shell常用命令教程》]]></title>
-      <url>/2017/09/21/hadoop-command-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> Hadoop </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Hadoop </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[学习笔记---《HBase常用命令教程》]]></title>
-      <url>/2017/09/21/hbase-command-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> HBase </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> HBase </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[学习笔记---《Hive常用命令教程》]]></title>
-      <url>/2017/09/21/hive-command-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> Hive </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Hive </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[学习笔记---《SVN常用命令教程》]]></title>
-      <url>/2017/09/21/svn-command-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> SVN </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> SVN </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[学习笔记---《git常用命令教程》]]></title>
-      <url>/2017/09/21/git-command-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> Tool </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> git </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[学习笔记---《Vim常用命令教程》]]></title>
-      <url>/2017/09/21/vim-command-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> Linux </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Vim </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朴素贝叶斯分类及其应用]]></title>
-      <url>/2017/09/15/navie-bayes/</url>
-      <content type="html"><![CDATA[<h1 id="朴素贝叶斯1"><a href="#朴素贝叶斯1" class="headerlink" title="朴素贝叶斯1"></a>朴素贝叶斯1</h1><h2 id="朴素贝叶斯2"><a href="#朴素贝叶斯2" class="headerlink" title="朴素贝叶斯2"></a>朴素贝叶斯2</h2><h3 id="朴素贝叶斯3"><a href="#朴素贝叶斯3" class="headerlink" title="朴素贝叶斯3"></a>朴素贝叶斯3</h3><h4 id="朴素贝叶斯4"><a href="#朴素贝叶斯4" class="headerlink" title="朴素贝叶斯4"></a>朴素贝叶斯4</h4><h5 id="朴素贝叶斯5"><a href="#朴素贝叶斯5" class="headerlink" title="朴素贝叶斯5"></a>朴素贝叶斯5</h5><h6 id="朴素贝叶斯6"><a href="#朴素贝叶斯6" class="headerlink" title="朴素贝叶斯6"></a>朴素贝叶斯6</h6><p>####### 朴素贝叶斯7<br>$$ e = mc^2$$</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Machine Learning </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Navie Bayes </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[朴素贝叶斯分类及其应用]]></title>
+    <url>%2F2017%2F10%2F01%2Fnavie-bayes%2F</url>
+    <content type="text"><![CDATA[朴素贝叶斯1朴素贝叶斯2朴素贝叶斯3朴素贝叶斯4朴素贝叶斯5朴素贝叶斯6####### 朴素贝叶斯7$$ e = mc^2$$without default primary success info warning danger]]></content>
+      <categories>
+        <category>Machine Learning</category>
+      </categories>
+      <tags>
+        <tag>Navie Bayes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[TensorFlow安装教程]]></title>
+    <url>%2F2017%2F09%2F21%2Ftensorflow-install-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>TensorFlow</category>
+      </categories>
+      <tags>
+        <tag>TensorFlow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Numpy教程]]></title>
+    <url>%2F2017%2F09%2F21%2Fnumpy-using-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Numpy</category>
+      </categories>
+      <tags>
+        <tag>Numpy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Python使用教程]]></title>
+    <url>%2F2017%2F08%2F21%2Fpython-using-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++常用语法教程]]></title>
+    <url>%2F2017%2F08%2F20%2Fc-plus-plus-using-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hive常用命令教程]]></title>
+    <url>%2F2017%2F08%2F11%2Fhive-command-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>Hive</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HBase常用命令教程]]></title>
+    <url>%2F2017%2F08%2F10%2Fhbase-command-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>HBase</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hadoop Shell常用命令教程]]></title>
+    <url>%2F2017%2F08%2F09%2Fhadoop-fs-command-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>Hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux 常用命令教程]]></title>
+    <url>%2F2017%2F08%2F08%2FLinux-commond-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX 使用教程]]></title>
+    <url>%2F2017%2F08%2F07%2FLaTeX-using-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>LaTeX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SVN常用命令教程]]></title>
+    <url>%2F2017%2F08%2F06%2Fsvn-command-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>svn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git常用命令教程]]></title>
+    <url>%2F2017%2F08%2F05%2Fgit-command-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Vim常用命令教程]]></title>
+    <url>%2F2017%2F08%2F04%2Fvim-command-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>Vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[本地挂载服务器文件夹工具---「sshfs」的安装及使用]]></title>
+    <url>%2F2017%2F08%2F03%2Fsshfs-install-and-using-on-mac%2F</url>
+    <content type="text"><![CDATA[对于习惯在本地使用「IDE」工具进行编辑而不习惯在服务器上使用 「vim」 进行编辑的同学，下面介绍一个非常方便的在本地挂载服务器文件夹的工具 「sshfs」。下面介绍在「Mac」(系统版本：macOS Sierra 10.12.6)下的安装及使用方法： 1、安装「sshfs」1.1、 安装 Homebrew先确定是否已经安装「Homebrew」，在命令行执行如下命令：1brew -v 输出示例：12Homebrew &gt;1.2.0 (no git repository)Homebrew/homebrew-core (git revision 9cf7; last commit 2017-09-22) 如果没有安装，则执行如下命令进行安装，在命令行执行如下命令：1ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; 1.2、 安装 「sshfs」 的依赖 「osxfuse」执行如下命令：1brew install caskroom/cask/osxfuse 1.3、 安装 「sshfs」执行如下命令：1brew install sshfs 2、 使用 「sshfs」 挂载执行如下命令：1sshfs -C -o reconnect user@hostname:remote_dir local_dir 参数说明如下： user: 远程连接用户名 hostname: 远程连接的主机名 remote_dir: 远程目录 local_dir: 本地目录 4、查看挂载情况1df -h local_dir 5、使用 「umount」 取消挂载1umount local_dir 6、 相关问题如过我们的Mac休眠或重启, 发现挂载的失败了, 进入目录：1ls local_dir 会提示如下类似信息：1ls: local_dir: Input/output error 取消挂载1umount local_dir 又会提示1umount: local_dir: not currently mounted 这个时候, 我们不得不关闭进程了, 可以先通过命令查看进程1pgrep -lf sshfs 然后杀掉相应的挂载进程, 或者直接杀掉所有挂载进程1pkill -9 sshfs 之后重新挂载响应的目录即可 相关链接：http://www.jianshu.com/p/8723ba79f35a]]></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>sshfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Markdown 使用教程]]></title>
+    <url>%2F2017%2F08%2F02%2FMarkdown-using-tutorial%2F</url>
+    <content type="text"><![CDATA[1、标题语法：1# 标题内容 说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。示例： 123456# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题 示例显示效果： 一级标题二级标题三级标题四级标题五级标题六级标题 2、斜体、粗体、加粗斜体、删除线语法：1234*斜体***粗体*****加粗斜体***~~删除线~~ 示例显示效果： 斜体粗体加粗斜体删除线 3、链接3.1、 自动链接语法：1&lt;链接地址&gt; 说明：Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，Markdown 就会自动把它转成链接。示例：1&lt;https://chengjinli.github.io/&gt; 示例显示效果： https://chengjinli.github.io/ 3.2、 超链接语法：1[链接文字](链接地址 &quot;链接标题&quot;) 说明：()中的””之间可以为链接指定title，title属性可加可不加。title属性的效果是鼠标悬停在链接上会出现指定的 title 文字。链接地址与链接标题前有一个空格。示例：1[MJ&apos;s Learning Notes](https://chengjinli.github.io/) 示例显示效果： MJ’s Learning Notes 4、 列表4.1、 有序列表语法：1数字加一个英文句点 示例：121. 无序列表12. 无序列表2 示例显示效果： 无序列表1 无序列表2 4.2、 无序列表语法：1*，+，- 加上列表内容 示例：123456* 无序列表1* 无序列表2+ 无序列表3+ 无序列表4- 无序列表5- 无序列表6 示例显示效果： 无序列表1 无序列表2 无序列表3 无序列表4 无序列表5 无序列表6 5. 引用6. 插入图片语法：1![图片Alt](图片地址 &quot;图片Title&quot;) 说明：[]中写图片Alt，如果图片因为某些原因不能显示，就用定义的图片Alt文字来代替图片。()里写图片地址，()图片Title表示鼠标悬停在图片上时出现的文字。 Alt 和 Title 都不是必须的，可以省略，但建议写上。示例：1![头像](https://chengjinli.github.io/images/MJ.jpg &quot;MJ&quot;) 示例显示效果： 7. LaTeX公式8. 流程图9. 表格10. 分割线11. 代码12. 目录13. 锚点14. 注脚]]></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Hexo + Next + github/coding 搭建个人静态博客]]></title>
+    <url>%2F2017%2F08%2F01%2Fuse-hexo-next-github-and-coding-build-static-blog%2F</url>
+    <content type="text"><![CDATA[博客框架使用Hexo主题使用NexT代码托管使用Coding]]></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Next</tag>
+      </tags>
+  </entry>
 </search>

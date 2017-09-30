@@ -387,6 +387,7 @@
     
     
     
+    
 
     
 
@@ -525,6 +526,7 @@
         
       
     </div>
+    
     
     
     
@@ -669,6 +671,7 @@
     
     
     
+    
 
     
 
@@ -807,6 +810,7 @@
         
       
     </div>
+    
     
     
     
@@ -951,6 +955,7 @@
     
     
     
+    
 
     
 
@@ -1089,6 +1094,7 @@
         
       
     </div>
+    
     
     
     
@@ -1239,6 +1245,7 @@
     
     
     
+    
 
     
 
@@ -1386,6 +1393,7 @@
     
     
     
+    
 
     
 
@@ -1520,17 +1528,24 @@
         
           
             <p>博客框架使用 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo</a><br>主题使用 <a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">NexT</a><br>代码托管使用 <a href="https://mart.coding.net/" target="_blank" rel="external">Coding</a></p>
-<h1 id="Next主题修改文章内链接文本样式"><a href="#Next主题修改文章内链接文本样式" class="headerlink" title="Next主题修改文章内链接文本样式"></a>Next主题修改文章内链接文本样式</h1><p>在<code>themes\next\source\css\_common\components\post\post.styl</code>文件如下位置添加css样式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">.post-sticky-flag &#123;</div><div class="line">  display: inline-block;</div><div class="line">  font-size: 16px;</div><div class="line">  -ms-transform: rotate(30deg);</div><div class="line">  transform: rotate(30deg);</div><div class="line">&#125;</div><div class="line">// 文章内链接文本样式</div><div class="line">.post-body p a&#123;</div><div class="line">  color: #0593d3;</div><div class="line">  border-bottom: none;</div><div class="line">  &amp;:hover &#123;</div><div class="line">    color: #fc6423;</div><div class="line">    border-bottom: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>实现效果：<br><a href="https://chengjinli.github.io/" target="_blank" rel="external">https://chengjinli.github.io/</a></p>
+<h1 id="Next主题修改文章内链接文本样式"><a href="#Next主题修改文章内链接文本样式" class="headerlink" title="Next主题修改文章内链接文本样式"></a>Next主题修改文章内链接文本样式</h1><p>实现效果：<br><a href="https://chengjinli.github.io/" target="_blank" rel="external">https://chengjinli.github.io/</a></p>
+<p>在<code>themes\next\source\css\_common\components\post\post.styl</code>文件如下位置添加css样式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">.post-sticky-flag &#123;</div><div class="line">  display: inline-block;</div><div class="line">  font-size: 16px;</div><div class="line">  -ms-transform: rotate(30deg);</div><div class="line">  transform: rotate(30deg);</div><div class="line">&#125;</div><div class="line">// 文章内链接文本样式</div><div class="line">.post-body p a&#123;</div><div class="line">  color: #0593d3;</div><div class="line">  border-bottom: none;</div><div class="line">  &amp;:hover &#123;</div><div class="line">    color: #fc6423;</div><div class="line">    border-bottom: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h1 id="Next主题添加鼠标心形点击特效"><a href="#Next主题添加鼠标心形点击特效" class="headerlink" title="Next主题添加鼠标心形点击特效"></a>Next主题添加鼠标心形点击特效</h1><p>1、 在<code>themes\next\source\js\src\</code>目录下新建<code>love.js</code>,代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">!function(e,t,a)&#123;function n()&#123;c(&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &apos;&apos;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;),o(),r()&#125;function r()&#123;for(var e=0;e&lt;d.length;e++)d[e].alpha&lt;=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText=&quot;left:&quot;+d[e].x+&quot;px;top:&quot;+d[e].y+&quot;px;opacity:&quot;+d[e].alpha+&quot;;transform:scale(&quot;+d[e].scale+&quot;,&quot;+d[e].scale+&quot;) rotate(45deg);background:&quot;+d[e].color+&quot;;z-index:99999&quot;);requestAnimationFrame(r)&#125;function o()&#123;var t=&quot;function&quot;==typeof e.onclick&amp;&amp;e.onclick;e.onclick=function(e)&#123;t&amp;&amp;t(),i(e)&#125;&#125;function i(e)&#123;var a=t.createElement(&quot;div&quot;);a.className=&quot;heart&quot;,d.push(&#123;el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()&#125;),t.body.appendChild(a)&#125;function c(e)&#123;var a=t.createElement(&quot;style&quot;);a.type=&quot;text/css&quot;;try&#123;a.appendChild(t.createTextNode(e))&#125;catch(t)&#123;a.styleSheet.cssText=e&#125;t.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;function s()&#123;return&quot;rgb(&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;)&quot;&#125;var d=[];e.requestAnimationFrame=function()&#123;return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e)&#123;setTimeout(e,1e3/60)&#125;&#125;(),n()&#125;(window,document);</div></pre></td></tr></table></figure></p>
 <p>2、 在<code>themes\next\layout\_layout.swig</code>文件的最下方，<code>&lt;/body&gt;</code>前面添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;/js/src/love.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure></p>
-<h1 id="Next主题修改文章底部的那个带-号的标签"><a href="#Next主题修改文章底部的那个带-号的标签" class="headerlink" title="Next主题修改文章底部的那个带#号的标签"></a>Next主题修改文章底部的那个带#号的标签</h1><p>实现效果图：<br><img src="/images/label_modified_impression_drawing.png" alt="标签修改后的效果图"></p>
+<h1 id="Next主题修改文章底部的那个带-号的标签"><a href="#Next主题修改文章底部的那个带-号的标签" class="headerlink" title="Next主题修改文章底部的那个带#号的标签"></a>Next主题修改文章底部的那个带#号的标签</h1><p>实现效果：<br><img src="/images/label_modified_impression_drawing.png" alt="标签修改后的效果图"></p>
 <p>方法：<br>修改模板<code>themes/next/layout/_macro/post.swig</code>，搜索 <code>rel=&quot;tag&quot;&gt;#</code>，将 <code>#</code> 换成 <code>&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;</code></p>
+<h1 id="Next主题在每篇文章末尾统一添加“本文结束”标记"><a href="#Next主题在每篇文章末尾统一添加“本文结束”标记" class="headerlink" title="Next主题在每篇文章末尾统一添加“本文结束”标记"></a>Next主题在每篇文章末尾统一添加“本文结束”标记</h1><p>实现效果：<br><img src="/images/end_of_text.png" alt="本文结束标记"><br>方法：</p>
+<p>在路径<code>themes\next\layout\_macro</code> 中新建 <code>passage-end-tag.swig</code> 文件，并添加以下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">    &#123;% if not is_index %&#125;</div><div class="line">        &lt;div style=&quot;text-align:center;color: #ccc;font-size:14px;&quot;&gt;-------------本文结束&lt;i class=&quot;fa fa-heart&quot;&gt;&lt;/i&gt;感谢您的阅读-------------&lt;/div&gt;</div><div class="line">    &#123;% endif %&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>接着打开<code>themes\next\layout\_macro\post.swig</code>文件，在 <code>post-body</code> 之后， <code>post-footer</code> 之前添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">  &#123;% if not is_index %&#125;</div><div class="line">    &#123;% include &apos;passage-end-tag.swig&apos; %&#125;</div><div class="line">  &#123;% endif %&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>然后打开主题配置文件<code>_config.yml</code>，在末尾添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 文章末尾添加“本文结束”标记</div><div class="line">passage_end_tag:</div><div class="line">  enabled: true</div></pre></td></tr></table></figure></p>
+<h1 id="Next主题修改作者头像并旋转"><a href="#Next主题修改作者头像并旋转" class="headerlink" title="Next主题修改作者头像并旋转"></a>Next主题修改作者头像并旋转</h1><p>打开<code>themes\next\source\css\_common\components\sidebar\sidebar-author.styl</code>，修改<code>site-author-image</code>相代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">.site-author-image &#123;</div><div class="line">  display: block;</div><div class="line">  margin: 0 auto;</div><div class="line">  padding: $site-author-image-padding;</div><div class="line">  max-width: $site-author-image-width;</div><div class="line">  height: $site-author-image-height;</div><div class="line">  border: $site-author-image-border-width solid $site-author-image-border-color;</div><div class="line"></div><div class="line">  /* 头像圆形 */</div><div class="line">  border-radius: 80px;</div><div class="line">  -webkit-border-radius: 80px;</div><div class="line">  -moz-border-radius: 80px;</div><div class="line">  box-shadow: inset 0 -1px 0 #333sf;</div><div class="line"></div><div class="line">  /* 设置循环动画 [animation: (play)动画名称 (2s)动画播放时长单位秒或微秒 (ase-out)动画播放的速度曲线为以低速结束 </div><div class="line">    (1s)等待1秒然后开始动画 (1)动画播放次数(infinite为循环播放) ]*/</div><div class="line"></div><div class="line"></div><div class="line">  /* 鼠标经过头像旋转360度 */</div><div class="line">  -webkit-transition: -webkit-transform 1.0s ease-out;</div><div class="line">  -moz-transition: -moz-transform 1.0s ease-out;</div><div class="line">  transition: transform 1.0s ease-out;</div><div class="line">&#125;</div><div class="line"></div><div class="line">img:hover &#123;</div><div class="line">  /* 鼠标经过停止头像旋转 </div><div class="line">  -webkit-animation-play-state:paused;</div><div class="line">  animation-play-state:paused;*/</div><div class="line"></div><div class="line">  /* 鼠标经过头像旋转360度 */</div><div class="line">  -webkit-transform: rotateZ(360deg);</div><div class="line">  -moz-transform: rotateZ(360deg);</div><div class="line">  transform: rotateZ(360deg);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* Z 轴旋转动画 */</div><div class="line">@-webkit-keyframes play &#123;</div><div class="line">  0% &#123;</div><div class="line">    -webkit-transform: rotateZ(0deg);</div><div class="line">  &#125;</div><div class="line">  100% &#123;</div><div class="line">    -webkit-transform: rotateZ(-360deg);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">@-moz-keyframes play &#123;</div><div class="line">  0% &#123;</div><div class="line">    -moz-transform: rotateZ(0deg);</div><div class="line">  &#125;</div><div class="line">  100% &#123;</div><div class="line">    -moz-transform: rotateZ(-360deg);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">@keyframes play &#123;</div><div class="line">  0% &#123;</div><div class="line">    transform: rotateZ(0deg);</div><div class="line">  &#125;</div><div class="line">  100% &#123;</div><div class="line">    transform: rotateZ(-360deg);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="Next主题设置网站的图标Favicon"><a href="#Next主题设置网站的图标Favicon" class="headerlink" title="Next主题设置网站的图标Favicon"></a>Next主题设置网站的图标Favicon</h1><p>方法：<br>将一张32x32的ico图标名称改为favicon.ico，然后把图标放在<code>themes/next/source/images</code>里，并且修改主题配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Put your favicon.ico into `hexo-site/source/` directory.</div><div class="line">favicon: /favicon.ico</div></pre></td></tr></table></figure></p>
 
           
         
       
     </div>
+    
     
     
     

@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[朴素贝叶斯分类及其应用]]></title>
-    <url>%2F2017%2F10%2F01%2Fnavie-bayes%2F</url>
-    <content type="text"><![CDATA[朴素贝叶斯1朴素贝叶斯2朴素贝叶斯3朴素贝叶斯4朴素贝叶斯5朴素贝叶斯6####### 朴素贝叶斯7$$ e = mc^2$$without default primary success info warning danger]]></content>
-      <categories>
-        <category>Machine Learning</category>
-      </categories>
-      <tags>
-        <tag>Navie Bayes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[TensorFlow安装教程]]></title>
     <url>%2F2017%2F09%2F21%2Ftensorflow-install-tutorial%2F</url>
     <content type="text"></content>

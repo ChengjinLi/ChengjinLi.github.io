@@ -80,7 +80,7 @@
 <meta property="og:image" content="http://yoursite.com/images/git/git_process.jpg">
 <meta property="og:image" content="http://yoursite.com/images/git/git_work_stage_respository.jpg">
 <meta property="og:image" content="http://yoursite.com/images/git/git_life_cycle.jpg">
-<meta property="og:updated_time" content="2017-10-03T13:44:45.000Z">
+<meta property="og:updated_time" content="2017-10-03T13:45:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git常用命令教程">
 <meta name="twitter:description" content="Git简介Git 介绍Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。Git的读音为/gɪt/。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。 什么文件可以被 Git 管理?文本文件(.txt)，脚本文件(.py等)，各种基于文本信息的文件. 什么文件不能被 Git 管理?图片文件(.jpg等)，">
@@ -387,7 +387,7 @@
       
         <h1 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h1><h2 id="Git-介绍"><a href="#Git-介绍" class="headerlink" title="Git 介绍"></a>Git 介绍</h2><p><a href="https://git-scm.com/" target="_blank" rel="external">Git</a> 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。<code>Git</code>的读音为/gɪt/。<code>Git</code> 是 <code>Linus Torvalds</code> 为了帮助管理 <code>Linux</code> 内核开发而开发的一个开放源码的版本控制软件。</p>
 <h2 id="什么文件可以被-Git-管理"><a href="#什么文件可以被-Git-管理" class="headerlink" title="什么文件可以被 Git 管理?"></a>什么文件可以被 Git 管理?</h2><p>文本文件(.txt)，脚本文件(.py等)，各种基于文本信息的文件.</p>
-<h2 id="什么文件不能被-Git-管理"><a href="#什么文件不能被-Git-管理" class="headerlink" title="什么文件不能被 Git 管理?"></a>什么文件不能被 Git 管理?</h2><p>图片文件(.jpg等)，PDF(.pdf)，MS Word(.doc)，MS Power Point(.ppt)，MS Excel(.xls)等。</p>
+<h2 id="什么文件不能被-Git-管理"><a href="#什么文件不能被-Git-管理" class="headerlink" title="什么文件不能被 Git 管理?"></a>什么文件不能被 Git 管理?</h2><p>图片文件(.jpg等)，PDF(.pdf)，MS Word(.doc)，MS Power Point(.ppt)，MS Excel(.xls)等。<br><a id="more"></a></p>
 <h2 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h2><h3 id="Git-直接记录快照，而非差异比较"><a href="#Git-直接记录快照，而非差异比较" class="headerlink" title="Git 直接记录快照，而非差异比较"></a><code>Git</code> 直接记录快照，而非差异比较</h3><p><code>Git</code> 和其它版本控制系统（包括 <code>Subversion</code> 等）的主要差别在于 <code>Git</code> 对待数据的方法。 概念上来区分，其它大部分系统以文件变更列表的方式存储信息。 这类系统（<code>CVS</code>、<code>Subversion</code>、<code>Perforce</code>、<code>Bazaar</code> 等等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。<br><code>Git</code> 不按照以上方式对待或保存数据。 反之，<code>Git</code> 更像是把数据看作是对小型文件系统的一组快照。 每次你提交更新，或在 <code>Git</code> 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，<code>Git</code> 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。 <code>Git</code> 对待数据更像是一个「快照流」。<br>这是 <code>Git</code> 与几乎所有其它版本控制系统的重要区别。 因此 <code>Git</code> 重新考虑了以前每一代版本控制系统延续下来的诸多方面。<code>Git</code> 更像是一个小型的文件系统，提供了许多以此为基础构建的超强工具，而不只是一个简单的 <code>VCS</code>。</p>
 <h3 id="Git-不需要联网就能工作"><a href="#Git-不需要联网就能工作" class="headerlink" title="Git 不需要联网就能工作"></a><code>Git</code> 不需要联网就能工作</h3><p>在 <code>Git</code> 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其它计算机的信息，由于本地磁盘上就有项目的完整历史，所以大部分操作看起来瞬间完成。而其他集中式版本控制系统(例如 <code>SVN</code>等)，必须联网才能工作， 所有操作都有网络延时开销。</p>
 <h3 id="Git-保证完整性"><a href="#Git-保证完整性" class="headerlink" title="Git 保证完整性"></a><code>Git</code> 保证完整性</h3><p><code>Git</code> 的内容完整性要优于其他集中式版本控制系统(例如 <code>SVN</code>等)。<code>Git</code> 中所有数据在存储前都计算校验和，然后以校验和来引用。这个功能建构在 <code>Git</code> 底层，是构成 <code>Git</code> 哲学不可或缺的部分。 若在传送过程中丢失信息或损坏文件，<code>Git</code> 就能发现。<code>Git</code> 用以计算校验和的机制叫做 <code>SHA-1</code> 哈希散列。 这是一个由40个十六进制字符(<code>0-9</code> 和 <code>a-f</code>)组成字符串，基于 <code>Git</code> 中文件的内容或目录结构计算出来。 <code>SHA-1</code> 哈希看起来是这样：<code>24b9da6552252987aa493b52f8696cd6d3b00373</code>，<code>Git</code> 中使用这种哈希值的情况很多，你将经常看到这种哈希值。 实际上，<code>Git</code>  数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名。</p>
@@ -663,7 +663,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

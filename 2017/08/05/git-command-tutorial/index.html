@@ -69,18 +69,22 @@
 
 
 
-<meta name="description" content="机器之法，学习之道">
+<meta name="description" content="Git简介Git 介绍Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。Git的读音为/gɪt/。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。 什么文件可以被 Git 管理?文本文件(.txt)，脚本文件(.py等)，各种基于文本信息的文件. 什么文件不能被 Git 管理?图片文件(.jpg等)，">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git常用命令教程">
+<meta property="og:title" content="Git常用命令教程">
 <meta property="og:url" content="http://yoursite.com/2017/08/05/git-command-tutorial/index.html">
 <meta property="og:site_name" content="MJ&#39;s Learning Notes">
-<meta property="og:description" content="机器之法，学习之道">
+<meta property="og:description" content="Git简介Git 介绍Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。Git的读音为/gɪt/。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。 什么文件可以被 Git 管理?文本文件(.txt)，脚本文件(.py等)，各种基于文本信息的文件. 什么文件不能被 Git 管理?图片文件(.jpg等)，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-29T08:42:31.000Z">
+<meta property="og:image" content="http://yoursite.com/images/git/git_process.jpg">
+<meta property="og:image" content="http://yoursite.com/images/git/git_work_stage_respository.jpg">
+<meta property="og:image" content="http://yoursite.com/images/git/git_life_cycle.jpg">
+<meta property="og:updated_time" content="2017-10-03T13:42:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git常用命令教程">
-<meta name="twitter:description" content="机器之法，学习之道">
+<meta name="twitter:title" content="Git常用命令教程">
+<meta name="twitter:description" content="Git简介Git 介绍Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。Git的读音为/gɪt/。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。 什么文件可以被 Git 管理?文本文件(.txt)，脚本文件(.py等)，各种基于文本信息的文件. 什么文件不能被 Git 管理?图片文件(.jpg等)，">
+<meta name="twitter:image" content="http://yoursite.com/images/git/git_process.jpg">
 
 
 
@@ -116,7 +120,7 @@
 
 
 
-  <title>git常用命令教程 | MJ's Learning Notes</title>
+  <title>Git常用命令教程 | MJ's Learning Notes</title>
   
 
 
@@ -304,7 +308,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">git常用命令教程</h1>
+          <h1 class="post-title" itemprop="name headline">Git常用命令教程</h1>
         
 
         <div class="post-meta">
@@ -381,7 +385,101 @@
       
 
       
-        
+        <h1 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h1><h2 id="Git-介绍"><a href="#Git-介绍" class="headerlink" title="Git 介绍"></a>Git 介绍</h2><p><a href="https://git-scm.com/" target="_blank" rel="external">Git</a> 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。<code>Git</code>的读音为/gɪt/。<code>Git</code> 是 <code>Linus Torvalds</code> 为了帮助管理 <code>Linux</code> 内核开发而开发的一个开放源码的版本控制软件。</p>
+<h2 id="什么文件可以被-Git-管理"><a href="#什么文件可以被-Git-管理" class="headerlink" title="什么文件可以被 Git 管理?"></a>什么文件可以被 Git 管理?</h2><p>文本文件(.txt)，脚本文件(.py等)，各种基于文本信息的文件.</p>
+<h2 id="什么文件不能被-Git-管理"><a href="#什么文件不能被-Git-管理" class="headerlink" title="什么文件不能被 Git 管理?"></a>什么文件不能被 Git 管理?</h2><p>图片文件(.jpg等)，PDF(.pdf)，MS Word(.doc)，MS Power Point(.ppt)，MS Excel(.xls)等。</p>
+<h2 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h2><h3 id="Git-直接记录快照，而非差异比较"><a href="#Git-直接记录快照，而非差异比较" class="headerlink" title="Git 直接记录快照，而非差异比较"></a><code>Git</code> 直接记录快照，而非差异比较</h3><p><code>Git</code> 和其它版本控制系统（包括 <code>Subversion</code> 等）的主要差别在于 <code>Git</code> 对待数据的方法。 概念上来区分，其它大部分系统以文件变更列表的方式存储信息。 这类系统（<code>CVS</code>、<code>Subversion</code>、<code>Perforce</code>、<code>Bazaar</code> 等等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。<br><code>Git</code> 不按照以上方式对待或保存数据。 反之，<code>Git</code> 更像是把数据看作是对小型文件系统的一组快照。 每次你提交更新，或在 <code>Git</code> 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，<code>Git</code> 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。 <code>Git</code> 对待数据更像是一个「快照流」。<br>这是 <code>Git</code> 与几乎所有其它版本控制系统的重要区别。 因此 <code>Git</code> 重新考虑了以前每一代版本控制系统延续下来的诸多方面。<code>Git</code> 更像是一个小型的文件系统，提供了许多以此为基础构建的超强工具，而不只是一个简单的 <code>VCS</code>。</p>
+<h3 id="Git-不需要联网就能工作"><a href="#Git-不需要联网就能工作" class="headerlink" title="Git 不需要联网就能工作"></a><code>Git</code> 不需要联网就能工作</h3><p>在 <code>Git</code> 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其它计算机的信息，由于本地磁盘上就有项目的完整历史，所以大部分操作看起来瞬间完成。而其他集中式版本控制系统(例如 <code>SVN</code>等)，必须联网才能工作， 所有操作都有网络延时开销。</p>
+<h3 id="Git-保证完整性"><a href="#Git-保证完整性" class="headerlink" title="Git 保证完整性"></a><code>Git</code> 保证完整性</h3><p><code>Git</code> 的内容完整性要优于其他集中式版本控制系统(例如 <code>SVN</code>等)。<code>Git</code> 中所有数据在存储前都计算校验和，然后以校验和来引用。这个功能建构在 <code>Git</code> 底层，是构成 <code>Git</code> 哲学不可或缺的部分。 若在传送过程中丢失信息或损坏文件，<code>Git</code> 就能发现。<code>Git</code> 用以计算校验和的机制叫做 <code>SHA-1</code> 哈希散列。 这是一个由40个十六进制字符(<code>0-9</code> 和 <code>a-f</code>)组成字符串，基于 <code>Git</code> 中文件的内容或目录结构计算出来。 <code>SHA-1</code> 哈希看起来是这样：<code>24b9da6552252987aa493b52f8696cd6d3b00373</code>，<code>Git</code> 中使用这种哈希值的情况很多，你将经常看到这种哈希值。 实际上，<code>Git</code>  数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名。</p>
+<h3 id="Git-一般只添加数据"><a href="#Git-一般只添加数据" class="headerlink" title="Git 一般只添加数据"></a><code>Git</code> 一般只添加数据</h3><p><code>Git</code> 操作，几乎只往 <code>Git</code> 数据库中增加数据。 很难让 <code>Git</code> 执行任何不可逆操作，或者让它以任何方式清除数据。 同别的 <code>VCS</code> 一样，未提交更新时有可能丢失或弄乱修改的内容；但是一旦你提交快照到 <code>Git</code> 中，就难以再丢失数据，特别是如果你定期的推送数据库到其它仓库的话。这使得在使用 <code>Git</code> 成为一个安心愉悦的过程，因为我们深知可以尽情做各种尝试，而没有把事情弄糟的危险。</p>
+<h1 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h1><p>最早 <code>Git</code> 是在 <code>Linux</code> 上开发的，很长一段时间内，<code>Git</code> 也只能在 <code>Linux</code> 和 <code>Unix</code> 系统上跑。目前，<code>Git</code> 已经可以在 <code>Linux</code>、<code>Unix</code>、<code>Mac</code> 和 <code>Windows</code> 几大平台上运行。详细的安装说明请前往<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="external"> Git官网安装说明 </a>查看， <code>Git</code> 在每种系统上的安装方式各不相同，安装步骤分别如下:</p>
+<h2 id="Linux平台上安装"><a href="#Linux平台上安装" class="headerlink" title="Linux平台上安装"></a>Linux平台上安装</h2><p>打开 <code>terminal</code>，可以用下面的命令安装：</p>
+<h3 id="Debian-Ubuntu"><a href="#Debian-Ubuntu" class="headerlink" title="Debian/Ubuntu"></a>Debian/Ubuntu</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> apt-get install git-all</div></pre></td></tr></table></figure>
+<p>使用 <code>git --version</code> 查看是否安装成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git --version</div><div class="line">git version 2.7.4</div></pre></td></tr></table></figure></p>
+<h3 id="Centos-RedHat"><a href="#Centos-RedHat" class="headerlink" title="Centos/RedHat"></a>Centos/RedHat</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> yum -y install git-all</div></pre></td></tr></table></figure>
+<p>使用 <code>git --version</code> 查看是否安装成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git --version</div><div class="line">git version 1.7.1</div></pre></td></tr></table></figure></p>
+<h2 id="Mac-平台上安装"><a href="#Mac-平台上安装" class="headerlink" title="Mac 平台上安装"></a>Mac 平台上安装</h2><p>1、先下载 <code>.dmg</code> 安装包，下载地址为：<a href="https://git-scm.com/download/mac" target="_blank" rel="external">https://git-scm.com/download/mac</a> ，点击下载到本地，下载文件例如：<code>git-2.14.1-intel-universal-mavericks.dmg</code><br>2、双击安装包进行安装即可<br>3、使用 <code>git --version</code> 查看是否安装成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git --version</div><div class="line">git version 2.14.1</div></pre></td></tr></table></figure></p>
+<h2 id="Windows-平台上安装"><a href="#Windows-平台上安装" class="headerlink" title="Windows 平台上安装"></a>Windows 平台上安装</h2><p>1、先下载 <code>.exe</code> 安装包，下载地址为：<a href="https://git-scm.com/download/win" target="_blank" rel="external">https://git-scm.com/download/win</a> ，选择适合当前系统的版本，点击下载到本地<br>2、双击安装包进行安装即可<br>3、在开始菜单里找到<code>Git</code>-&gt;<code>Git Bash</code>，会弹出 <code>Git</code> 命令窗口，使用 <code>git --version</code> 查看是否安装成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git version</div><div class="line">git version 2.14.2.windows.1</div></pre></td></tr></table></figure></p>
+<h1 id="Git-配置"><a href="#Git-配置" class="headerlink" title="Git 配置"></a>Git 配置</h1><p>安装 <code>Git</code> 后，每台计算机上只需要进行一次配置，程序升级时会保留配置信息。你可以在任何时候再次通过运行命令来修改它们。<br><code>Git</code> 自带一个 <code>git config</code> 的工具，专门用来配置或读取相应的工作环境变量。这些变量存储在三个不同的位置：</p>
+<ul>
+<li><code>/etc/gitconfig</code> 文件： 包含系统上每一个用户及他们仓库的通用配置，如果使用带有 <code>--system</code> 选项的 <code>git config</code> 时，它会从此文件读写配置变量。</li>
+<li><code>~/.gitconfig</code> 或 <code>~/.config/git/config</code> 文件：只针对当前用户，可以传递 <code>--global</code> 选项让 <code>Git</code> 读写此文件。</li>
+<li>当前使用仓库的 <code>Git</code> 目录中的 <code>config</code> 文件(就是 <code>.git/config</code>)：针对该仓库。</li>
+</ul>
+<p>每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。</p>
+<p>在 <code>Windows</code> 系统中，<code>Git</code> 会查找 <code>$HOME</code> 目录下（一般情况下是 <code>C:\Users\$USER</code>）的 <code>.gitconfig</code> 文件。 <code>Git</code> 同样也会寻找 <code>/etc/gitconfig</code> 文件，但只限于 <code>MSys</code> 的根目录下，即安装 <code>Git</code> 时所选的目标位置。</p>
+<h2 id="配置用户信息"><a href="#配置用户信息" class="headerlink" title="配置用户信息"></a>配置用户信息</h2><p>当安装完 <code>Git</code> 应该做的第一件事就是设置个人的「用户名称」与「邮件地址」。 这样做很重要，因为每一个 <code>Git</code> 的提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git config --global user.name lichengjin</div><div class="line"><span class="meta">$</span> git config --global user.email lichengjin606@gmail.com</div></pre></td></tr></table></figure></p>
+<p>再次强调，如果使用了 <code>--global</code> 选项，那么该命令只需要运行一次，因为之后无论你在该系统上做任何事情，<code>Git</code> 都会使用那些信息。当你想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 <code>--global</code>选项的命令来配置，新的设定保存在当前项目的 <code>.git/config</code> 文件里。</p>
+<h2 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h2><p>要检查已有的配置信息，可以使用 <code>git config --list</code> 命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git config --list</div><div class="line">user.name=lichengjin</div><div class="line">user.email=lichengjin606@gmail.com</div></pre></td></tr></table></figure></p>
+<p>有时候会看到重复的变量名，那就说明它们来自不同的配置文件（比如 <code>/etc/gitconfig</code> 和 <code>~/.gitconfig</code>），不过最终 <code>Git</code> 实际采用的是最后一个。<br>这些配置我们也可以在 <code>~/.gitconfig</code> 或 <code>/etc/gitconfi</code> 看到，如下所示：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> vim ~/.gitconfig</div></pre></td></tr></table></figure></p>
+<p>显示内容如下所示：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[user]</div><div class="line">    	name = lichengjin</div><div class="line">    	email = lichengjin606@gmail.<span class="keyword">com</span></div></pre></td></tr></table></figure></p>
+<p>你可以通过输入 <code>git config &lt;key&gt;</code> 来检查 <code>Git</code>的某一项配置，例如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git config user.name</div><div class="line">lichengjin</div></pre></td></tr></table></figure></p>
+<h1 id="Git-工作流程"><a href="#Git-工作流程" class="headerlink" title="Git 工作流程"></a>Git 工作流程</h1><p><code>Git</code> 的工作流程如下：</p>
+<ol>
+<li>克隆 <code>Git</code> 资源作为工作目录。</li>
+<li>在克隆的资源上添加或修改文件。</li>
+<li>如果其他人修改了，你可以更新资源。</li>
+<li>在提交前查看修改。</li>
+<li>提交修改。</li>
+<li>在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。</li>
+</ol>
+<p>下图展示了 <code>Git</code> 的工作流程，图片来自<a href="http://www.runoob.com/git/git-workflow.html" target="_blank" rel="external">菜鸟教程</a>：<br><img src="/images/git/git_process.jpg" alt="Git 工作流程图"></p>
+<h1 id="Git-工作区，暂存区和版本库"><a href="#Git-工作区，暂存区和版本库" class="headerlink" title="Git 工作区，暂存区和版本库"></a>Git 工作区，暂存区和版本库</h1><p>工作区：就是你在电脑里能看到的目录。是对项目的某个版本独立提取出来的内容。 这些从 <code>Git</code> 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。<br>暂存区：英文叫<code>stage</code>， 或<code>index</code>。是一个文件，一般存放在 <code>.git/index</code> 中，保存了下次将提交的文件列表信息，有时候也被称作索引( <code>index</code> )。<br>版本库：版本库又名仓库，英文名<code>repository</code>，你可以简单理解成一个目录，这个目录里面的所有文件都可以被 <code>Git</code> 管理起来，每个文件的修改、删除，<code>Git</code> 都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以还原。工作区有一个隐藏目录 <code>.git</code>，这个不算工作区，而是 <code>Git</code> 的版本库，是 <code>Git</code> 用来保存项目的元数据和对象数据库的地方。 这是 <code>Git</code> 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。<br>下面这个图展示了「工作区」、「暂存区」和「版本库」之间的关系，图片来自<a href="http://www.runoob.com/git/git-workspace-index-repo.html" target="_blank" rel="external">菜鸟教程</a>：<br><img src="/images/git/git_work_stage_respository.jpg" alt="工作区、暂存区和版本库之间的关系"><br>图中左侧为「工作区」，右侧为「版本库」。在「版本库」中标记为 <code>index</code> 的区域是「暂存区」(<code>stage</code>，<code>index</code>)，标记为 <code>master</code> 的是 <code>master</code> 分支所代表的目录树。<br>图中我们可以看出此时 <code>HEAD</code> 实际是指向 <code>master</code> 分支的一个「游标」。所以图示的命令中出现 <code>HEAD</code> 的地方可以用 <code>master</code> 来替换。<br>图中的 <code>objects</code> 标识的区域为 <code>Git</code> 的「对象库」，实际位于 <code>.git/objects</code> 目录下，里面包含了创建的各种对象及内容。<br>当对「工作区」修改或新增的文件执行 <code>git add</code> 命令时，「暂存区」的目录树被更新，同时「工作区」修改或新增的文件内容被写入到「对象库」中的一个新的对象中，而该对象的 <code>ID</code> 被记录在暂存区的文件索引中。<br>当执行提交操作 <code>git commit</code> 时，「暂存区」的目录树写到「版本库」中，<code>master</code> 分支会做相应的更新。即 <code>master</code> 指向的目录树就是提交时「暂存区」的目录树。<br>当执行 <code>git reset HEAD</code> 命令时，「暂存区」的目录树会被重写，被 <code>master</code> 分支指向的目录树所替换，但是「工作区」不受影响。<br>当执行 <code>git rm --cached &lt;file&gt;</code> 命令时，会直接从「暂存区」删除文件，「工作区」则不做出改变。<br>当执行 <code>git checkout .</code> 或者 <code>git checkout -- &lt;file&gt;</code> 命令时，会用「暂存区」全部或指定的文件替换「工作区」的文件。这个操作很危险，会清除「工作区」中未添加到「暂存区」的改动。<br>当执行 <code>git checkout HEAD .</code> 或者 <code>git checkout HEAD &lt;file&gt;</code> 命令时，会用 <code>HEAD</code> 指向的 <code>master</code> 分支中的全部或者部分文件替换「暂存区」和以及「工作区」中的文件。这个命令也是极具危险性的，因为不但会清除「工作区」中未提交的改动，也会清除「暂存区」中未提交的改动。</p>
+<h1 id="获取版本库"><a href="#获取版本库" class="headerlink" title="获取版本库"></a>获取版本库</h1><h2 id="创建新的版本库"><a href="#创建新的版本库" class="headerlink" title="创建新的版本库"></a>创建新的版本库</h2><p>1、 选择一个合适的地方，创建一个空目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> mkdir git_tutorial</div><div class="line"><span class="meta">$</span> cd git_tutorial</div><div class="line"><span class="meta">$</span> pwd</div><div class="line">/Users/lichengjin/workspace/git_tutorial</div></pre></td></tr></table></figure>
+<p>2、 通过 <code>git init</code> 命令把这个目录变成 <code>Git</code> 可以管理的仓库:<br>注：如果打算使用 <code>Git</code> 来对现有的项目进行管理，只需要进入该项目目录并输入<code>git init</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git init</div><div class="line">Initialized empty Git repository in /Users/lichengjin/workspace/git_tutorial/.git/</div></pre></td></tr></table></figure>
+<p>该命令将创建一个名为 <code>.git</code> 的子目录，这个子目录含有你初始化的 <code>Git</code> 仓库中所有的必须文件，这些文件是 <code>Git</code> 仓库的骨干，是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。<br>如果你没有看到 <code>.git</code> 目录，那是因为这个目录默认是隐藏的，用 <code>ls -a</code> 命令查看即可：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> ls -a</div><div class="line">.    ..   .git</div></pre></td></tr></table></figure></p>
+<h2 id="克隆现有的版本库"><a href="#克隆现有的版本库" class="headerlink" title="克隆现有的版本库"></a>克隆现有的版本库</h2><p>如果你想获得一份已经存在了的 Git 仓库的拷贝，比如说，你想为某个开源项目贡献自己的一份力，这时就要用到 <code>git clone</code> 命令。 如果你对其它的 <code>VCS</code> 系统（比如说 <code>Subversion</code> ）很熟悉，请留心一下你所使用的命令是 <code>clone</code> 而不是 <code>checkout</code>。 这是 <code>Git</code> 区别于其它版本控制系统的一个重要特性，<code>Git</code> 克隆的是该 <code>Git</code> 仓库服务器上的几乎所有数据，而不是仅仅复制完成你的工作所需要文件。 当你执行 <code>git clone</code> 命令的时候，默认配置下远程 <code>Git</code> 仓库中的每一个文件的每一个版本都将被拉取下来。 事实上，如果你的服务器的磁盘坏掉了，你通常可以使用任何一个克隆下来的用户端来重建服务器上的仓库(虽然可能会丢失某些服务器端的挂钩设置，但是所有版本的数据仍在)。</p>
+<p>克隆仓库的命令格式：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone &lt;repo&gt;</div></pre></td></tr></table></figure></p>
+<p>例如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/ChengjinLi/machine_learning.git</div></pre></td></tr></table></figure></p>
+<p>如果我们需要克隆到指定的目录，可以使用以下命令格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone &lt;repo&gt; &lt;directory&gt;</div></pre></td></tr></table></figure></p>
+<p>例如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/ChengjinLi/machine_learning.git mj_machine_learning</div></pre></td></tr></table></figure></p>
+<p>参数说明：</p>
+<ul>
+<li>repo：Git 仓库。</li>
+<li>directory：本地目录。</li>
+</ul>
+<p><code>Git</code> 支持多种数据传输协议。 上面的例子使用的是 <code>https://</code> 协议，不过你也可以使用 <code>git://</code> 协议或者使用 <code>SSH</code> 传输协议。</p>
+<h1 id="Git-文件生命周期"><a href="#Git-文件生命周期" class="headerlink" title="Git 文件生命周期"></a>Git 文件生命周期</h1><p>请记住，「工作目录」下的每一个文件都不外乎这两种状态：「已跟踪」或「未跟踪」。「已跟踪」的文件是指那些被纳入了版本控制的文件，在上一次快照中有它们的记录，在工作一段时间后，它们的状态可能处于「未修改」，「已修改」或「已放入暂存区」。 「工作目录」中除「已跟踪」文件以外的所有其它文件都属于「未跟踪」文件，它们既不存在于上次快照的记录中，也没有放入「暂存区」。 初次克隆某个仓库的时候，「工作目录」中的所有文件都属于「已跟踪」文件，并处于「未修改」状态。编辑过某些文件之后，由于自上次提交后你对它们做了修改，<code>Git</code> 将它们标记为「已修改」文件。 我们逐步将这些修改过的文件放入「暂存区」，然后提交所有暂存了的修改，如此反复。<br>使用 <code>Git</code> 时文件的生命周期如下：<br><img src="/images/git/git_life_cycle.jpg" alt="Git 文件生命周期"></p>
+<h1 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h1><p><strong><code>git add &lt;file_name&gt;/&lt;dir_name&gt;</code></strong><br>将文件添加到暂存区，参数可以是指定路径的文件名或目录的名字，也可以使用 glob 模式。</p>
+<p><strong><code>git status</code></strong><br>查看项目的当前状态，输出详细内容<br><strong><code>git status --short</code></strong> 或 <strong><code>git status -s</code></strong><br>查看项目的当前状态，以简短的结果输出<br>状态说明：</p>
+<ul>
+<li>?? 未跟踪的文件</li>
+<li>M：修改过的文件，出现在靠左边的<code>M</code>表示该文件被修改了并放入了暂存区，出现在右边的<code>M</code>表示该文件被修改了但是还没放入暂存区，</li>
+<li>A：新添加到暂存区的文件</li>
+<li>D：已删除(deleted)</li>
+<li>R：重命名(renamed)</li>
+<li>C：已拷贝(copied)</li>
+<li>U：已更新但为合并(updated but unmerged)</li>
+</ul>
+<p><strong><code>git diff</code></strong><br>查看尚未 <code>add</code> 的所有文件的改动和上个已经 <code>commit</code>的文件的不同<br><strong><code>git diff &lt;file_name&gt;</code></strong><br>查看尚未 <code>add</code> 的 <code>&lt;file_name&gt;</code> 文件的改动和上个已经 <code>commit</code>的文件的不同<br><strong><code>git diff --cached</code></strong><br>查看已经 <code>add</code> 的文件的改动<br><strong><code>git diff HEAD</code></strong><br>查看已 <code>add</code> 的与未 <code>add</code> 的所有改动<br><strong><code>git diff --stat</code></strong><br>显示摘要而非整个<code>diff</code></p>
+<p><strong><code>git commit -m &quot;message&quot;</code></strong><br>将暂存区的文件提交到版本库，<code>-m</code>后面输入的是本次提交的说明，可以输入任意内容，最好是有意义的，方便从历史记录找到改动记录。<br><strong><code>git commit --amend --no-edit</code></strong><br>将本次改动直接合并到上一个 <code>commit</code> 中<br><strong><code>git commit -am &quot;message&quot;</code></strong><br>跳过使用暂存区的方式，自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 <code>git add</code> 步骤。</p>
+<p><strong><code>git rm &lt;file_name&gt;/&lt;dir_name&gt;</code></strong><br>将文件从暂存区域移除，参数可以是指定路径的文件名或目录的名字，也可以使用 glob 模式。<br><strong><code>git rm --cached &lt;file_name&gt;/&lt;dir_name&gt;</code></strong><br>将文件从 <code>Git</code> 仓库中删除，但仍然希望保留在当前工作目录中，参数可以是指定路径的文件名或目录的名字，也可以使用 glob 模式。</p>
+<p><strong><code>git mv &lt;file_from&gt; &lt;file_to&gt;</code></strong><br>将 <code>Git</code> 中的 <code>&lt;file_from&gt;</code> 重命名为 <code>&lt;file_to&gt;</code></p>
+<p><strong><code>git log</code></strong><br>查看历史提交记录，显示从最近到最远的提交日志<br><strong><code>git log --oneline</code></strong><br>一行显示一次提交<br><strong><code>git log --oneline --graph</code></strong><br>查看历史中什么时候出现了分支、合并，开启了拓扑图选项<br><strong><code>git log --author=&lt;user_name&gt;</code></strong><br>查找指定用户 <code>&lt;user_name&gt;</code> 的提交日志</p>
+<p><strong><code>git reflog</code></strong><br>查看历史命令记录，显示从最近到最远的日志</p>
+<p><strong><code>git reset HEAD</code></strong><br>取消已缓存的内容，即取消之前 <code>git add</code> 添加的内容<br>在 <code>Git</code> 中，用 <code>HEAD</code> 表示当前版本，上一个版本就是 <code>HEAD^</code> ，上上一个版本就是 <code>HEAD^^</code>，当然往上100个版本写100个<code>^</code>比较容易数不过来，所以写成 <code>HEAD~100</code>。<br><strong><code>git reset &lt;file_name&gt;</code></strong><br>取消已缓存的<code>&lt;file_name&gt;</code>，即取消之前 <code>git add</code> 添加的内容<br><strong><code>git reset --hard &lt;commit_id&gt;</code></strong><br>回退到指定 <code>&lt;commit_id&gt;</code> 版本，<code>&lt;commit_id&gt;</code>没必要写全，前位(例如前7位)就可以了，<code>Git</code> 会自动去找，当然也不能只写前一两位，因为 <code>Git</code> 可能会找到多个版本号，就无法确定是哪一个了。</p>
+<p><strong><code>git checkout &lt;commid_id&gt; -- &lt;file_name&gt;</code></strong><br>将 <code>&lt;file_name&gt;</code> 回退到 <code>&lt;commid_id&gt;</code> 的版本<br><strong><code>git checkout &lt;branch_name&gt;</code></strong><br>将 <code>HEAD</code> 从当前分支切换到 <code>&lt;branch_name&gt;</code> 分支<br><strong><code>git checkout -b &lt;branch_name&gt;</code></strong><br>创建 <code>&lt;branch_name&gt;</code> 分支，并切换到新建的分支</p>
+<p><strong><code>git branch</code></strong><br>查看当前分支，<code>*</code>代表了当前 <code>HEAD</code> 所在的分支<br><strong><code>git branch &lt;branch_name&gt;</code></strong><br>创建 <code>&lt;branch_name&gt;</code> 分支</p>
+<p><strong><code>git merge &lt;branch_name&gt;</code></strong><br>将 <code>&lt;branch_name&gt;</code> 合并到当前分支，<code>Git</code> 会采用默认的 <code>Fast forward</code> 格式进行合并，这次合并操作不会有 <code>commit</code> 信息，<code>log</code> 中也不会有分支的图案。<br><strong><code>git merge --no-diff -m &quot;message&quot; &lt;branch_name&gt;</code></strong><br>采取 <code>--no-ff</code> 这种方式保留合并的 <code>commit</code> 信息。</p>
+<h1 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h1><p>一般我们总会有些文件无需纳入 <code>Git</code> 的管理，也不希望它们总出现在未跟踪文件列表。 通常都是些自动生成的文件，比如日志文件，或者编译过程中创建的临时文件等。 在这种情况下，我们可以创建一个名为<code>.gitignore</code> 的文件，列出要忽略的文件模式。要养成一开始就设置好 <code>.gitignore</code> 文件的习惯，以免将来误提交这类无用的文件。<br>文件 <code>.gitignore</code> 的格式规范如下：</p>
+<ul>
+<li>所有空行或者以 <code>＃</code> 开头的行都会被 <code>Git</code> 忽略。</li>
+<li>可以使用标准的 <code>glob</code> 模式匹配。</li>
+<li>匹配模式可以以（<code>/</code>）开头防止递归。</li>
+<li>匹配模式可以以（<code>/</code>）结尾指定目录。</li>
+<li>要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。</li>
+</ul>
+<p>所谓的 <code>glob</code> 模式是指 <code>shell</code> 所使用的简化了的正则表达式。 星号<code>*</code>匹配零个或多个任意字符；<code>[abc]</code> 匹配任何一个列在方括号中的字符（这个例子要么匹配一个 <code>a</code>，要么匹配一个 <code>b</code>，要么匹配一个 <code>c</code>）；问号<code>?</code>只匹配一个任意字符；如果在方括号中使用短划线<code>-</code>分隔两个字符，表示所有在这两个字符范围内的都可以匹配（比如 <code>[0-9]</code> 表示匹配所有<code>0</code>到<code>9</code>的数字）。 使用两个星号<code>*</code>表示匹配任意中间目录，比如<code>a/**/z</code> 可以匹配 <code>a/z</code>, <code>a/b/z</code> 或 <code>a/b/c/z</code>等。<code>GitHub</code> 有一个十分详细的针对数十种项目及语言的 <code>.gitignore</code> 文件列表，你可以在 <a href="https://github.com/github/gitignore" target="_blank" rel="external">https://github.com/github/gitignore</a> 找到它.</p>
+<h1 id="Github-使用"><a href="#Github-使用" class="headerlink" title="Github 使用"></a>Github 使用</h1><p><a href="https://github.com/" target="_blank" rel="external">Github</a> 是一个大家都积极贡献的地方， 你可以和各种人合作创作，也是开源的天堂， 只要你愿意, 任何人都能下载, 或修改你的杰作。<br>在<code>Github</code> 上注册一个账户<br>然后添加一个 <code>online</code> 版本库 <code>repository</code><br>连接本地版本库<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add [alias] [url]</div></pre></td></tr></table></figure></p>
+<p>例如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git remote add origin https://github.com/ChengjinLi/machine_learning.git</div><div class="line"><span class="meta">$</span> git push -u origin master     # 推送本地 master 去 origin</div></pre></td></tr></table></figure></p>
+<p>在执行 <code>commit</code> 之后，可以执行 <code>git push -u origin master</code> 将本地修改提交到 <code>Github</code></p>
+<p>要查看当前配置有哪些远程仓库，可以用命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git remote</div><div class="line">origin</div></pre></td></tr></table></figure></p>
+<p>执行时加上 -v 参数，你还可以看到每个别名的实际链接地址。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git remote -v</div><div class="line">origin	https://github.com/ChengjinLi/machine_learning.git (fetch)</div><div class="line">origin	https://github.com/ChengjinLi/machine_learning.git (push)</div></pre></td></tr></table></figure></p>
+<p>删除别名为 <code>&lt;alias&gt;</code> 的远程仓库<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git remote rm &lt;alias&gt;</div></pre></td></tr></table></figure></p>
+<h1 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h1><p>Git 官网： <a href="https://git-scm.com/" target="_blank" rel="external">https://git-scm.com/</a><br>Git 完整命令手册地址： <a href="http://git-scm.com/docs" target="_blank" rel="external">http://git-scm.com/docs</a><br>Pro Git book： <a href="https://git-scm.com/book/zh/v2" target="_blank" rel="external">https://git-scm.com/book/zh/v2</a><br>廖雪峰Git教程：<br><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a><br>菜鸟Git教程： <a href="http://www.runoob.com/git/git-tutorial.html" target="_blank" rel="external">http://www.runoob.com/git/git-tutorial.html</a><br>Github 官网： <a href="https://github.com/" target="_blank" rel="external">https://github.com/</a></p>
+
       
     </div>
     
@@ -537,8 +635,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -643,6 +750,22 @@ var jiathis_config={
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git简介"><span class="nav-number">1.</span> <span class="nav-text">Git简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-介绍"><span class="nav-number">1.1.</span> <span class="nav-text">Git 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么文件可以被-Git-管理"><span class="nav-number">1.2.</span> <span class="nav-text">什么文件可以被 Git 管理?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么文件不能被-Git-管理"><span class="nav-number">1.3.</span> <span class="nav-text">什么文件不能被 Git 管理?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-基础"><span class="nav-number">1.4.</span> <span class="nav-text">Git 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-直接记录快照，而非差异比较"><span class="nav-number">1.4.1.</span> <span class="nav-text">Git 直接记录快照，而非差异比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-不需要联网就能工作"><span class="nav-number">1.4.2.</span> <span class="nav-text">Git 不需要联网就能工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-保证完整性"><span class="nav-number">1.4.3.</span> <span class="nav-text">Git 保证完整性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-一般只添加数据"><span class="nav-number">1.4.4.</span> <span class="nav-text">Git 一般只添加数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-安装"><span class="nav-number">2.</span> <span class="nav-text">Git 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux平台上安装"><span class="nav-number">2.1.</span> <span class="nav-text">Linux平台上安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Debian-Ubuntu"><span class="nav-number">2.1.1.</span> <span class="nav-text">Debian/Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Centos-RedHat"><span class="nav-number">2.1.2.</span> <span class="nav-text">Centos/RedHat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac-平台上安装"><span class="nav-number">2.2.</span> <span class="nav-text">Mac 平台上安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-平台上安装"><span class="nav-number">2.3.</span> <span class="nav-text">Windows 平台上安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-配置"><span class="nav-number">3.</span> <span class="nav-text">Git 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置用户信息"><span class="nav-number">3.1.</span> <span class="nav-text">配置用户信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看配置信息"><span class="nav-number">3.2.</span> <span class="nav-text">查看配置信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-工作流程"><span class="nav-number">4.</span> <span class="nav-text">Git 工作流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-工作区，暂存区和版本库"><span class="nav-number">5.</span> <span class="nav-text">Git 工作区，暂存区和版本库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取版本库"><span class="nav-number">6.</span> <span class="nav-text">获取版本库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新的版本库"><span class="nav-number">6.1.</span> <span class="nav-text">创建新的版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#克隆现有的版本库"><span class="nav-number">6.2.</span> <span class="nav-text">克隆现有的版本库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-文件生命周期"><span class="nav-number">7.</span> <span class="nav-text">Git 文件生命周期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-常用命令"><span class="nav-number">8.</span> <span class="nav-text">Git 常用命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#忽略文件"><span class="nav-number">9.</span> <span class="nav-text">忽略文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Github-使用"><span class="nav-number">10.</span> <span class="nav-text">Github 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关链接"><span class="nav-number">11.</span> <span class="nav-text">相关链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

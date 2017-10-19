@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title><![CDATA[TensorFlow Tensor变换API]]></title>
-    <url>%2F2017%2F10%2F14%2Ftensorflow-tensor-transform-API%2F</url>
+    <url>%2F2017%2F10%2F14%2Ftensorflow-tensor-transform-api%2F</url>
     <content type="text"><![CDATA[tf.stack()12345stack( values, axis=0, name=&quot;stack&quot;) 官方文档： https://www.tensorflow.org/api_docs/python/tf/stack 定义： tensorflow/python/ops/array_ops.py 功能： 将由 R 维的 tensor 堆成 R+1 维的 tensor . 说明： 通过沿着 axis 维，将 values 中的 tensor 列表填充到一个比values 中的 tensor 高一维的 tensor中。 给定一个长度为 N ，由 shape 为 （A，B，C） 的 tensor 构成的列表； 如果 axis == 0，输出的 tensor 的 shape 为 (N, A, B, C) 如果 axis == 1，输出的 tensor 的 shape 为 (A, N, B, C) 示例：12345678910111213141516171819import tensorflow as tfx = [1, 4]y = [2, 5]z = [3, 6]stack_0 = tf.stack([x, y, z])print (stack_0.get_shape()) # (3, 2)stack_1 = tf.stack([x, y, z], axis=1)print (stack_1.get_shape()) # (2, 3)with tf.Session() as sess: stack_0_val, stack_1_val = sess.run([stack_0, stack_1]) print ('stack_0_val:') print (stack_0_val) # [[1, 4], [2, 5], [3, 6]] print ('stack_0_val.shape: %s' % str(stack_0_val.shape)) # (3, 2) print ('stack_1_val:') print (stack_1_val) # [[1, 2, 3], [4, 5, 6]] print ('stack_1_val.shape: %s' % str(stack_1_val.shape)) # (2, 3) 输出结果：1234567891011stack_0.get_shape(): (3, 2)stack_1.get_shape(): (2, 3)stack_0_val:[[1 4] [2 5] [3 6]]stack_0_val.shape: (3, 2)stack_1_val:[[1 2 3] [4 5 6]]stack_1_val.shape: (2, 3)]]></content>
       <categories>
         <category>TensorFlow</category>

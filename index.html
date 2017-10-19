@@ -286,6 +286,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/tensorflow-tensor-transform-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/MJ.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MJ's Learning Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/14/tensorflow-tensor-transform-api/" itemprop="url">tensorflow tensor变换api</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T20:15:09+08:00">
+                2017-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TensorFlow/" itemprop="url" rel="index">
+                    <span itemprop="name">TensorFlow</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="tf-stack"><a href="#tf-stack" class="headerlink" title="tf.stack()"></a>tf.stack()</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">stack(</div><div class="line">    values, </div><div class="line">    axis=0, </div><div class="line">    name=&quot;stack&quot;</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>官方文档：</p>
+<blockquote>
+<p><a href="https://www.tensorflow.org/api_docs/python/tf/stack" target="_blank" rel="external">https://www.tensorflow.org/api_docs/python/tf/stack</a></p>
+</blockquote>
+<p>定义：</p>
+<blockquote>
+<p><a href="https://github.com/tensorflow/tensorflow/blob/r1.3/tensorflow/python/ops/array_ops.py" target="_blank" rel="external"><code>tensorflow/python/ops/array_ops.py</code></a></p>
+</blockquote>
+<p>功能：</p>
+<blockquote>
+<p>将由 <code>R</code> 维的 <code>tensor</code> 堆成 <code>R+1</code> 维的 <code>tensor</code> .</p>
+</blockquote>
+<p>说明：</p>
+<blockquote>
+<p>通过沿着 <code>axis</code> 维，将 <code>values</code> 中的 <code>tensor</code> 列表填充到一个比<code>values</code> 中的 <code>tensor</code> 高一维的 <code>tensor</code>中。</p>
+<p>给定一个长度为 <code>N</code> ，由 <code>shape</code> 为 <code>（A，B，C）</code> 的 <code>tensor</code> 构成的列表；</p>
+<p>如果 <code>axis == 0</code>，输出的  <code>tensor</code> 的 <code>shape</code> 为 <code>(N, A, B, C)</code></p>
+<p>如果 <code>axis == 1</code>，输出的  <code>tensor</code> 的 <code>shape</code> 为 <code>(A, N, B, C)</code></p>
+</blockquote>
+<p>示例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"></div><div class="line">x = [<span class="number">1</span>, <span class="number">4</span>]</div><div class="line">y = [<span class="number">2</span>, <span class="number">5</span>]</div><div class="line">z = [<span class="number">3</span>, <span class="number">6</span>]</div><div class="line"></div><div class="line">stack_0 = tf.stack([x, y, z])</div><div class="line"><span class="keyword">print</span> (stack_0.get_shape())     <span class="comment"># (3, 2)</span></div><div class="line">stack_1 = tf.stack([x, y, z], axis=<span class="number">1</span>)</div><div class="line"><span class="keyword">print</span> (stack_1.get_shape())     <span class="comment"># (2, 3)</span></div><div class="line"></div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    stack_0_val, stack_1_val = sess.run([stack_0, stack_1])</div><div class="line">    <span class="keyword">print</span> (<span class="string">'stack_0_val:'</span>)</div><div class="line">    <span class="keyword">print</span> (stack_0_val)     <span class="comment"># [[1, 4], [2, 5], [3, 6]]</span></div><div class="line">    <span class="keyword">print</span> (<span class="string">'stack_0_val.shape: %s'</span> % str(stack_0_val.shape))     <span class="comment"># (3, 2)</span></div><div class="line">    <span class="keyword">print</span> (<span class="string">'stack_1_val:'</span>)</div><div class="line">    <span class="keyword">print</span> (stack_1_val)     <span class="comment"># [[1, 2, 3], [4, 5, 6]]</span></div><div class="line">    <span class="keyword">print</span> (<span class="string">'stack_1_val.shape: %s'</span> % str(stack_1_val.shape))     <span class="comment"># (2, 3)</span></div></pre></td></tr></table></figure></p>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">stack_0.get_shape(): (3, 2)</div><div class="line">stack_1.get_shape(): (2, 3)</div><div class="line">stack_0_val:</div><div class="line">[[1 4]</div><div class="line"> [2 5]</div><div class="line"> [3 6]]</div><div class="line">stack_0_val.shape: (3, 2)</div><div class="line">stack_1_val:</div><div class="line">[[1 2 3]</div><div class="line"> [4 5 6]]</div><div class="line">stack_1_val.shape: (2, 3)</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/21/tensorflow-install-tutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -317,7 +481,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-21T16:49:03+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-21T20:49:03+08:00">
                 2017-09-21
               </time>
             
@@ -1482,7 +1646,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1504,7 +1668,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

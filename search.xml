@@ -1,518 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[C++学习笔记---《vector》使用教程]]></title>
-      <url>/2017/10/24/cpp-vector-use-tutorial/</url>
-      <content type="html"><![CDATA[<h1 id="利用-remove-if-和-erase-从Vector中移除指定Set中包含的元素"><a href="#利用-remove-if-和-erase-从Vector中移除指定Set中包含的元素" class="headerlink" title="利用 remove_if() 和 erase() 从Vector中移除指定Set中包含的元素"></a>利用 <code>remove_if()</code> 和 <code>erase()</code> 从Vector中移除指定Set中包含的元素</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"></div><div class="line"><span class="built_in">std</span>::<span class="built_in">string</span> replace_str_array[] = &#123;<span class="string">","</span>, <span class="string">"."</span>&#125;;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">set</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; replace_str_set(replace_str_array, replace_str_array + <span class="number">2</span>);</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsReplaceStr</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span> str)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (replace_str_set.find(str) != replace_str_set.end()) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; string_vector;</div><div class="line">    string_vector.push_back(<span class="string">"a"</span>);</div><div class="line">    string_vector.push_back(<span class="string">","</span>);</div><div class="line">    string_vector.push_back(<span class="string">"b"</span>);</div><div class="line">    string_vector.push_back(<span class="string">"."</span>);</div><div class="line">    string_vector.push_back(<span class="string">"c"</span>);</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;::iterator it;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"before replace: "</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">for</span> (it = string_vector.begin(); it != string_vector.end(); it++) &#123;</div><div class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    string_vector.erase(remove_if(string_vector.begin(), string_vector.end(), IsReplaceStr), string_vector.end());</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"after replace: "</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">for</span> (it = string_vector.begin(); it != string_vector.end(); it++) &#123;</div><div class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">before replace:</div><div class="line">a</div><div class="line">,</div><div class="line">b</div><div class="line">.</div><div class="line">c</div><div class="line">after replace:</div><div class="line">a</div><div class="line">b</div><div class="line">c</div></pre></td></tr></table></figure></p>
-]]></content>
-      
-        <categories>
-            
-            <category> C++ </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> C++,vector </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[TensorFlow Tensor变换API]]></title>
-      <url>/2017/10/19/tensorflow-tensor-transform-api/</url>
-      <content type="html"><![CDATA[<h1 id="tf-stack"><a href="#tf-stack" class="headerlink" title="tf.stack()"></a>tf.stack()</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">stack(</div><div class="line">    values, </div><div class="line">    axis=0, </div><div class="line">    name=&quot;stack&quot;</div><div class="line">)</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>官方文档：</p>
-<blockquote>
-<p><a href="https://www.tensorflow.org/api_docs/python/tf/stack" target="_blank" rel="external">https://www.tensorflow.org/api_docs/python/tf/stack</a></p>
-</blockquote>
-<p>定义：</p>
-<blockquote>
-<p><a href="https://github.com/tensorflow/tensorflow/blob/r1.3/tensorflow/python/ops/array_ops.py" target="_blank" rel="external">tensorflow/python/ops/array_ops.py</a></p>
-</blockquote>
-<p>功能：</p>
-<blockquote>
-<p>将由 <code>R</code> 维的 <code>tensor</code> 堆成 <code>R+1</code> 维的 <code>tensor</code> .</p>
-</blockquote>
-<p>说明：</p>
-<blockquote>
-<p>通过沿着 <code>axis</code> 维，将 <code>values</code> 中的 <code>tensor</code> 列表填充到一个比<code>values</code> 中的 <code>tensor</code> 高一维的 <code>tensor</code>中。</p>
-<p>给定一个长度为 <code>N</code> ，由 <code>shape</code> 为 <code>（A，B，C）</code> 的 <code>tensor</code> 构成的列表；</p>
-<p>如果 <code>axis == 0</code>，输出的  <code>tensor</code> 的 <code>shape</code> 为 <code>(N, A, B, C)</code></p>
-<p>如果 <code>axis == 1</code>，输出的  <code>tensor</code> 的 <code>shape</code> 为 <code>(A, N, B, C)</code></p>
-</blockquote>
-<p>示例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"></div><div class="line">x = [<span class="number">1</span>, <span class="number">4</span>]</div><div class="line">y = [<span class="number">2</span>, <span class="number">5</span>]</div><div class="line">z = [<span class="number">3</span>, <span class="number">6</span>]</div><div class="line"></div><div class="line">stack_0 = tf.stack([x, y, z])</div><div class="line"><span class="keyword">print</span> (stack_0.get_shape())     <span class="comment"># (3, 2)</span></div><div class="line">stack_1 = tf.stack([x, y, z], axis=<span class="number">1</span>)</div><div class="line"><span class="keyword">print</span> (stack_1.get_shape())     <span class="comment"># (2, 3)</span></div><div class="line"></div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    stack_0_val, stack_1_val = sess.run([stack_0, stack_1])</div><div class="line">    <span class="keyword">print</span> (<span class="string">'stack_0_val:'</span>)</div><div class="line">    <span class="keyword">print</span> (stack_0_val)     <span class="comment"># [[1, 4], [2, 5], [3, 6]]</span></div><div class="line">    <span class="keyword">print</span> (<span class="string">'stack_0_val.shape: %s'</span> % str(stack_0_val.shape))     <span class="comment"># (3, 2)</span></div><div class="line">    <span class="keyword">print</span> (<span class="string">'stack_1_val:'</span>)</div><div class="line">    <span class="keyword">print</span> (stack_1_val)     <span class="comment"># [[1, 2, 3], [4, 5, 6]]</span></div><div class="line">    <span class="keyword">print</span> (<span class="string">'stack_1_val.shape: %s'</span> % str(stack_1_val.shape))     <span class="comment"># (2, 3)</span></div></pre></td></tr></table></figure></p>
-<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">stack_0.get_shape(): (3, 2)</div><div class="line">stack_1.get_shape(): (2, 3)</div><div class="line">stack_0_val:</div><div class="line">[[1 4]</div><div class="line"> [2 5]</div><div class="line"> [3 6]]</div><div class="line">stack_0_val.shape: (3, 2)</div><div class="line">stack_1_val:</div><div class="line">[[1 2 3]</div><div class="line"> [4 5 6]]</div><div class="line">stack_1_val.shape: (2, 3)</div></pre></td></tr></table></figure></p>
-]]></content>
-      
-        <categories>
-            
-            <category> TensorFlow </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> TensorFlow </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[TensorFlow安装教程]]></title>
-      <url>/2017/09/21/tensorflow-install-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> TensorFlow </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> TensorFlow </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Linux 常用命令教程]]></title>
-      <url>/2017/08/08/linux-commond-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> Tool </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Linux </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[SVN常用命令教程]]></title>
-      <url>/2017/08/06/svn-command-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> Tool </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> svn </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Git常用命令教程]]></title>
-      <url>/2017/08/05/git-command-tutorial/</url>
-      <content type="html"><![CDATA[<h1 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h1><h2 id="Git-介绍"><a href="#Git-介绍" class="headerlink" title="Git 介绍"></a>Git 介绍</h2><p><a href="https://git-scm.com/" target="_blank" rel="external">Git</a> 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。<code>Git</code>的读音为/gɪt/。<code>Git</code> 是 <code>Linus Torvalds</code> 为了帮助管理 <code>Linux</code> 内核开发而开发的一个开放源码的版本控制软件。</p>
-<h2 id="什么文件可以被-Git-管理"><a href="#什么文件可以被-Git-管理" class="headerlink" title="什么文件可以被 Git 管理?"></a>什么文件可以被 Git 管理?</h2><p>文本文件(.txt)，脚本文件(.py等)，各种基于文本信息的文件.</p>
-<h2 id="什么文件不能被-Git-管理"><a href="#什么文件不能被-Git-管理" class="headerlink" title="什么文件不能被 Git 管理?"></a>什么文件不能被 Git 管理?</h2><p>图片文件(.jpg等)，PDF(.pdf)，MS Word(.doc)，MS Power Point(.ppt)，MS Excel(.xls)等。<br><a id="more"></a></p>
-<h2 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h2><h3 id="Git-直接记录快照，而非差异比较"><a href="#Git-直接记录快照，而非差异比较" class="headerlink" title="Git 直接记录快照，而非差异比较"></a><code>Git</code> 直接记录快照，而非差异比较</h3><p><code>Git</code> 和其它版本控制系统（包括 <code>Subversion</code> 等）的主要差别在于 <code>Git</code> 对待数据的方法。 概念上来区分，其它大部分系统以文件变更列表的方式存储信息。 这类系统（<code>CVS</code>、<code>Subversion</code>、<code>Perforce</code>、<code>Bazaar</code> 等等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。<br><code>Git</code> 不按照以上方式对待或保存数据。 反之，<code>Git</code> 更像是把数据看作是对小型文件系统的一组快照。 每次你提交更新，或在 <code>Git</code> 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，<code>Git</code> 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。 <code>Git</code> 对待数据更像是一个「快照流」。<br>这是 <code>Git</code> 与几乎所有其它版本控制系统的重要区别。 因此 <code>Git</code> 重新考虑了以前每一代版本控制系统延续下来的诸多方面。<code>Git</code> 更像是一个小型的文件系统，提供了许多以此为基础构建的超强工具，而不只是一个简单的 <code>VCS</code>。</p>
-<h3 id="Git-不需要联网就能工作"><a href="#Git-不需要联网就能工作" class="headerlink" title="Git 不需要联网就能工作"></a><code>Git</code> 不需要联网就能工作</h3><p>在 <code>Git</code> 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其它计算机的信息，由于本地磁盘上就有项目的完整历史，所以大部分操作看起来瞬间完成。而其他集中式版本控制系统(例如 <code>SVN</code>等)，必须联网才能工作， 所有操作都有网络延时开销。</p>
-<h3 id="Git-保证完整性"><a href="#Git-保证完整性" class="headerlink" title="Git 保证完整性"></a><code>Git</code> 保证完整性</h3><p><code>Git</code> 的内容完整性要优于其他集中式版本控制系统(例如 <code>SVN</code>等)。<code>Git</code> 中所有数据在存储前都计算校验和，然后以校验和来引用。这个功能建构在 <code>Git</code> 底层，是构成 <code>Git</code> 哲学不可或缺的部分。 若在传送过程中丢失信息或损坏文件，<code>Git</code> 就能发现。<code>Git</code> 用以计算校验和的机制叫做 <code>SHA-1</code> 哈希散列。 这是一个由40个十六进制字符(<code>0-9</code> 和 <code>a-f</code>)组成字符串，基于 <code>Git</code> 中文件的内容或目录结构计算出来。 <code>SHA-1</code> 哈希看起来是这样：<code>24b9da6552252987aa493b52f8696cd6d3b00373</code>，<code>Git</code> 中使用这种哈希值的情况很多，你将经常看到这种哈希值。 实际上，<code>Git</code>  数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名。</p>
-<h3 id="Git-一般只添加数据"><a href="#Git-一般只添加数据" class="headerlink" title="Git 一般只添加数据"></a><code>Git</code> 一般只添加数据</h3><p><code>Git</code> 操作，几乎只往 <code>Git</code> 数据库中增加数据。 很难让 <code>Git</code> 执行任何不可逆操作，或者让它以任何方式清除数据。 同别的 <code>VCS</code> 一样，未提交更新时有可能丢失或弄乱修改的内容；但是一旦你提交快照到 <code>Git</code> 中，就难以再丢失数据，特别是如果你定期的推送数据库到其它仓库的话。这使得在使用 <code>Git</code> 成为一个安心愉悦的过程，因为我们深知可以尽情做各种尝试，而没有把事情弄糟的危险。</p>
-<h1 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h1><p>最早 <code>Git</code> 是在 <code>Linux</code> 上开发的，很长一段时间内，<code>Git</code> 也只能在 <code>Linux</code> 和 <code>Unix</code> 系统上跑。目前，<code>Git</code> 已经可以在 <code>Linux</code>、<code>Unix</code>、<code>Mac</code> 和 <code>Windows</code> 几大平台上运行。详细的安装说明请前往<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="external"> Git官网安装说明 </a>查看， <code>Git</code> 在每种系统上的安装方式各不相同，安装步骤分别如下:</p>
-<h2 id="Linux平台上安装"><a href="#Linux平台上安装" class="headerlink" title="Linux平台上安装"></a>Linux平台上安装</h2><p>打开 <code>terminal</code>，可以用下面的命令安装：</p>
-<h3 id="Debian-Ubuntu"><a href="#Debian-Ubuntu" class="headerlink" title="Debian/Ubuntu"></a>Debian/Ubuntu</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> apt-get install git-all</div></pre></td></tr></table></figure>
-<p>使用 <code>git --version</code> 查看是否安装成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git --version</div><div class="line">git version 2.7.4</div></pre></td></tr></table></figure></p>
-<h3 id="Centos-RedHat"><a href="#Centos-RedHat" class="headerlink" title="Centos/RedHat"></a>Centos/RedHat</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> yum -y install git-all</div></pre></td></tr></table></figure>
-<p>使用 <code>git --version</code> 查看是否安装成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git --version</div><div class="line">git version 1.7.1</div></pre></td></tr></table></figure></p>
-<h2 id="Mac-平台上安装"><a href="#Mac-平台上安装" class="headerlink" title="Mac 平台上安装"></a>Mac 平台上安装</h2><p>1、先下载 <code>.dmg</code> 安装包，下载地址为：<a href="https://git-scm.com/download/mac" target="_blank" rel="external">https://git-scm.com/download/mac</a> ，点击下载到本地，下载文件例如：<code>git-2.14.1-intel-universal-mavericks.dmg</code><br>2、双击安装包进行安装即可<br>3、使用 <code>git --version</code> 查看是否安装成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git --version</div><div class="line">git version 2.14.1</div></pre></td></tr></table></figure></p>
-<h2 id="Windows-平台上安装"><a href="#Windows-平台上安装" class="headerlink" title="Windows 平台上安装"></a>Windows 平台上安装</h2><p>1、先下载 <code>.exe</code> 安装包，下载地址为：<a href="https://git-scm.com/download/win" target="_blank" rel="external">https://git-scm.com/download/win</a> ，选择适合当前系统的版本，点击下载到本地<br>2、双击安装包进行安装即可<br>3、在开始菜单里找到<code>Git</code>-&gt;<code>Git Bash</code>，会弹出 <code>Git</code> 命令窗口，使用 <code>git --version</code> 查看是否安装成功<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git version</div><div class="line">git version 2.14.2.windows.1</div></pre></td></tr></table></figure></p>
-<h1 id="Git-配置"><a href="#Git-配置" class="headerlink" title="Git 配置"></a>Git 配置</h1><p>安装 <code>Git</code> 后，每台计算机上只需要进行一次配置，程序升级时会保留配置信息。你可以在任何时候再次通过运行命令来修改它们。<br><code>Git</code> 自带一个 <code>git config</code> 的工具，专门用来配置或读取相应的工作环境变量。这些变量存储在三个不同的位置：</p>
-<ul>
-<li><code>/etc/gitconfig</code> 文件： 包含系统上每一个用户及他们仓库的通用配置，如果使用带有 <code>--system</code> 选项的 <code>git config</code> 时，它会从此文件读写配置变量。</li>
-<li><code>~/.gitconfig</code> 或 <code>~/.config/git/config</code> 文件：只针对当前用户，可以传递 <code>--global</code> 选项让 <code>Git</code> 读写此文件。</li>
-<li>当前使用仓库的 <code>Git</code> 目录中的 <code>config</code> 文件(就是 <code>.git/config</code>)：针对该仓库。</li>
-</ul>
-<p>每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。</p>
-<p>在 <code>Windows</code> 系统中，<code>Git</code> 会查找 <code>$HOME</code> 目录下（一般情况下是 <code>C:\Users\$USER</code>）的 <code>.gitconfig</code> 文件。 <code>Git</code> 同样也会寻找 <code>/etc/gitconfig</code> 文件，但只限于 <code>MSys</code> 的根目录下，即安装 <code>Git</code> 时所选的目标位置。</p>
-<h2 id="配置用户信息"><a href="#配置用户信息" class="headerlink" title="配置用户信息"></a>配置用户信息</h2><p>当安装完 <code>Git</code> 应该做的第一件事就是设置个人的「用户名称」与「邮件地址」。 这样做很重要，因为每一个 <code>Git</code> 的提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git config --global user.name lichengjin</div><div class="line"><span class="meta">$</span> git config --global user.email lichengjin606@gmail.com</div></pre></td></tr></table></figure></p>
-<p>再次强调，如果使用了 <code>--global</code> 选项，那么该命令只需要运行一次，因为之后无论你在该系统上做任何事情，<code>Git</code> 都会使用那些信息。当你想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 <code>--global</code>选项的命令来配置，新的设定保存在当前项目的 <code>.git/config</code> 文件里。</p>
-<h2 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h2><p>要检查已有的配置信息，可以使用 <code>git config --list</code> 命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git config --list</div><div class="line">user.name=lichengjin</div><div class="line">user.email=lichengjin606@gmail.com</div></pre></td></tr></table></figure></p>
-<p>有时候会看到重复的变量名，那就说明它们来自不同的配置文件（比如 <code>/etc/gitconfig</code> 和 <code>~/.gitconfig</code>），不过最终 <code>Git</code> 实际采用的是最后一个。<br>这些配置我们也可以在 <code>~/.gitconfig</code> 或 <code>/etc/gitconfi</code> 看到，如下所示：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> vim ~/.gitconfig</div></pre></td></tr></table></figure></p>
-<p>显示内容如下所示：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[user]</div><div class="line">    	name = lichengjin</div><div class="line">    	email = lichengjin606@gmail.<span class="keyword">com</span></div></pre></td></tr></table></figure></p>
-<p>你可以通过输入 <code>git config &lt;key&gt;</code> 来检查 <code>Git</code>的某一项配置，例如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git config user.name</div><div class="line">lichengjin</div></pre></td></tr></table></figure></p>
-<h1 id="Git-工作流程"><a href="#Git-工作流程" class="headerlink" title="Git 工作流程"></a>Git 工作流程</h1><p><code>Git</code> 的工作流程如下：</p>
-<ol>
-<li>克隆 <code>Git</code> 资源作为工作目录。</li>
-<li>在克隆的资源上添加或修改文件。</li>
-<li>如果其他人修改了，你可以更新资源。</li>
-<li>在提交前查看修改。</li>
-<li>提交修改。</li>
-<li>在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。</li>
-</ol>
-<p>下图展示了 <code>Git</code> 的工作流程，图片来自<a href="http://www.runoob.com/git/git-workflow.html" target="_blank" rel="external">菜鸟教程</a>：<br><img src="/images/git/git_process.jpg" alt="Git 工作流程图"></p>
-<h1 id="Git-工作区，暂存区和版本库"><a href="#Git-工作区，暂存区和版本库" class="headerlink" title="Git 工作区，暂存区和版本库"></a>Git 工作区，暂存区和版本库</h1><p>工作区：就是你在电脑里能看到的目录。是对项目的某个版本独立提取出来的内容。 这些从 <code>Git</code> 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。<br>暂存区：英文叫<code>stage</code>， 或<code>index</code>。是一个文件，一般存放在 <code>.git/index</code> 中，保存了下次将提交的文件列表信息，有时候也被称作索引( <code>index</code> )。<br>版本库：版本库又名仓库，英文名<code>repository</code>，你可以简单理解成一个目录，这个目录里面的所有文件都可以被 <code>Git</code> 管理起来，每个文件的修改、删除，<code>Git</code> 都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以还原。工作区有一个隐藏目录 <code>.git</code>，这个不算工作区，而是 <code>Git</code> 的版本库，是 <code>Git</code> 用来保存项目的元数据和对象数据库的地方。 这是 <code>Git</code> 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。<br>下面这个图展示了「工作区」、「暂存区」和「版本库」之间的关系，图片来自<a href="http://www.runoob.com/git/git-workspace-index-repo.html" target="_blank" rel="external">菜鸟教程</a>：<br><img src="/images/git/git_work_stage_respository.jpg" alt="工作区、暂存区和版本库之间的关系"><br>图中左侧为「工作区」，右侧为「版本库」。在「版本库」中标记为 <code>index</code> 的区域是「暂存区」(<code>stage</code>，<code>index</code>)，标记为 <code>master</code> 的是 <code>master</code> 分支所代表的目录树。<br>图中我们可以看出此时 <code>HEAD</code> 实际是指向 <code>master</code> 分支的一个「游标」。所以图示的命令中出现 <code>HEAD</code> 的地方可以用 <code>master</code> 来替换。<br>图中的 <code>objects</code> 标识的区域为 <code>Git</code> 的「对象库」，实际位于 <code>.git/objects</code> 目录下，里面包含了创建的各种对象及内容。<br>当对「工作区」修改或新增的文件执行 <code>git add</code> 命令时，「暂存区」的目录树被更新，同时「工作区」修改或新增的文件内容被写入到「对象库」中的一个新的对象中，而该对象的 <code>ID</code> 被记录在暂存区的文件索引中。<br>当执行提交操作 <code>git commit</code> 时，「暂存区」的目录树写到「版本库」中，<code>master</code> 分支会做相应的更新。即 <code>master</code> 指向的目录树就是提交时「暂存区」的目录树。<br>当执行 <code>git reset HEAD</code> 命令时，「暂存区」的目录树会被重写，被 <code>master</code> 分支指向的目录树所替换，但是「工作区」不受影响。<br>当执行 <code>git rm --cached &lt;file&gt;</code> 命令时，会直接从「暂存区」删除文件，「工作区」则不做出改变。<br>当执行 <code>git checkout .</code> 或者 <code>git checkout -- &lt;file&gt;</code> 命令时，会用「暂存区」全部或指定的文件替换「工作区」的文件。这个操作很危险，会清除「工作区」中未添加到「暂存区」的改动。<br>当执行 <code>git checkout HEAD .</code> 或者 <code>git checkout HEAD &lt;file&gt;</code> 命令时，会用 <code>HEAD</code> 指向的 <code>master</code> 分支中的全部或者部分文件替换「暂存区」和以及「工作区」中的文件。这个命令也是极具危险性的，因为不但会清除「工作区」中未提交的改动，也会清除「暂存区」中未提交的改动。</p>
-<h1 id="获取版本库"><a href="#获取版本库" class="headerlink" title="获取版本库"></a>获取版本库</h1><h2 id="创建新的版本库"><a href="#创建新的版本库" class="headerlink" title="创建新的版本库"></a>创建新的版本库</h2><p>1、 选择一个合适的地方，创建一个空目录：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> mkdir git_tutorial</div><div class="line"><span class="meta">$</span> cd git_tutorial</div><div class="line"><span class="meta">$</span> pwd</div><div class="line">/Users/lichengjin/workspace/git_tutorial</div></pre></td></tr></table></figure>
-<p>2、 通过 <code>git init</code> 命令把这个目录变成 <code>Git</code> 可以管理的仓库:<br>注：如果打算使用 <code>Git</code> 来对现有的项目进行管理，只需要进入该项目目录并输入<code>git init</code>。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git init</div><div class="line">Initialized empty Git repository in /Users/lichengjin/workspace/git_tutorial/.git/</div></pre></td></tr></table></figure>
-<p>该命令将创建一个名为 <code>.git</code> 的子目录，这个子目录含有你初始化的 <code>Git</code> 仓库中所有的必须文件，这些文件是 <code>Git</code> 仓库的骨干，是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。<br>如果你没有看到 <code>.git</code> 目录，那是因为这个目录默认是隐藏的，用 <code>ls -a</code> 命令查看即可：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> ls -a</div><div class="line">.    ..   .git</div></pre></td></tr></table></figure></p>
-<h2 id="克隆现有的版本库"><a href="#克隆现有的版本库" class="headerlink" title="克隆现有的版本库"></a>克隆现有的版本库</h2><p>如果你想获得一份已经存在了的 Git 仓库的拷贝，比如说，你想为某个开源项目贡献自己的一份力，这时就要用到 <code>git clone</code> 命令。 如果你对其它的 <code>VCS</code> 系统（比如说 <code>Subversion</code> ）很熟悉，请留心一下你所使用的命令是 <code>clone</code> 而不是 <code>checkout</code>。 这是 <code>Git</code> 区别于其它版本控制系统的一个重要特性，<code>Git</code> 克隆的是该 <code>Git</code> 仓库服务器上的几乎所有数据，而不是仅仅复制完成你的工作所需要文件。 当你执行 <code>git clone</code> 命令的时候，默认配置下远程 <code>Git</code> 仓库中的每一个文件的每一个版本都将被拉取下来。 事实上，如果你的服务器的磁盘坏掉了，你通常可以使用任何一个克隆下来的用户端来重建服务器上的仓库(虽然可能会丢失某些服务器端的挂钩设置，但是所有版本的数据仍在)。</p>
-<p>克隆仓库的命令格式：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone &lt;repo&gt;</div></pre></td></tr></table></figure></p>
-<p>例如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/ChengjinLi/machine_learning.git</div></pre></td></tr></table></figure></p>
-<p>如果我们需要克隆到指定的目录，可以使用以下命令格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone &lt;repo&gt; &lt;directory&gt;</div></pre></td></tr></table></figure></p>
-<p>例如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/ChengjinLi/machine_learning.git mj_machine_learning</div></pre></td></tr></table></figure></p>
-<p>参数说明：</p>
-<ul>
-<li>repo：Git 仓库。</li>
-<li>directory：本地目录。</li>
-</ul>
-<p><code>Git</code> 支持多种数据传输协议。 上面的例子使用的是 <code>https://</code> 协议，不过你也可以使用 <code>git://</code> 协议或者使用 <code>SSH</code> 传输协议。</p>
-<h1 id="Git-文件生命周期"><a href="#Git-文件生命周期" class="headerlink" title="Git 文件生命周期"></a>Git 文件生命周期</h1><p>请记住，「工作目录」下的每一个文件都不外乎这两种状态：「已跟踪」或「未跟踪」。「已跟踪」的文件是指那些被纳入了版本控制的文件，在上一次快照中有它们的记录，在工作一段时间后，它们的状态可能处于「未修改」，「已修改」或「已放入暂存区」。 「工作目录」中除「已跟踪」文件以外的所有其它文件都属于「未跟踪」文件，它们既不存在于上次快照的记录中，也没有放入「暂存区」。 初次克隆某个仓库的时候，「工作目录」中的所有文件都属于「已跟踪」文件，并处于「未修改」状态。编辑过某些文件之后，由于自上次提交后你对它们做了修改，<code>Git</code> 将它们标记为「已修改」文件。 我们逐步将这些修改过的文件放入「暂存区」，然后提交所有暂存了的修改，如此反复。<br>使用 <code>Git</code> 时文件的生命周期如下：<br><img src="/images/git/git_life_cycle.jpg" alt="Git 文件生命周期"></p>
-<h1 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h1><p><strong><code>git add &lt;file_name&gt;/&lt;dir_name&gt;</code></strong><br>将文件添加到暂存区，参数可以是指定路径的文件名或目录的名字，也可以使用 glob 模式。</p>
-<p><strong><code>git status</code></strong><br>查看项目的当前状态，输出详细内容<br><strong><code>git status --short</code></strong> 或 <strong><code>git status -s</code></strong><br>查看项目的当前状态，以简短的结果输出<br>状态说明：</p>
-<ul>
-<li>?? 未跟踪的文件</li>
-<li>M：修改过的文件，出现在靠左边的<code>M</code>表示该文件被修改了并放入了暂存区，出现在右边的<code>M</code>表示该文件被修改了但是还没放入暂存区，</li>
-<li>A：新添加到暂存区的文件</li>
-<li>D：已删除(deleted)</li>
-<li>R：重命名(renamed)</li>
-<li>C：已拷贝(copied)</li>
-<li>U：已更新但为合并(updated but unmerged)</li>
-</ul>
-<p><strong><code>git diff</code></strong><br>查看尚未 <code>add</code> 的所有文件的改动和上个已经 <code>commit</code>的文件的不同<br><strong><code>git diff &lt;file_name&gt;</code></strong><br>查看尚未 <code>add</code> 的 <code>&lt;file_name&gt;</code> 文件的改动和上个已经 <code>commit</code>的文件的不同<br><strong><code>git diff --cached</code></strong><br>查看已经 <code>add</code> 的文件的改动<br><strong><code>git diff HEAD</code></strong><br>查看已 <code>add</code> 的与未 <code>add</code> 的所有改动<br><strong><code>git diff --stat</code></strong><br>显示摘要而非整个<code>diff</code></p>
-<p><strong><code>git commit -m &quot;message&quot;</code></strong><br>将暂存区的文件提交到版本库，<code>-m</code>后面输入的是本次提交的说明，可以输入任意内容，最好是有意义的，方便从历史记录找到改动记录。<br><strong><code>git commit --amend --no-edit</code></strong><br>将本次改动直接合并到上一个 <code>commit</code> 中<br><strong><code>git commit -am &quot;message&quot;</code></strong><br>跳过使用暂存区的方式，自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 <code>git add</code> 步骤。</p>
-<p><strong><code>git rm &lt;file_name&gt;/&lt;dir_name&gt;</code></strong><br>将文件从暂存区域移除，参数可以是指定路径的文件名或目录的名字，也可以使用 glob 模式。<br><strong><code>git rm --cached &lt;file_name&gt;/&lt;dir_name&gt;</code></strong><br>将文件从 <code>Git</code> 仓库中删除，但仍然希望保留在当前工作目录中，参数可以是指定路径的文件名或目录的名字，也可以使用 glob 模式。</p>
-<p><strong><code>git mv &lt;file_from&gt; &lt;file_to&gt;</code></strong><br>将 <code>Git</code> 中的 <code>&lt;file_from&gt;</code> 重命名为 <code>&lt;file_to&gt;</code></p>
-<p><strong><code>git log</code></strong><br>查看历史提交记录，显示从最近到最远的提交日志<br><strong><code>git log --oneline</code></strong><br>一行显示一次提交<br><strong><code>git log --oneline --graph</code></strong><br>查看历史中什么时候出现了分支、合并，开启了拓扑图选项<br><strong><code>git log --author=&lt;user_name&gt;</code></strong><br>查找指定用户 <code>&lt;user_name&gt;</code> 的提交日志</p>
-<p><strong><code>git reflog</code></strong><br>查看历史命令记录，显示从最近到最远的日志</p>
-<p><strong><code>git reset HEAD</code></strong><br>取消已缓存的内容，即取消之前 <code>git add</code> 添加的内容<br>在 <code>Git</code> 中，用 <code>HEAD</code> 表示当前版本，上一个版本就是 <code>HEAD^</code> ，上上一个版本就是 <code>HEAD^^</code>，当然往上100个版本写100个<code>^</code>比较容易数不过来，所以写成 <code>HEAD~100</code>。<br><strong><code>git reset &lt;file_name&gt;</code></strong><br>取消已缓存的<code>&lt;file_name&gt;</code>，即取消之前 <code>git add</code> 添加的内容<br><strong><code>git reset --hard &lt;commit_id&gt;</code></strong><br>回退到指定 <code>&lt;commit_id&gt;</code> 版本，<code>&lt;commit_id&gt;</code>没必要写全，前位(例如前7位)就可以了，<code>Git</code> 会自动去找，当然也不能只写前一两位，因为 <code>Git</code> 可能会找到多个版本号，就无法确定是哪一个了。</p>
-<p><strong><code>git checkout &lt;commid_id&gt; -- &lt;file_name&gt;</code></strong><br>将 <code>&lt;file_name&gt;</code> 回退到 <code>&lt;commid_id&gt;</code> 的版本<br><strong><code>git checkout &lt;branch_name&gt;</code></strong><br>将 <code>HEAD</code> 从当前分支切换到 <code>&lt;branch_name&gt;</code> 分支<br><strong><code>git checkout -b &lt;branch_name&gt;</code></strong><br>创建 <code>&lt;branch_name&gt;</code> 分支，并切换到新建的分支</p>
-<p><strong><code>git branch</code></strong><br>查看当前分支，<code>*</code>代表了当前 <code>HEAD</code> 所在的分支<br><strong><code>git branch &lt;branch_name&gt;</code></strong><br>创建 <code>&lt;branch_name&gt;</code> 分支</p>
-<p><strong><code>git merge &lt;branch_name&gt;</code></strong><br>将 <code>&lt;branch_name&gt;</code> 合并到当前分支，<code>Git</code> 会采用默认的 <code>Fast forward</code> 格式进行合并，这次合并操作不会有 <code>commit</code> 信息，<code>log</code> 中也不会有分支的图案。<br><strong><code>git merge --no-diff -m &quot;message&quot; &lt;branch_name&gt;</code></strong><br>采取 <code>--no-ff</code> 这种方式保留合并的 <code>commit</code> 信息。</p>
-<h1 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h1><p>一般我们总会有些文件无需纳入 <code>Git</code> 的管理，也不希望它们总出现在未跟踪文件列表。 通常都是些自动生成的文件，比如日志文件，或者编译过程中创建的临时文件等。 在这种情况下，我们可以创建一个名为<code>.gitignore</code> 的文件，列出要忽略的文件模式。要养成一开始就设置好 <code>.gitignore</code> 文件的习惯，以免将来误提交这类无用的文件。<br>文件 <code>.gitignore</code> 的格式规范如下：</p>
-<ul>
-<li>所有空行或者以 <code>＃</code> 开头的行都会被 <code>Git</code> 忽略。</li>
-<li>可以使用标准的 <code>glob</code> 模式匹配。</li>
-<li>匹配模式可以以（<code>/</code>）开头防止递归。</li>
-<li>匹配模式可以以（<code>/</code>）结尾指定目录。</li>
-<li>要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。</li>
-</ul>
-<p>所谓的 <code>glob</code> 模式是指 <code>shell</code> 所使用的简化了的正则表达式。 星号<code>*</code>匹配零个或多个任意字符；<code>[abc]</code> 匹配任何一个列在方括号中的字符（这个例子要么匹配一个 <code>a</code>，要么匹配一个 <code>b</code>，要么匹配一个 <code>c</code>）；问号<code>?</code>只匹配一个任意字符；如果在方括号中使用短划线<code>-</code>分隔两个字符，表示所有在这两个字符范围内的都可以匹配（比如 <code>[0-9]</code> 表示匹配所有<code>0</code>到<code>9</code>的数字）。 使用两个星号<code>*</code>表示匹配任意中间目录，比如<code>a/**/z</code> 可以匹配 <code>a/z</code>, <code>a/b/z</code> 或 <code>a/b/c/z</code>等。<code>GitHub</code> 有一个十分详细的针对数十种项目及语言的 <code>.gitignore</code> 文件列表，你可以在 <a href="https://github.com/github/gitignore" target="_blank" rel="external">https://github.com/github/gitignore</a> 找到它.</p>
-<h1 id="Github-使用"><a href="#Github-使用" class="headerlink" title="Github 使用"></a>Github 使用</h1><p><a href="https://github.com/" target="_blank" rel="external">Github</a> 是一个大家都积极贡献的地方， 你可以和各种人合作创作，也是开源的天堂， 只要你愿意, 任何人都能下载, 或修改你的杰作。<br>在<code>Github</code> 上注册一个账户<br>然后添加一个 <code>online</code> 版本库 <code>repository</code><br>连接本地版本库<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add [alias] [url]</div></pre></td></tr></table></figure></p>
-<p>例如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git remote add origin https://github.com/ChengjinLi/machine_learning.git</div><div class="line"><span class="meta">$</span> git push -u origin master     # 推送本地 master 去 origin</div></pre></td></tr></table></figure></p>
-<p>在执行 <code>commit</code> 之后，可以执行 <code>git push -u origin master</code> 将本地修改提交到 <code>Github</code></p>
-<p>要查看当前配置有哪些远程仓库，可以用命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git remote</div><div class="line">origin</div></pre></td></tr></table></figure></p>
-<p>执行时加上 -v 参数，你还可以看到每个别名的实际链接地址。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git remote -v</div><div class="line">origin	https://github.com/ChengjinLi/machine_learning.git (fetch)</div><div class="line">origin	https://github.com/ChengjinLi/machine_learning.git (push)</div></pre></td></tr></table></figure></p>
-<p>删除别名为 <code>&lt;alias&gt;</code> 的远程仓库<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git remote rm &lt;alias&gt;</div></pre></td></tr></table></figure></p>
-<h1 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h1><p>Git 官网： <a href="https://git-scm.com/" target="_blank" rel="external">https://git-scm.com/</a><br>Git 完整命令手册地址： <a href="http://git-scm.com/docs" target="_blank" rel="external">http://git-scm.com/docs</a><br>Pro Git book： <a href="https://git-scm.com/book/zh/v2" target="_blank" rel="external">https://git-scm.com/book/zh/v2</a><br>廖雪峰Git教程：<br><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a><br>菜鸟Git教程： <a href="http://www.runoob.com/git/git-tutorial.html" target="_blank" rel="external">http://www.runoob.com/git/git-tutorial.html</a><br>Github 官网： <a href="https://github.com/" target="_blank" rel="external">https://github.com/</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> Tool </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> git </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Vim常用命令教程]]></title>
-      <url>/2017/08/04/vim-command-tutorial/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> Tool </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Vim </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[本地挂载服务器文件夹工具---「sshfs」的安装及使用]]></title>
-      <url>/2017/08/03/sshfs-install-and-using-on-mac/</url>
-      <content type="html"><![CDATA[<p>对于习惯在本地使用「<strong>IDE</strong>」工具进行编辑而不习惯在服务器上使用 「<strong>vim</strong>」 进行编辑的同学，下面介绍一个非常方便的在本地挂载服务器文件夹的工具 「<strong>sshfs</strong>」。下面介绍在「<strong>Mac</strong>」(系统版本：macOS Sierra 10.12.6)下的安装及使用方法：</p>
-<h1 id="安装「sshfs」"><a href="#安装「sshfs」" class="headerlink" title="安装「sshfs」"></a>安装「<strong>sshfs</strong>」</h1><h2 id="安装-Homebrew"><a href="#安装-Homebrew" class="headerlink" title="安装 Homebrew"></a>安装 <a href="https://brew.sh/index_zh-cn.html" target="_blank" rel="external">Homebrew</a></h2><a id="more"></a>
-<p>先确定是否已经安装「<strong>Homebrew</strong>」，在命令行执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew -v</div></pre></td></tr></table></figure></p>
-<p>输出示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Homebrew &gt;1.2.0 (no git repository)</div><div class="line">Homebrew/homebrew-core (git revision 9cf7; last commit 2017-09-22)</div></pre></td></tr></table></figure></p>
-<p>如果没有安装，则执行如下命令进行安装，在命令行执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure></p>
-<h2 id="安装-「sshfs」-的依赖-「osxfuse」"><a href="#安装-「sshfs」-的依赖-「osxfuse」" class="headerlink" title="安装 「sshfs」 的依赖 「osxfuse」"></a>安装 「<strong>sshfs</strong>」 的依赖 「<strong>osxfuse</strong>」</h2><p>执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install caskroom/cask/osxfuse</div></pre></td></tr></table></figure></p>
-<h2 id="安装-「sshfs」"><a href="#安装-「sshfs」" class="headerlink" title="安装 「sshfs」"></a>安装 「<strong>sshfs</strong>」</h2><p>执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install sshfs</div></pre></td></tr></table></figure></p>
-<h1 id="使用-「sshfs」-挂载"><a href="#使用-「sshfs」-挂载" class="headerlink" title="使用 「sshfs」 挂载"></a>使用 「<strong>sshfs</strong>」 挂载</h1><p>执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sshfs -C -o reconnect user@hostname:remote_dir local_dir</div></pre></td></tr></table></figure></p>
-<p>参数说明如下：</p>
-<ul>
-<li>user: 远程连接用户名</li>
-<li>hostname: 远程连接的主机名</li>
-<li>remote_dir: 远程目录</li>
-<li>local_dir: 本地目录</li>
-</ul>
-<h1 id="查看挂载情况"><a href="#查看挂载情况" class="headerlink" title="查看挂载情况"></a>查看挂载情况</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df -h local_dir</div></pre></td></tr></table></figure>
-<h1 id="使用-「umount」-取消挂载"><a href="#使用-「umount」-取消挂载" class="headerlink" title="使用 「umount」 取消挂载"></a>使用 「<strong>umount</strong>」 取消挂载</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">umount local_dir</div></pre></td></tr></table></figure>
-<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>如过我们的Mac休眠或重启, 发现挂载的失败了, 进入目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls local_dir</div></pre></td></tr></table></figure></p>
-<p>会提示如下类似信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls: local_dir: Input/output error</div></pre></td></tr></table></figure></p>
-<p>取消挂载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">umount local_dir</div></pre></td></tr></table></figure></p>
-<p>又会提示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">umount: local_dir: not currently mounted</div></pre></td></tr></table></figure></p>
-<p>这个时候, 我们不得不关闭进程了, 可以先通过命令查看进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pgrep -lf sshfs</div></pre></td></tr></table></figure></p>
-<p>然后杀掉相应的挂载进程, 或者直接杀掉所有挂载进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pkill -9 sshfs</div></pre></td></tr></table></figure></p>
-<p>之后重新挂载响应的目录即可</p>
-<p>相关链接：<a href="http://www.jianshu.com/p/8723ba79f35a" target="_blank" rel="external">http://www.jianshu.com/p/8723ba79f35a</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> Tool </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> sshfs </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Markdown 使用教程]]></title>
-      <url>/2017/08/02/markdown-using-tutorial/</url>
-      <content type="html"><![CDATA[<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">不同数量的# 标题内容</div></pre></td></tr></table></figure></p>
-<p>说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。<br><a id="more"></a></p>
-<p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 一级标题</div><div class="line">## 二级标题</div><div class="line">### 三级标题</div><div class="line">#### 四级标题</div><div class="line">#####  五级标题</div><div class="line">######  六级标题</div></pre></td></tr></table></figure>
-<p>示例显示效果：</p>
-<blockquote>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
-<h1 id="斜体、粗体、加粗斜体、删除线"><a href="#斜体、粗体、加粗斜体、删除线" class="headerlink" title="斜体、粗体、加粗斜体、删除线"></a>斜体、粗体、加粗斜体、删除线</h1><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*斜体*</div><div class="line">**粗体**</div><div class="line">***加粗斜体***</div><div class="line">~~删除线~~</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p><em>斜体</em><br><strong>粗体</strong><br><strong><em>加粗斜体</em></strong><br><del>删除线</del></p>
-</blockquote>
-<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><h2 id="自动链接"><a href="#自动链接" class="headerlink" title="自动链接"></a>自动链接</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;链接地址&gt;</div></pre></td></tr></table></figure></p>
-<p>说明：Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，Markdown 就会自动把它转成链接。<br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;https://chengjinli.github.io/&gt;</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p><a href="https://chengjinli.github.io/" target="_blank" rel="external">https://chengjinli.github.io/</a></p>
-</blockquote>
-<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[链接文字](链接地址 &quot;链接标题&quot;)</div></pre></td></tr></table></figure></p>
-<p>说明：()中的””之间可以为链接指定title，title属性可加可不加。title属性的效果是鼠标悬停在链接上会出现指定的 title 文字。链接地址与链接标题前有一个空格。<br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[MJ&apos;s Learning Notes](https://chengjinli.github.io/)</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p><a href="https://chengjinli.github.io/" target="_blank" rel="external">MJ’s Learning Notes</a></p>
-</blockquote>
-<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">数字加一个英文句点</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. 无序列表1</div><div class="line">2. 无序列表2</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<ol>
-<li>无序列表1</li>
-<li>无序列表2</li>
-</ol>
-</blockquote>
-<h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*，+，- 加上列表内容</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">* 无序列表1</div><div class="line">* 无序列表2</div><div class="line">+ 无序列表3</div><div class="line">+ 无序列表4</div><div class="line">- 无序列表5</div><div class="line">- 无序列表6</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<ul>
-<li>无序列表1</li>
-<li>无序列表2</li>
-</ul>
-<ul>
-<li>无序列表3</li>
-<li>无序列表4</li>
-</ul>
-<ul>
-<li>无序列表5</li>
-<li>无序列表6</li>
-</ul>
-</blockquote>
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><h2 id="单层引用"><a href="#单层引用" class="headerlink" title="单层引用"></a>单层引用</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;加上被引用的内容</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; 一行内容的引用</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p>一行内容的引用</p>
-</blockquote>
-<h2 id="多层引用"><a href="#多层引用" class="headerlink" title="多层引用"></a>多层引用</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">不同数量的&gt;加上被引用的内容</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;第3层引用</div><div class="line"></div><div class="line">&gt;&gt;第2层引用</div><div class="line"></div><div class="line">&gt;第1层引用</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>第3层引用</p>
-</blockquote>
-<p>第2层引用</p>
-</blockquote>
-<p>第1层引用</p>
-</blockquote>
-<h2 id="引用其他元素"><a href="#引用其他元素" class="headerlink" title="引用其他元素"></a>引用其他元素</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; ### 三级标题</div><div class="line">&gt; 1. 第一行列表内容</div><div class="line">&gt; 2. 第二行列表内容</div><div class="line">&gt; </div><div class="line">&gt; 插入代码的例子</div><div class="line">&gt; `print (&quot;MJ&quot;)`</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<h3 id="三级标题-1"><a href="#三级标题-1" class="headerlink" title="三级标题"></a>三级标题</h3><ol>
-<li>第一行列表内容</li>
-<li>第二行列表内容</li>
-</ol>
-<p><code>print (&quot;MJ&quot;)</code></p>
-</blockquote>
-<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![图片Alt](图片地址 &quot;图片Title&quot;)</div></pre></td></tr></table></figure></p>
-<p>说明：[]中写图片Alt，如果图片因为某些原因不能显示，就用定义的图片Alt文字来代替图片。()里写图片地址，()图片Title表示鼠标悬停在图片上时出现的文字。 Alt 和 Title 都不是必须的，可以省略，但建议写上。<br>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![头像](https://chengjinli.github.io/images/MJ.jpg &quot;MJ&quot;)</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p><img src="https://chengjinli.github.io/images/MJ.jpg" alt="头像" title="MJ"></p>
-</blockquote>
-<h1 id="LaTeX公式"><a href="#LaTeX公式" class="headerlink" title="LaTeX公式"></a>LaTeX公式</h1><h2 id="行内公式"><a href="#行内公式" class="headerlink" title="行内公式"></a>行内公式</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$公式$</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p>质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。</p>
-</blockquote>
-<h2 id="正行公式"><a href="#正行公式" class="headerlink" title="正行公式"></a>正行公式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$$公式$$</div></pre></td></tr></table></figure>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$$\sum_&#123;i=1&#125;^n a_i=0$$</div><div class="line">$$f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 $$</div><div class="line">$$\sum^&#123;j-1&#125;_&#123;k=0&#125;&#123;\widehat&#123;\gamma&#125;_&#123;kj&#125; z_k&#125;$$</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p>$$\sum_{i=1}^n a_i=0$$</p>
-<p>$$f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2$$</p>
-</blockquote>
-<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><p>语法说明：</p>
-<ol>
-<li>不管是哪种方式，第一行为表头，第二行分隔表头和主体部分，第三行开始每一行为一个表格行。</li>
-<li>列于列之间用管道符“|”隔开。原生方式的表格每一行的两边也要有管道符。</li>
-<li>第二行还可以为不同的列指定对齐方向。默认为左对齐，在 “-” 右边加上 “:” 为右对齐，在 “-” 两侧同时加上 “:” 为居中对齐。</li>
-</ol>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">|年|月|日|</div><div class="line">|-|:-:|-:|</div><div class="line">|2015|5|5|</div><div class="line">|2016|6|6|</div><div class="line">|2017|7|7|</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<table>
-<thead>
-<tr>
-<th>年</th>
-<th style="text-align:center">月</th>
-<th style="text-align:right">日</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2015</td>
-<td style="text-align:center">5</td>
-<td style="text-align:right">5</td>
-</tr>
-<tr>
-<td>2016</td>
-<td style="text-align:center">6</td>
-<td style="text-align:right">6</td>
-</tr>
-<tr>
-<td>2017</td>
-<td style="text-align:center">7</td>
-<td style="text-align:right">7</td>
-</tr>
-</tbody>
-</table>
-<h1 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h1><p>语法：<br>你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：<br>示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">* * *</div><div class="line">***</div><div class="line">*****</div><div class="line">- - -</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<hr>
-<hr>
-<hr>
-<hr>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="行内代码"><a href="#行内代码" class="headerlink" title="行内代码"></a>行内代码</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">`代码`</div></pre></td></tr></table></figure></p>
-<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python语言里的函数`print()`怎么使用？</div></pre></td></tr></table></figure></p>
-<p>示例显示效果：</p>
-<blockquote>
-<p>python语言里的函数<code>print()</code>怎么使用？</p>
-</blockquote>
-<h2 id="多行代码"><a href="#多行代码" class="headerlink" title="多行代码"></a>多行代码</h2><p>语法：<br>```<br>第1行代码<br>第2行代码<br>```</p>
-<p>示例：<br>```python<br>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    print(“MJ”)<br>```</p>
-<p>示例显示效果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    print(<span class="string">"MJ"</span>)</div></pre></td></tr></table></figure></p>
-<h2 id="缩进式代码"><a href="#缩进式代码" class="headerlink" title="缩进式代码"></a>缩进式代码</h2><p>语法：<br>缩进 4 个空格或是 1 个制表符，一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
-<p>示例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    print(<span class="string">"MJ"</span>)</div></pre></td></tr></table></figure></p>
-<p>示例显示效果:</p>
-<pre><code>if __name__ == &apos;__main__&apos;:
-    print(&quot;MJ&quot;)
-</code></pre><h1 id="相关链接："><a href="#相关链接：" class="headerlink" title="相关链接："></a>相关链接：</h1><p><a href="http://blog.leanote.com/post/freewalk/Markdown-%E8%AF%AD%E6%B3%95%E6%89%8B%E5%86%8C#title-6" target="_blank" rel="external">http://blog.leanote.com/post/freewalk/Markdown-%E8%AF%AD%E6%B3%95%E6%89%8B%E5%86%8C#title-6</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> Tool </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Markdown </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[使用Hexo + Next + github/coding 搭建个人静态博客]]></title>
-      <url>/2017/08/01/use-hexo-next-github-and-coding-build-static-blog/</url>
-      <content type="html"><![CDATA[<p>博客框架使用 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo</a><br>主题使用 <a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">NexT</a><br>代码托管使用 <a href="https://mart.coding.net/" target="_blank" rel="external">Coding</a><br><a id="more"></a></p>
-<h1 id="Next主题修改文章内链接文本样式"><a href="#Next主题修改文章内链接文本样式" class="headerlink" title="Next主题修改文章内链接文本样式"></a>Next主题修改文章内链接文本样式</h1><p>实现效果：<br><a href="https://chengjin.li/" target="_blank" rel="external">https://chengjin.li/</a></p>
-<p>在<code>themes\next\source\css\_common\components\post\post.styl</code>文件如下位置添加css样式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">.post-sticky-flag &#123;</div><div class="line">  display: inline-block;</div><div class="line">  font-size: 16px;</div><div class="line">  -ms-transform: rotate(30deg);</div><div class="line">  transform: rotate(30deg);</div><div class="line">&#125;</div><div class="line">// 文章内链接文本样式</div><div class="line">.post-body p a&#123;</div><div class="line">  color: #0593d3;</div><div class="line">  border-bottom: none;</div><div class="line">  &amp;:hover &#123;</div><div class="line">    color: #fc6423;</div><div class="line">    border-bottom: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="Next主题添加鼠标心形点击特效"><a href="#Next主题添加鼠标心形点击特效" class="headerlink" title="Next主题添加鼠标心形点击特效"></a>Next主题添加鼠标心形点击特效</h1><p>1、 在<code>themes\next\source\js\src\</code>目录下新建<code>love.js</code>,代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">!function(e,t,a)&#123;function n()&#123;c(&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &apos;&apos;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;),o(),r()&#125;function r()&#123;for(var e=0;e&lt;d.length;e++)d[e].alpha&lt;=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText=&quot;left:&quot;+d[e].x+&quot;px;top:&quot;+d[e].y+&quot;px;opacity:&quot;+d[e].alpha+&quot;;transform:scale(&quot;+d[e].scale+&quot;,&quot;+d[e].scale+&quot;) rotate(45deg);background:&quot;+d[e].color+&quot;;z-index:99999&quot;);requestAnimationFrame(r)&#125;function o()&#123;var t=&quot;function&quot;==typeof e.onclick&amp;&amp;e.onclick;e.onclick=function(e)&#123;t&amp;&amp;t(),i(e)&#125;&#125;function i(e)&#123;var a=t.createElement(&quot;div&quot;);a.className=&quot;heart&quot;,d.push(&#123;el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()&#125;),t.body.appendChild(a)&#125;function c(e)&#123;var a=t.createElement(&quot;style&quot;);a.type=&quot;text/css&quot;;try&#123;a.appendChild(t.createTextNode(e))&#125;catch(t)&#123;a.styleSheet.cssText=e&#125;t.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;function s()&#123;return&quot;rgb(&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;)&quot;&#125;var d=[];e.requestAnimationFrame=function()&#123;return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e)&#123;setTimeout(e,1e3/60)&#125;&#125;(),n()&#125;(window,document);</div></pre></td></tr></table></figure></p>
-<p>2、 在<code>themes\next\layout\_layout.swig</code>文件的最下方，<code>&lt;/body&gt;</code>前面添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;/js/src/love.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure></p>
-<h1 id="Next主题修改文章底部的那个带-号的标签"><a href="#Next主题修改文章底部的那个带-号的标签" class="headerlink" title="Next主题修改文章底部的那个带#号的标签"></a>Next主题修改文章底部的那个带#号的标签</h1><p>实现效果：<br><img src="/images/label_modified_impression_drawing.png" alt="标签修改后的效果图"></p>
-<p>方法：<br>修改模板<code>themes/next/layout/_macro/post.swig</code>，搜索 <code>rel=&quot;tag&quot;&gt;#</code>，将 <code>#</code> 换成 <code>&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;</code></p>
-<h1 id="Next主题在每篇文章末尾统一添加“本文结束”标记"><a href="#Next主题在每篇文章末尾统一添加“本文结束”标记" class="headerlink" title="Next主题在每篇文章末尾统一添加“本文结束”标记"></a>Next主题在每篇文章末尾统一添加“本文结束”标记</h1><p>实现效果：<br><img src="/images/end_of_text.png" alt="本文结束标记"><br>方法：</p>
-<p>在路径<code>themes\next\layout\_macro</code> 中新建 <code>passage-end-tag.swig</code> 文件，并添加以下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">    &#123;% if not is_index %&#125;</div><div class="line">        &lt;div style=&quot;text-align:center;color: #ccc;font-size:14px;&quot;&gt;-------------本文结束&lt;i class=&quot;fa fa-heart&quot;&gt;&lt;/i&gt;感谢您的阅读-------------&lt;/div&gt;</div><div class="line">    &#123;% endif %&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
-<p>接着打开<code>themes\next\layout\_macro\post.swig</code>文件，在 <code>post-body</code> 之后， <code>post-footer</code> 之前添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">  &#123;% if not is_index %&#125;</div><div class="line">    &#123;% include &apos;passage-end-tag.swig&apos; %&#125;</div><div class="line">  &#123;% endif %&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
-<p>然后打开主题配置文件<code>_config.yml</code>，在末尾添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 文章末尾添加“本文结束”标记</div><div class="line">passage_end_tag:</div><div class="line">  enabled: true</div></pre></td></tr></table></figure></p>
-<h1 id="Next主题修改作者头像并旋转"><a href="#Next主题修改作者头像并旋转" class="headerlink" title="Next主题修改作者头像并旋转"></a>Next主题修改作者头像并旋转</h1><p>打开<code>themes\next\source\css\_common\components\sidebar\sidebar-author.styl</code>，修改<code>site-author-image</code>相代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">.site-author-image &#123;</div><div class="line">  display: block;</div><div class="line">  margin: 0 auto;</div><div class="line">  padding: $site-author-image-padding;</div><div class="line">  max-width: $site-author-image-width;</div><div class="line">  height: $site-author-image-height;</div><div class="line">  border: $site-author-image-border-width solid $site-author-image-border-color;</div><div class="line"></div><div class="line">  /* 头像圆形 */</div><div class="line">  border-radius: 70px;</div><div class="line">  -webkit-border-radius: 70px;</div><div class="line">  -moz-border-radius: 70px;</div><div class="line">  box-shadow: inset 0 -1px 0 #333sf;</div><div class="line"></div><div class="line">  /* 设置循环动画 [animation: (play)动画名称 (2s)动画播放时长单位秒或微秒 (ase-out)动画播放的速度曲线为以低速结束 </div><div class="line">    (1s)等待1秒然后开始动画 (1)动画播放次数(infinite为循环播放) ]*/</div><div class="line"></div><div class="line"></div><div class="line">  /* 鼠标经过头像旋转360度 */</div><div class="line">  -webkit-transition: -webkit-transform 1.0s ease-out;</div><div class="line">  -moz-transition: -moz-transform 1.0s ease-out;</div><div class="line">  transition: transform 1.0s ease-out;</div><div class="line">&#125;</div><div class="line"></div><div class="line">img:hover &#123;</div><div class="line">  /* 鼠标经过停止头像旋转 </div><div class="line">  -webkit-animation-play-state:paused;</div><div class="line">  animation-play-state:paused;*/</div><div class="line"></div><div class="line">  /* 鼠标经过头像旋转360度 */</div><div class="line">  -webkit-transform: rotateZ(360deg);</div><div class="line">  -moz-transform: rotateZ(360deg);</div><div class="line">  transform: rotateZ(360deg);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* Z 轴旋转动画 */</div><div class="line">@-webkit-keyframes play &#123;</div><div class="line">  0% &#123;</div><div class="line">    -webkit-transform: rotateZ(0deg);</div><div class="line">  &#125;</div><div class="line">  100% &#123;</div><div class="line">    -webkit-transform: rotateZ(-360deg);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">@-moz-keyframes play &#123;</div><div class="line">  0% &#123;</div><div class="line">    -moz-transform: rotateZ(0deg);</div><div class="line">  &#125;</div><div class="line">  100% &#123;</div><div class="line">    -moz-transform: rotateZ(-360deg);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">@keyframes play &#123;</div><div class="line">  0% &#123;</div><div class="line">    transform: rotateZ(0deg);</div><div class="line">  &#125;</div><div class="line">  100% &#123;</div><div class="line">    transform: rotateZ(-360deg);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="Next主题设置网站的图标Favicon"><a href="#Next主题设置网站的图标Favicon" class="headerlink" title="Next主题设置网站的图标Favicon"></a>Next主题设置网站的图标Favicon</h1><p>方法：<br>将一张32x32的ico图标名称改为favicon.ico，然后把图标放在<code>themes/next/source/images</code>里，并且修改主题配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Put your favicon.ico into `hexo-site/source/` directory.</div><div class="line">favicon: /images/favicon.ico</div></pre></td></tr></table></figure></p>
-]]></content>
-      
-        <categories>
-            
-            <category> Tool </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Hexo </tag>
-            
-            <tag> Next </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[C++学习笔记---《vector》使用教程]]></title>
+    <url>%2F2017%2F10%2F24%2Fcpp-vector-use-tutorial%2F</url>
+    <content type="text"><![CDATA[利用 remove_if() 和 erase() 从 vector 中移除指定 set 中包含的元素12345678910111213141516171819202122232425262728#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;unordered_set&gt;#include &lt;string&gt;#include &lt;algorithm&gt;std::unordered_set&lt;std::string&gt; replace_str_set&#123;",", "."&#125;;bool IsReplaceStr(std::string str) &#123; if (replace_str_set.find(str) != replace_str_set.end()) &#123; return true; &#125; return false;&#125;int main() &#123; std::vector&lt;std::string&gt; string_vector&#123;"a", ",", "b", ".", "c"&#125;; std::vector&lt;std::string&gt;::iterator it; std::cout &lt;&lt; "before replace: " &lt;&lt; std::endl; for (it = string_vector.begin(); it != string_vector.end(); it++) &#123; std::cout &lt;&lt; *it &lt;&lt; std::endl; &#125; string_vector.erase(remove_if(string_vector.begin(), string_vector.end(), IsReplaceStr), string_vector.end()); std::cout &lt;&lt; "after replace: " &lt;&lt; std::endl; for (it = string_vector.begin(); it != string_vector.end(); it++) &#123; std::cout &lt;&lt; *it &lt;&lt; std::endl; &#125; return 0;&#125; 输出结果：12345678910before replace:a,b.cafter replace:abc]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++,vector</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[TensorFlow Tensor变换API]]></title>
+    <url>%2F2017%2F10%2F19%2Ftensorflow-tensor-transform-api%2F</url>
+    <content type="text"><![CDATA[tf.stack()12345stack( values, axis=0, name=&quot;stack&quot;) 官方文档： https://www.tensorflow.org/api_docs/python/tf/stack 定义： tensorflow/python/ops/array_ops.py 功能： 将由 R 维的 tensor 堆成 R+1 维的 tensor . 说明： 通过沿着 axis 维，将 values 中的 tensor 列表填充到一个比values 中的 tensor 高一维的 tensor中。 给定一个长度为 N ，由 shape 为 （A，B，C） 的 tensor 构成的列表； 如果 axis == 0，输出的 tensor 的 shape 为 (N, A, B, C) 如果 axis == 1，输出的 tensor 的 shape 为 (A, N, B, C) 示例：12345678910111213141516171819import tensorflow as tfx = [1, 4]y = [2, 5]z = [3, 6]stack_0 = tf.stack([x, y, z])print (stack_0.get_shape()) # (3, 2)stack_1 = tf.stack([x, y, z], axis=1)print (stack_1.get_shape()) # (2, 3)with tf.Session() as sess: stack_0_val, stack_1_val = sess.run([stack_0, stack_1]) print ('stack_0_val:') print (stack_0_val) # [[1, 4], [2, 5], [3, 6]] print ('stack_0_val.shape: %s' % str(stack_0_val.shape)) # (3, 2) print ('stack_1_val:') print (stack_1_val) # [[1, 2, 3], [4, 5, 6]] print ('stack_1_val.shape: %s' % str(stack_1_val.shape)) # (2, 3) 输出结果：1234567891011stack_0.get_shape(): (3, 2)stack_1.get_shape(): (2, 3)stack_0_val:[[1 4] [2 5] [3 6]]stack_0_val.shape: (3, 2)stack_1_val:[[1 2 3] [4 5 6]]stack_1_val.shape: (2, 3)]]></content>
+      <categories>
+        <category>TensorFlow</category>
+      </categories>
+      <tags>
+        <tag>TensorFlow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[TensorFlow安装教程]]></title>
+    <url>%2F2017%2F09%2F21%2Ftensorflow-install-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>TensorFlow</category>
+      </categories>
+      <tags>
+        <tag>TensorFlow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux 常用命令教程]]></title>
+    <url>%2F2017%2F08%2F08%2Flinux-commond-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SVN常用命令教程]]></title>
+    <url>%2F2017%2F08%2F06%2Fsvn-command-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>svn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Git常用命令教程]]></title>
+    <url>%2F2017%2F08%2F05%2Fgit-command-tutorial%2F</url>
+    <content type="text"><![CDATA[Git简介Git 介绍Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。Git的读音为/gɪt/。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。 什么文件可以被 Git 管理?文本文件(.txt)，脚本文件(.py等)，各种基于文本信息的文件. 什么文件不能被 Git 管理?图片文件(.jpg等)，PDF(.pdf)，MS Word(.doc)，MS Power Point(.ppt)，MS Excel(.xls)等。 Git 基础Git 直接记录快照，而非差异比较Git 和其它版本控制系统（包括 Subversion 等）的主要差别在于 Git 对待数据的方法。 概念上来区分，其它大部分系统以文件变更列表的方式存储信息。 这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。Git 不按照以上方式对待或保存数据。 反之，Git 更像是把数据看作是对小型文件系统的一组快照。 每次你提交更新，或在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。 Git 对待数据更像是一个「快照流」。这是 Git 与几乎所有其它版本控制系统的重要区别。 因此 Git 重新考虑了以前每一代版本控制系统延续下来的诸多方面。Git 更像是一个小型的文件系统，提供了许多以此为基础构建的超强工具，而不只是一个简单的 VCS。 Git 不需要联网就能工作在 Git 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其它计算机的信息，由于本地磁盘上就有项目的完整历史，所以大部分操作看起来瞬间完成。而其他集中式版本控制系统(例如 SVN等)，必须联网才能工作， 所有操作都有网络延时开销。 Git 保证完整性Git 的内容完整性要优于其他集中式版本控制系统(例如 SVN等)。Git 中所有数据在存储前都计算校验和，然后以校验和来引用。这个功能建构在 Git 底层，是构成 Git 哲学不可或缺的部分。 若在传送过程中丢失信息或损坏文件，Git 就能发现。Git 用以计算校验和的机制叫做 SHA-1 哈希散列。 这是一个由40个十六进制字符(0-9 和 a-f)组成字符串，基于 Git 中文件的内容或目录结构计算出来。 SHA-1 哈希看起来是这样：24b9da6552252987aa493b52f8696cd6d3b00373，Git 中使用这种哈希值的情况很多，你将经常看到这种哈希值。 实际上，Git 数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名。 Git 一般只添加数据Git 操作，几乎只往 Git 数据库中增加数据。 很难让 Git 执行任何不可逆操作，或者让它以任何方式清除数据。 同别的 VCS 一样，未提交更新时有可能丢失或弄乱修改的内容；但是一旦你提交快照到 Git 中，就难以再丢失数据，特别是如果你定期的推送数据库到其它仓库的话。这使得在使用 Git 成为一个安心愉悦的过程，因为我们深知可以尽情做各种尝试，而没有把事情弄糟的危险。 Git 安装最早 Git 是在 Linux 上开发的，很长一段时间内，Git 也只能在 Linux 和 Unix 系统上跑。目前，Git 已经可以在 Linux、Unix、Mac 和 Windows 几大平台上运行。详细的安装说明请前往 Git官网安装说明 查看， Git 在每种系统上的安装方式各不相同，安装步骤分别如下: Linux平台上安装打开 terminal，可以用下面的命令安装： Debian/Ubuntu1$ apt-get install git-all 使用 git --version 查看是否安装成功12$ git --versiongit version 2.7.4 Centos/RedHat1$ yum -y install git-all 使用 git --version 查看是否安装成功12$ git --versiongit version 1.7.1 Mac 平台上安装1、先下载 .dmg 安装包，下载地址为：https://git-scm.com/download/mac ，点击下载到本地，下载文件例如：git-2.14.1-intel-universal-mavericks.dmg2、双击安装包进行安装即可3、使用 git --version 查看是否安装成功12$ git --versiongit version 2.14.1 Windows 平台上安装1、先下载 .exe 安装包，下载地址为：https://git-scm.com/download/win ，选择适合当前系统的版本，点击下载到本地2、双击安装包进行安装即可3、在开始菜单里找到Git-&gt;Git Bash，会弹出 Git 命令窗口，使用 git --version 查看是否安装成功12$ git versiongit version 2.14.2.windows.1 Git 配置安装 Git 后，每台计算机上只需要进行一次配置，程序升级时会保留配置信息。你可以在任何时候再次通过运行命令来修改它们。Git 自带一个 git config 的工具，专门用来配置或读取相应的工作环境变量。这些变量存储在三个不同的位置： /etc/gitconfig 文件： 包含系统上每一个用户及他们仓库的通用配置，如果使用带有 --system 选项的 git config 时，它会从此文件读写配置变量。 ~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户，可以传递 --global 选项让 Git 读写此文件。 当前使用仓库的 Git 目录中的 config 文件(就是 .git/config)：针对该仓库。 每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。 在 Windows 系统中，Git 会查找 $HOME 目录下（一般情况下是 C:\Users\$USER）的 .gitconfig 文件。 Git 同样也会寻找 /etc/gitconfig 文件，但只限于 MSys 的根目录下，即安装 Git 时所选的目标位置。 配置用户信息当安装完 Git 应该做的第一件事就是设置个人的「用户名称」与「邮件地址」。 这样做很重要，因为每一个 Git 的提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改：12$ git config --global user.name lichengjin$ git config --global user.email lichengjin606@gmail.com 再次强调，如果使用了 --global 选项，那么该命令只需要运行一次，因为之后无论你在该系统上做任何事情，Git 都会使用那些信息。当你想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 --global选项的命令来配置，新的设定保存在当前项目的 .git/config 文件里。 查看配置信息要检查已有的配置信息，可以使用 git config --list 命令：123$ git config --listuser.name=lichengjinuser.email=lichengjin606@gmail.com 有时候会看到重复的变量名，那就说明它们来自不同的配置文件（比如 /etc/gitconfig 和 ~/.gitconfig），不过最终 Git 实际采用的是最后一个。这些配置我们也可以在 ~/.gitconfig 或 /etc/gitconfi 看到，如下所示：1$ vim ~/.gitconfig 显示内容如下所示：123[user] name = lichengjin email = lichengjin606@gmail.com 你可以通过输入 git config &lt;key&gt; 来检查 Git的某一项配置，例如：12$ git config user.namelichengjin Git 工作流程Git 的工作流程如下： 克隆 Git 资源作为工作目录。 在克隆的资源上添加或修改文件。 如果其他人修改了，你可以更新资源。 在提交前查看修改。 提交修改。 在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。 下图展示了 Git 的工作流程，图片来自菜鸟教程： Git 工作区，暂存区和版本库工作区：就是你在电脑里能看到的目录。是对项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。暂存区：英文叫stage， 或index。是一个文件，一般存放在 .git/index 中，保存了下次将提交的文件列表信息，有时候也被称作索引( index )。版本库：版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被 Git 管理起来，每个文件的修改、删除，Git 都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以还原。工作区有一个隐藏目录 .git，这个不算工作区，而是 Git 的版本库，是 Git 用来保存项目的元数据和对象数据库的地方。 这是 Git 中最重要的部分，从其它计算机克隆仓库时，拷贝的就是这里的数据。下面这个图展示了「工作区」、「暂存区」和「版本库」之间的关系，图片来自菜鸟教程：图中左侧为「工作区」，右侧为「版本库」。在「版本库」中标记为 index 的区域是「暂存区」(stage，index)，标记为 master 的是 master 分支所代表的目录树。图中我们可以看出此时 HEAD 实际是指向 master 分支的一个「游标」。所以图示的命令中出现 HEAD 的地方可以用 master 来替换。图中的 objects 标识的区域为 Git 的「对象库」，实际位于 .git/objects 目录下，里面包含了创建的各种对象及内容。当对「工作区」修改或新增的文件执行 git add 命令时，「暂存区」的目录树被更新，同时「工作区」修改或新增的文件内容被写入到「对象库」中的一个新的对象中，而该对象的 ID 被记录在暂存区的文件索引中。当执行提交操作 git commit 时，「暂存区」的目录树写到「版本库」中，master 分支会做相应的更新。即 master 指向的目录树就是提交时「暂存区」的目录树。当执行 git reset HEAD 命令时，「暂存区」的目录树会被重写，被 master 分支指向的目录树所替换，但是「工作区」不受影响。当执行 git rm --cached &lt;file&gt; 命令时，会直接从「暂存区」删除文件，「工作区」则不做出改变。当执行 git checkout . 或者 git checkout -- &lt;file&gt; 命令时，会用「暂存区」全部或指定的文件替换「工作区」的文件。这个操作很危险，会清除「工作区」中未添加到「暂存区」的改动。当执行 git checkout HEAD . 或者 git checkout HEAD &lt;file&gt; 命令时，会用 HEAD 指向的 master 分支中的全部或者部分文件替换「暂存区」和以及「工作区」中的文件。这个命令也是极具危险性的，因为不但会清除「工作区」中未提交的改动，也会清除「暂存区」中未提交的改动。 获取版本库创建新的版本库1、 选择一个合适的地方，创建一个空目录： 1234$ mkdir git_tutorial$ cd git_tutorial$ pwd/Users/lichengjin/workspace/git_tutorial 2、 通过 git init 命令把这个目录变成 Git 可以管理的仓库:注：如果打算使用 Git 来对现有的项目进行管理，只需要进入该项目目录并输入git init。 12$ git initInitialized empty Git repository in /Users/lichengjin/workspace/git_tutorial/.git/ 该命令将创建一个名为 .git 的子目录，这个子目录含有你初始化的 Git 仓库中所有的必须文件，这些文件是 Git 仓库的骨干，是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。如果你没有看到 .git 目录，那是因为这个目录默认是隐藏的，用 ls -a 命令查看即可：12$ ls -a. .. .git 克隆现有的版本库如果你想获得一份已经存在了的 Git 仓库的拷贝，比如说，你想为某个开源项目贡献自己的一份力，这时就要用到 git clone 命令。 如果你对其它的 VCS 系统（比如说 Subversion ）很熟悉，请留心一下你所使用的命令是 clone 而不是 checkout。 这是 Git 区别于其它版本控制系统的一个重要特性，Git 克隆的是该 Git 仓库服务器上的几乎所有数据，而不是仅仅复制完成你的工作所需要文件。 当你执行 git clone 命令的时候，默认配置下远程 Git 仓库中的每一个文件的每一个版本都将被拉取下来。 事实上，如果你的服务器的磁盘坏掉了，你通常可以使用任何一个克隆下来的用户端来重建服务器上的仓库(虽然可能会丢失某些服务器端的挂钩设置，但是所有版本的数据仍在)。 克隆仓库的命令格式：1git clone &lt;repo&gt; 例如：1git clone https://github.com/ChengjinLi/machine_learning.git 如果我们需要克隆到指定的目录，可以使用以下命令格式：1git clone &lt;repo&gt; &lt;directory&gt; 例如：1git clone https://github.com/ChengjinLi/machine_learning.git mj_machine_learning 参数说明： repo：Git 仓库。 directory：本地目录。 Git 支持多种数据传输协议。 上面的例子使用的是 https:// 协议，不过你也可以使用 git:// 协议或者使用 SSH 传输协议。 Git 文件生命周期请记住，「工作目录」下的每一个文件都不外乎这两种状态：「已跟踪」或「未跟踪」。「已跟踪」的文件是指那些被纳入了版本控制的文件，在上一次快照中有它们的记录，在工作一段时间后，它们的状态可能处于「未修改」，「已修改」或「已放入暂存区」。 「工作目录」中除「已跟踪」文件以外的所有其它文件都属于「未跟踪」文件，它们既不存在于上次快照的记录中，也没有放入「暂存区」。 初次克隆某个仓库的时候，「工作目录」中的所有文件都属于「已跟踪」文件，并处于「未修改」状态。编辑过某些文件之后，由于自上次提交后你对它们做了修改，Git 将它们标记为「已修改」文件。 我们逐步将这些修改过的文件放入「暂存区」，然后提交所有暂存了的修改，如此反复。使用 Git 时文件的生命周期如下： Git 常用命令git add &lt;file_name&gt;/&lt;dir_name&gt;将文件添加到暂存区，参数可以是指定路径的文件名或目录的名字，也可以使用 glob 模式。 git status查看项目的当前状态，输出详细内容git status --short 或 git status -s查看项目的当前状态，以简短的结果输出状态说明： ?? 未跟踪的文件 M：修改过的文件，出现在靠左边的M表示该文件被修改了并放入了暂存区，出现在右边的M表示该文件被修改了但是还没放入暂存区， A：新添加到暂存区的文件 D：已删除(deleted) R：重命名(renamed) C：已拷贝(copied) U：已更新但为合并(updated but unmerged) git diff查看尚未 add 的所有文件的改动和上个已经 commit的文件的不同git diff &lt;file_name&gt;查看尚未 add 的 &lt;file_name&gt; 文件的改动和上个已经 commit的文件的不同git diff --cached查看已经 add 的文件的改动git diff HEAD查看已 add 的与未 add 的所有改动git diff --stat显示摘要而非整个diff git commit -m &quot;message&quot;将暂存区的文件提交到版本库，-m后面输入的是本次提交的说明，可以输入任意内容，最好是有意义的，方便从历史记录找到改动记录。git commit --amend --no-edit将本次改动直接合并到上一个 commit 中git commit -am &quot;message&quot;跳过使用暂存区的方式，自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 git add 步骤。 git rm &lt;file_name&gt;/&lt;dir_name&gt;将文件从暂存区域移除，参数可以是指定路径的文件名或目录的名字，也可以使用 glob 模式。git rm --cached &lt;file_name&gt;/&lt;dir_name&gt;将文件从 Git 仓库中删除，但仍然希望保留在当前工作目录中，参数可以是指定路径的文件名或目录的名字，也可以使用 glob 模式。 git mv &lt;file_from&gt; &lt;file_to&gt;将 Git 中的 &lt;file_from&gt; 重命名为 &lt;file_to&gt; git log查看历史提交记录，显示从最近到最远的提交日志git log --oneline一行显示一次提交git log --oneline --graph查看历史中什么时候出现了分支、合并，开启了拓扑图选项git log --author=&lt;user_name&gt;查找指定用户 &lt;user_name&gt; 的提交日志 git reflog查看历史命令记录，显示从最近到最远的日志 git reset HEAD取消已缓存的内容，即取消之前 git add 添加的内容在 Git 中，用 HEAD 表示当前版本，上一个版本就是 HEAD^ ，上上一个版本就是 HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成 HEAD~100。git reset &lt;file_name&gt;取消已缓存的&lt;file_name&gt;，即取消之前 git add 添加的内容git reset --hard &lt;commit_id&gt;回退到指定 &lt;commit_id&gt; 版本，&lt;commit_id&gt;没必要写全，前位(例如前7位)就可以了，Git 会自动去找，当然也不能只写前一两位，因为 Git 可能会找到多个版本号，就无法确定是哪一个了。 git checkout &lt;commid_id&gt; -- &lt;file_name&gt;将 &lt;file_name&gt; 回退到 &lt;commid_id&gt; 的版本git checkout &lt;branch_name&gt;将 HEAD 从当前分支切换到 &lt;branch_name&gt; 分支git checkout -b &lt;branch_name&gt;创建 &lt;branch_name&gt; 分支，并切换到新建的分支 git branch查看当前分支，*代表了当前 HEAD 所在的分支git branch &lt;branch_name&gt;创建 &lt;branch_name&gt; 分支 git merge &lt;branch_name&gt;将 &lt;branch_name&gt; 合并到当前分支，Git 会采用默认的 Fast forward 格式进行合并，这次合并操作不会有 commit 信息，log 中也不会有分支的图案。git merge --no-diff -m &quot;message&quot; &lt;branch_name&gt;采取 --no-ff 这种方式保留合并的 commit 信息。 忽略文件一般我们总会有些文件无需纳入 Git 的管理，也不希望它们总出现在未跟踪文件列表。 通常都是些自动生成的文件，比如日志文件，或者编译过程中创建的临时文件等。 在这种情况下，我们可以创建一个名为.gitignore 的文件，列出要忽略的文件模式。要养成一开始就设置好 .gitignore 文件的习惯，以免将来误提交这类无用的文件。文件 .gitignore 的格式规范如下： 所有空行或者以 ＃ 开头的行都会被 Git 忽略。 可以使用标准的 glob 模式匹配。 匹配模式可以以（/）开头防止递归。 匹配模式可以以（/）结尾指定目录。 要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。 所谓的 glob 模式是指 shell 所使用的简化了的正则表达式。 星号*匹配零个或多个任意字符；[abc] 匹配任何一个列在方括号中的字符（这个例子要么匹配一个 a，要么匹配一个 b，要么匹配一个 c）；问号?只匹配一个任意字符；如果在方括号中使用短划线-分隔两个字符，表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有0到9的数字）。 使用两个星号*表示匹配任意中间目录，比如a/**/z 可以匹配 a/z, a/b/z 或 a/b/c/z等。GitHub 有一个十分详细的针对数十种项目及语言的 .gitignore 文件列表，你可以在 https://github.com/github/gitignore 找到它. Github 使用Github 是一个大家都积极贡献的地方， 你可以和各种人合作创作，也是开源的天堂， 只要你愿意, 任何人都能下载, 或修改你的杰作。在Github 上注册一个账户然后添加一个 online 版本库 repository连接本地版本库1git remote add [alias] [url] 例如：12$ git remote add origin https://github.com/ChengjinLi/machine_learning.git$ git push -u origin master # 推送本地 master 去 origin 在执行 commit 之后，可以执行 git push -u origin master 将本地修改提交到 Github 要查看当前配置有哪些远程仓库，可以用命令：12$ git remoteorigin 执行时加上 -v 参数，你还可以看到每个别名的实际链接地址。123$ git remote -vorigin https://github.com/ChengjinLi/machine_learning.git (fetch)origin https://github.com/ChengjinLi/machine_learning.git (push) 删除别名为 &lt;alias&gt; 的远程仓库1$ git remote rm &lt;alias&gt; 相关链接Git 官网： https://git-scm.com/Git 完整命令手册地址： http://git-scm.com/docsPro Git book： https://git-scm.com/book/zh/v2廖雪峰Git教程：https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000菜鸟Git教程： http://www.runoob.com/git/git-tutorial.htmlGithub 官网： https://github.com/]]></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Vim常用命令教程]]></title>
+    <url>%2F2017%2F08%2F04%2Fvim-command-tutorial%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>Vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[本地挂载服务器文件夹工具---「sshfs」的安装及使用]]></title>
+    <url>%2F2017%2F08%2F03%2Fsshfs-install-and-using-on-mac%2F</url>
+    <content type="text"><![CDATA[对于习惯在本地使用「IDE」工具进行编辑而不习惯在服务器上使用 「vim」 进行编辑的同学，下面介绍一个非常方便的在本地挂载服务器文件夹的工具 「sshfs」。下面介绍在「Mac」(系统版本：macOS Sierra 10.12.6)下的安装及使用方法： 安装「sshfs」安装 Homebrew 先确定是否已经安装「Homebrew」，在命令行执行如下命令：1brew -v 输出示例：12Homebrew &gt;1.2.0 (no git repository)Homebrew/homebrew-core (git revision 9cf7; last commit 2017-09-22) 如果没有安装，则执行如下命令进行安装，在命令行执行如下命令：1ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; 安装 「sshfs」 的依赖 「osxfuse」执行如下命令：1brew install caskroom/cask/osxfuse 安装 「sshfs」执行如下命令：1brew install sshfs 使用 「sshfs」 挂载执行如下命令：1sshfs -C -o reconnect user@hostname:remote_dir local_dir 参数说明如下： user: 远程连接用户名 hostname: 远程连接的主机名 remote_dir: 远程目录 local_dir: 本地目录 查看挂载情况1df -h local_dir 使用 「umount」 取消挂载1umount local_dir 相关问题如过我们的Mac休眠或重启, 发现挂载的失败了, 进入目录：1ls local_dir 会提示如下类似信息：1ls: local_dir: Input/output error 取消挂载1umount local_dir 又会提示1umount: local_dir: not currently mounted 这个时候, 我们不得不关闭进程了, 可以先通过命令查看进程1pgrep -lf sshfs 然后杀掉相应的挂载进程, 或者直接杀掉所有挂载进程1pkill -9 sshfs 之后重新挂载响应的目录即可 相关链接：http://www.jianshu.com/p/8723ba79f35a]]></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>sshfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Markdown 使用教程]]></title>
+    <url>%2F2017%2F08%2F02%2Fmarkdown-using-tutorial%2F</url>
+    <content type="text"><![CDATA[标题语法：1不同数量的# 标题内容 说明：在Markdown中，标题共计六个等级，标题字号随等级的升高而相应的降低。 示例： 123456# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题 示例显示效果： 一级标题二级标题三级标题四级标题五级标题六级标题 斜体、粗体、加粗斜体、删除线语法：1234*斜体***粗体*****加粗斜体***~~删除线~~ 示例显示效果： 斜体粗体加粗斜体删除线 链接自动链接语法：1&lt;链接地址&gt; 说明：Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，Markdown 就会自动把它转成链接。示例：1&lt;https://chengjinli.github.io/&gt; 示例显示效果： https://chengjinli.github.io/ 超链接语法：1[链接文字](链接地址 &quot;链接标题&quot;) 说明：()中的””之间可以为链接指定title，title属性可加可不加。title属性的效果是鼠标悬停在链接上会出现指定的 title 文字。链接地址与链接标题前有一个空格。示例：1[MJ&apos;s Learning Notes](https://chengjinli.github.io/) 示例显示效果： MJ’s Learning Notes 列表有序列表语法：1数字加一个英文句点 示例：121. 无序列表12. 无序列表2 示例显示效果： 无序列表1 无序列表2 无序列表语法：1*，+，- 加上列表内容 示例：123456* 无序列表1* 无序列表2+ 无序列表3+ 无序列表4- 无序列表5- 无序列表6 示例显示效果： 无序列表1 无序列表2 无序列表3 无序列表4 无序列表5 无序列表6 引用单层引用语法：1&gt;加上被引用的内容 示例：1&gt; 一行内容的引用 示例显示效果： 一行内容的引用 多层引用语法：1不同数量的&gt;加上被引用的内容 示例：12345&gt;&gt;&gt;第3层引用&gt;&gt;第2层引用&gt;第1层引用 示例显示效果： 第3层引用 第2层引用 第1层引用 引用其他元素语法：1引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等： 示例：123456&gt; ### 三级标题&gt; 1. 第一行列表内容&gt; 2. 第二行列表内容&gt; &gt; 插入代码的例子&gt; `print (&quot;MJ&quot;)` 示例显示效果： 三级标题 第一行列表内容 第二行列表内容 print (&quot;MJ&quot;) 插入图片语法：1![图片Alt](图片地址 &quot;图片Title&quot;) 说明：[]中写图片Alt，如果图片因为某些原因不能显示，就用定义的图片Alt文字来代替图片。()里写图片地址，()图片Title表示鼠标悬停在图片上时出现的文字。 Alt 和 Title 都不是必须的，可以省略，但建议写上。示例：1![头像](https://chengjinli.github.io/images/MJ.jpg &quot;MJ&quot;) 示例显示效果： LaTeX公式行内公式语法：1$公式$ 示例：1质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。 示例显示效果： 质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。 正行公式1$$公式$$ 示例：123$$\sum_&#123;i=1&#125;^n a_i=0$$$$f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 $$$$\sum^&#123;j-1&#125;_&#123;k=0&#125;&#123;\widehat&#123;\gamma&#125;_&#123;kj&#125; z_k&#125;$$ 示例显示效果： $$\sum_{i=1}^n a_i=0$$ $$f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2$$ 表格语法说明： 不管是哪种方式，第一行为表头，第二行分隔表头和主体部分，第三行开始每一行为一个表格行。 列于列之间用管道符“|”隔开。原生方式的表格每一行的两边也要有管道符。 第二行还可以为不同的列指定对齐方向。默认为左对齐，在 “-” 右边加上 “:” 为右对齐，在 “-” 两侧同时加上 “:” 为居中对齐。 示例：12345|年|月|日||-|:-:|-:||2015|5|5||2016|6|6||2017|7|7| 示例显示效果： 年 月 日 2015 5 5 2016 6 6 2017 7 7 分割线语法：你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：示例:1234* * *********- - - 示例显示效果： 代码行内代码语法：1`代码` 示例：1python语言里的函数`print()`怎么使用？ 示例显示效果： python语言里的函数print()怎么使用？ 多行代码语法：```第1行代码第2行代码``` 示例：```pythonif name == ‘main‘: print(“MJ”)``` 示例显示效果：12if __name__ == '__main__': print("MJ") 缩进式代码语法：缩进 4 个空格或是 1 个制表符，一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。 示例：12if __name__ == '__main__': print("MJ") 示例显示效果: if __name__ == &apos;__main__&apos;: print(&quot;MJ&quot;) 相关链接：http://blog.leanote.com/post/freewalk/Markdown-%E8%AF%AD%E6%B3%95%E6%89%8B%E5%86%8C#title-6]]></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Hexo + Next + github/coding 搭建个人静态博客]]></title>
+    <url>%2F2017%2F08%2F01%2Fuse-hexo-next-github-and-coding-build-static-blog%2F</url>
+    <content type="text"><![CDATA[博客框架使用 Hexo主题使用 NexT代码托管使用 Coding Next主题修改文章内链接文本样式实现效果：https://chengjin.li/ 在themes\next\source\css\_common\components\post\post.styl文件如下位置添加css样式：123456789101112131415.post-sticky-flag &#123; display: inline-block; font-size: 16px; -ms-transform: rotate(30deg); transform: rotate(30deg);&#125;// 文章内链接文本样式.post-body p a&#123; color: #0593d3; border-bottom: none; &amp;:hover &#123; color: #fc6423; border-bottom: none; &#125;&#125; Next主题添加鼠标心形点击特效1、 在themes\next\source\js\src\目录下新建love.js,代码如下:1!function(e,t,a)&#123;function n()&#123;c(&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &apos;&apos;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;),o(),r()&#125;function r()&#123;for(var e=0;e&lt;d.length;e++)d[e].alpha&lt;=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText=&quot;left:&quot;+d[e].x+&quot;px;top:&quot;+d[e].y+&quot;px;opacity:&quot;+d[e].alpha+&quot;;transform:scale(&quot;+d[e].scale+&quot;,&quot;+d[e].scale+&quot;) rotate(45deg);background:&quot;+d[e].color+&quot;;z-index:99999&quot;);requestAnimationFrame(r)&#125;function o()&#123;var t=&quot;function&quot;==typeof e.onclick&amp;&amp;e.onclick;e.onclick=function(e)&#123;t&amp;&amp;t(),i(e)&#125;&#125;function i(e)&#123;var a=t.createElement(&quot;div&quot;);a.className=&quot;heart&quot;,d.push(&#123;el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()&#125;),t.body.appendChild(a)&#125;function c(e)&#123;var a=t.createElement(&quot;style&quot;);a.type=&quot;text/css&quot;;try&#123;a.appendChild(t.createTextNode(e))&#125;catch(t)&#123;a.styleSheet.cssText=e&#125;t.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;function s()&#123;return&quot;rgb(&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;)&quot;&#125;var d=[];e.requestAnimationFrame=function()&#123;return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e)&#123;setTimeout(e,1e3/60)&#125;&#125;(),n()&#125;(window,document); 2、 在themes\next\layout\_layout.swig文件的最下方，&lt;/body&gt;前面添加如下代码：1&lt;script type=&quot;text/javascript&quot; src=&quot;/js/src/love.js&quot;&gt;&lt;/script&gt; Next主题修改文章底部的那个带#号的标签实现效果： 方法：修改模板themes/next/layout/_macro/post.swig，搜索 rel=&quot;tag&quot;&gt;#，将 # 换成 &lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt; Next主题在每篇文章末尾统一添加“本文结束”标记实现效果：方法： 在路径themes\next\layout\_macro 中新建 passage-end-tag.swig 文件，并添加以下内容：12345&lt;div&gt; &#123;% if not is_index %&#125; &lt;div style=&quot;text-align:center;color: #ccc;font-size:14px;&quot;&gt;-------------本文结束&lt;i class=&quot;fa fa-heart&quot;&gt;&lt;/i&gt;感谢您的阅读-------------&lt;/div&gt; &#123;% endif %&#125;&lt;/div&gt; 接着打开themes\next\layout\_macro\post.swig文件，在 post-body 之后， post-footer 之前添加如下代码：12345&lt;div&gt; &#123;% if not is_index %&#125; &#123;% include &apos;passage-end-tag.swig&apos; %&#125; &#123;% endif %&#125;&lt;/div&gt; 然后打开主题配置文件_config.yml，在末尾添加：123# 文章末尾添加“本文结束”标记passage_end_tag: enabled: true Next主题修改作者头像并旋转打开themes\next\source\css\_common\components\sidebar\sidebar-author.styl，修改site-author-image相代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960.site-author-image &#123; display: block; margin: 0 auto; padding: $site-author-image-padding; max-width: $site-author-image-width; height: $site-author-image-height; border: $site-author-image-border-width solid $site-author-image-border-color; /* 头像圆形 */ border-radius: 70px; -webkit-border-radius: 70px; -moz-border-radius: 70px; box-shadow: inset 0 -1px 0 #333sf; /* 设置循环动画 [animation: (play)动画名称 (2s)动画播放时长单位秒或微秒 (ase-out)动画播放的速度曲线为以低速结束 (1s)等待1秒然后开始动画 (1)动画播放次数(infinite为循环播放) ]*/ /* 鼠标经过头像旋转360度 */ -webkit-transition: -webkit-transform 1.0s ease-out; -moz-transition: -moz-transform 1.0s ease-out; transition: transform 1.0s ease-out;&#125;img:hover &#123; /* 鼠标经过停止头像旋转 -webkit-animation-play-state:paused; animation-play-state:paused;*/ /* 鼠标经过头像旋转360度 */ -webkit-transform: rotateZ(360deg); -moz-transform: rotateZ(360deg); transform: rotateZ(360deg);&#125;/* Z 轴旋转动画 */@-webkit-keyframes play &#123; 0% &#123; -webkit-transform: rotateZ(0deg); &#125; 100% &#123; -webkit-transform: rotateZ(-360deg); &#125;&#125;@-moz-keyframes play &#123; 0% &#123; -moz-transform: rotateZ(0deg); &#125; 100% &#123; -moz-transform: rotateZ(-360deg); &#125;&#125;@keyframes play &#123; 0% &#123; transform: rotateZ(0deg); &#125; 100% &#123; transform: rotateZ(-360deg); &#125;&#125; Next主题设置网站的图标Favicon方法：将一张32x32的ico图标名称改为favicon.ico，然后把图标放在themes/next/source/images里，并且修改主题配置文件：12# Put your favicon.ico into `hexo-site/source/` directory.favicon: /images/favicon.ico]]></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Next</tag>
+      </tags>
+  </entry>
 </search>

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[C++学习笔记---《vector》使用教程]]></title>
+    <url>%2F2017%2F10%2F24%2Fcpp-vector-use-tutorial%2F</url>
+    <content type="text"><![CDATA[利用 remove_if() 和 erase() 从Vector中移除指定Set中包含的元素12345678910111213141516171819202122232425262728293031323334#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;set&gt;#include &lt;string&gt;#include &lt;algorithm&gt;std::string replace_str_array[] = &#123;",", "."&#125;;std::set&lt;std::string&gt; replace_str_set(replace_str_array, replace_str_array + 2);bool IsReplaceStr(std::string str) &#123; if (replace_str_set.find(str) != replace_str_set.end()) &#123; return true; &#125; return false;&#125;int main() &#123; std::vector&lt;std::string&gt; string_vector; string_vector.push_back("a"); string_vector.push_back(","); string_vector.push_back("b"); string_vector.push_back("."); string_vector.push_back("c"); std::vector&lt;std::string&gt;::iterator it; std::cout &lt;&lt; "before replace: " &lt;&lt; std::endl; for (it = string_vector.begin(); it != string_vector.end(); it++) &#123; std::cout &lt;&lt; *it &lt;&lt; std::endl; &#125; string_vector.erase(remove_if(string_vector.begin(), string_vector.end(), IsReplaceStr), string_vector.end()); std::cout &lt;&lt; "after replace: " &lt;&lt; std::endl; for (it = string_vector.begin(); it != string_vector.end(); it++) &#123; std::cout &lt;&lt; *it &lt;&lt; std::endl; &#125; return 0;&#125; 输出结果：12345678910before replace:a,b.cafter replace:abc]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++,vector</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[TensorFlow Tensor变换API]]></title>
     <url>%2F2017%2F10%2F19%2Ftensorflow-tensor-transform-api%2F</url>
     <content type="text"><![CDATA[tf.stack()12345stack( values, axis=0, name=&quot;stack&quot;) 官方文档： https://www.tensorflow.org/api_docs/python/tf/stack 定义： tensorflow/python/ops/array_ops.py 功能： 将由 R 维的 tensor 堆成 R+1 维的 tensor . 说明： 通过沿着 axis 维，将 values 中的 tensor 列表填充到一个比values 中的 tensor 高一维的 tensor中。 给定一个长度为 N ，由 shape 为 （A，B，C） 的 tensor 构成的列表； 如果 axis == 0，输出的 tensor 的 shape 为 (N, A, B, C) 如果 axis == 1，输出的 tensor 的 shape 为 (A, N, B, C) 示例：12345678910111213141516171819import tensorflow as tfx = [1, 4]y = [2, 5]z = [3, 6]stack_0 = tf.stack([x, y, z])print (stack_0.get_shape()) # (3, 2)stack_1 = tf.stack([x, y, z], axis=1)print (stack_1.get_shape()) # (2, 3)with tf.Session() as sess: stack_0_val, stack_1_val = sess.run([stack_0, stack_1]) print ('stack_0_val:') print (stack_0_val) # [[1, 4], [2, 5], [3, 6]] print ('stack_0_val.shape: %s' % str(stack_0_val.shape)) # (3, 2) print ('stack_1_val:') print (stack_1_val) # [[1, 2, 3], [4, 5, 6]] print ('stack_1_val.shape: %s' % str(stack_1_val.shape)) # (2, 3) 输出结果：1234567891011stack_0.get_shape(): (3, 2)stack_1.get_shape(): (2, 3)stack_0_val:[[1 4] [2 5] [3 6]]stack_0_val.shape: (3, 2)stack_1_val:[[1 2 3] [4 5 6]]stack_1_val.shape: (2, 3)]]></content>

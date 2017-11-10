@@ -822,53 +822,14 @@
 
       
         
-          
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>tmux</code> 是一个优秀的终端复用软件，即使非正常掉线，也能保证当前的任务运行，这一点对于远程 <code>ssh</code> 访问特别有用，网络不好的情况下仍然能保证工作现场不丢失! <code>tmux</code>完全使用键盘控制窗口，实现窗口的切换。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="在「Mac-OS」中安装"><a href="#在「Mac-OS」中安装" class="headerlink" title="在「Mac OS」中安装"></a>在「Mac OS」中安装</h2><h3 id="安装「Homebrew」"><a href="#安装「Homebrew」" class="headerlink" title="安装「Homebrew」"></a>安装「Homebrew」</h3><p>如果没有homebrew，先安装homebrew，如果已经安装，则跳过此步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure></p>
-<h3 id="安装「Tmux」"><a href="#安装「Tmux」" class="headerlink" title="安装「Tmux」"></a>安装「Tmux」</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install tmux</div></pre></td></tr></table></figure>
-<h3 id="查看是否安装成功"><a href="#查看是否安装成功" class="headerlink" title="查看是否安装成功"></a>查看是否安装成功</h3><p>通过如下命令查看tmux的版本号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmux -V</div></pre></td></tr></table></figure></p>
-<p>当前安装版本为2.6，则终端显示如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmux 2.6</div></pre></td></tr></table></figure></p>
-<p>##在「Ubuntu」中安装<br>在终端输入如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install tmux</div></pre></td></tr></table></figure></p>
-<h1 id="「Tmux」的配置文件"><a href="#「Tmux」的配置文件" class="headerlink" title="「Tmux」的配置文件"></a>「Tmux」的配置文件</h1><p><code>Tmux</code> 的配置文件为 <code>~/.tmux.conf</code> ，每当开启一个新的会话时，<code>Tmux</code> 都会先读取这个文件。</p>
-<h1 id="「Tmux」的快捷键前缀（Prefix）"><a href="#「Tmux」的快捷键前缀（Prefix）" class="headerlink" title="「Tmux」的快捷键前缀（Prefix）"></a>「Tmux」的快捷键前缀（Prefix）</h1><p>为了使自身的快捷键和其他软件的快捷键互不干扰， <code>Tmux</code> 提供了一个快捷键前缀(<code>Prefix</code>)，默认是组合键 <code>Ctrl-b</code>（同时按下 <code>Ctrl</code> 键和 <code>b</code> 键）<br>当想要使用快捷键时，需要先按下快捷键前缀，然后再按下快捷键，以下把前缀按键称为 <code>Prefix</code>。</p>
-<p>下面介绍一下 <code>Tmux</code> 的三个核心概念(会话「session」、窗口「window」和 窗格「pane」)及其基本用法。</p>
-<h1 id="会话「session」"><a href="#会话「session」" class="headerlink" title="会话「session」"></a>会话「session」</h1><h2 id="创建session"><a href="#创建session" class="headerlink" title="创建session"></a>创建session</h2><p>创建一个新的会话，只需要在终端运行如下的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmux new -s &lt;session_name&gt; -n &lt;window_name&gt;</div></pre></td></tr></table></figure></p>
-<p>参数说明：</p>
-<blockquote>
-<p><code>-s</code> 参数表示会话名称，如果不加 <code>-s</code> 参数，那么 <code>Tmux</code> 默认会新建一个以数字(下标从0开始)命名的会话，并默认打开一个窗口。<br><code>-n</code> 参数表示默认打开的窗口的名称</p>
-<p>中执行的不同命令而变化。在新建会话时可以通过-n参数指定默认打开的window名称，比如通过 <code>tmux new -s basic -n win</code> 命名一个win名称的会话</p>
-</blockquote>
-<h2 id="重命名session"><a href="#重命名session" class="headerlink" title="重命名session"></a>重命名session</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Prefix + $ : 重命名当前的会话</div></pre></td></tr></table></figure>
-<h2 id="断开session"><a href="#断开session" class="headerlink" title="断开session"></a>断开session</h2><p>想要暂时从 <code>Tmux</code> 暂时分离，回到终端环境时，可以通过如下快捷键。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Prefix + d : 断开当前的会话</div></pre></td></tr></table></figure></p>
-<p>注意，即使是 <code>detach</code> 的状态，<code>Tmux</code> 中在运行的程序还会继续运行</p>
-<h2 id="回到session"><a href="#回到session" class="headerlink" title="回到session"></a>回到session</h2><p>想要回到 <code>session</code> 时，只需执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmux attach -t &lt;session_name&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="列出session"><a href="#列出session" class="headerlink" title="列出session"></a>列出session</h2><p>在终端下，运行如下命令列出当前有多少个会话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmux ls</div></pre></td></tr></table></figure></p>
-<p>在会话中列出当前有多少个会话<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Prefix + s : 列出所有会话</div></pre></td></tr></table></figure></p>
-<h2 id="关闭session"><a href="#关闭session" class="headerlink" title="关闭session"></a>关闭session</h2><p>在终端下，要真正关闭一个会话，可以运行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmux kill-session -t &lt;session_name&gt;</div></pre></td></tr></table></figure></p>
-<p>参数说明：</p>
-<blockquote>
-<p><code>-t</code> 参数表示会话名称。</p>
-</blockquote>
-<h1 id="窗口「window」"><a href="#窗口「window」" class="headerlink" title="窗口「window」"></a>窗口「window」</h1><p>如果说会话是个不可见的东西，那么窗口就是我们输入、执行命令的地方。一个会话 可以包含多个会话。</p>
-<h2 id="创建window"><a href="#创建window" class="headerlink" title="创建window"></a>创建window</h2><p>在创建会话的时候默认会创建一个以 <code>数字下标+bash</code> 命名的窗口，并且名称随着 <code>bash</code> 中执行的不同命令而变化。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Prefix + c : 创建一个新窗口</div></pre></td></tr></table></figure></p>
-<h2 id="重命名window"><a href="#重命名window" class="headerlink" title="重命名window"></a>重命名window</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Prefix + , : 重命名当前窗口</div></pre></td></tr></table></figure>
-<h2 id="切换window"><a href="#切换window" class="headerlink" title="切换window"></a>切换window</h2><p>同一个会话下的多个window之间切换。</p>
-<ul>
-<li>Prefix + p: 切换到上一个窗口。 </li>
-<li>Prefix + n: 切换到下一个窗口 。 </li>
-<li>Prefix + 0: 切换到0号window，依次类推，1、2、3… </li>
-<li>Prefix + w: 列出所有会话的全部窗口，通过上、下键选择要进入的窗口，按回车键即可进入所选择的窗口中。</li>
-</ul>
-<h2 id="关闭window"><a href="#关闭window" class="headerlink" title="关闭window"></a>关闭window</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Prefix + &amp; : 关闭当前窗口。</div></pre></td></tr></table></figure>
-<h1 id="窗格「pane」"><a href="#窗格「pane」" class="headerlink" title="窗格「pane」"></a>窗格「pane」</h1><p>一个窗口可以切割成多个窗格，也就是所谓的分屏。</p>
-<h2 id="创建pane"><a href="#创建pane" class="headerlink" title="创建pane"></a>创建pane</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Prefix + % : 垂直分屏，用一条垂线把当前窗口分成左右两屏。 </div><div class="line">Prefix + &quot; : 水平分屏，用一条水平线把当前窗口分成上下两屏。</div></pre></td></tr></table></figure>
-<h2 id="切换pane"><a href="#切换pane" class="headerlink" title="切换pane"></a>切换pane</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Prefix + o : 依次切换当前窗口下的各个窗格。 </div><div class="line">Prefix + Up|Down|Left|Right : 根据按箭方向选择切换到某个窗格。 </div><div class="line">Prefix + Space(空格键): 对当前窗口下的所有窗格重新排列布局，每按一次，换一种样式。 </div><div class="line">Prefix + z : 最大化当前窗格。再按一次后恢复。</div></pre></td></tr></table></figure>
-<h2 id="关闭pane"><a href="#关闭pane" class="headerlink" title="关闭pane"></a>关闭pane</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Prefix + x : 关闭当前使用中的窗格。</div></pre></td></tr></table></figure>
-<h2 id="其他pane快捷键"><a href="#其他pane快捷键" class="headerlink" title="其他pane快捷键"></a>其他pane快捷键</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Prefix + q : 显示窗格的编号</div><div class="line">Prefix + &#125; : 与下一个窗格交换位置</div><div class="line">Prefix + &#123; : 与上一个窗格交换位置</div><div class="line">Prefix + ! : 在新窗口中显示当前窗格</div><div class="line">Prefix + t : 在当前窗格显示时间</div></pre></td></tr></table></figure>
-<h1 id="滚屏"><a href="#滚屏" class="headerlink" title="滚屏"></a>滚屏</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Prefix + [ : 滚屏</div></pre></td></tr></table></figure>
-<p>滚屏要进入copy-mode，然后就可以用上下键来滚动屏幕，配置了<code>vi</code>快捷键模式，就可以像操作<code>vi</code>一样来滚动屏幕，非常的方便。 退出直接回车键或<code>q</code>键即可退出</p>
-
-          
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>tmux</code> 是一个优秀的终端复用软件，即使非正常掉线，也能保证当前的任务运行，这一点对于远程 <code>ssh</code> 访问特别有用，网络不好的情况下仍然能保证工作现场不丢失! <code>tmux</code>完全使用键盘控制窗口，实现窗口的切换。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/09/tmux-using-tutorial/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

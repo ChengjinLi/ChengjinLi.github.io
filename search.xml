@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[C++学习笔记---《vector容器》使用教程]]></title>
-    <url>%2F2017%2F10%2F24%2Fcpp-container-vector-use-tutorial%2F</url>
+    <title><![CDATA[C++学习笔记---vector容器使用教程]]></title>
+    <url>%2F2017%2F10%2F21%2Fcpp-container-vector-use-tutorial%2F</url>
     <content type="text"><![CDATA[利用 remove_if() 和 erase() 从 vector 中移除指定 set 中包含的元素12345678910111213141516171819202122232425262728#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;unordered_set&gt;std::unordered_set&lt;std::string&gt; replace_str_set&#123;",", "."&#125;;bool IsReplaceStr(std::string str) &#123; if (replace_str_set.find(str) != replace_str_set.end()) &#123; return true; &#125; return false;&#125;int main() &#123; std::vector&lt;std::string&gt; string_vector&#123;"a", ",", "b", ".", "c"&#125;; std::vector&lt;std::string&gt;::iterator it; std::cout &lt;&lt; "before replace: "; for (it = string_vector.begin(); it != string_vector.end(); it++) &#123; std::cout &lt;&lt; *it; &lt;&lt; std::endl; &#125; std::cout &lt;&lt; std::endl; string_vector.erase(remove_if(string_vector.begin(), string_vector.end(), IsReplaceStr), string_vector.end()); std::cout &lt;&lt; "after replace: "; for (it = string_vector.begin(); it != string_vector.end(); it++) &#123; std::cout &lt;&lt; *it; &#125; std::cout &lt;&lt; std::endl; return 0;&#125; 输出结果：12before replace: a,b.cafter replace: abc]]></content>
       <categories>
         <category>C++</category>
       </categories>
       <tags>
-        <tag>C++,vector</tag>
+        <tag>C++,container</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++学习笔记---容器(container)使用教程]]></title>
+    <url>%2F2017%2F10%2F20%2Fcpp-container-use-tutorial%2F</url>
+    <content type="text"><![CDATA[在C++的STL中常见的容器可分为「顺序容器」(sequential container)和「关联容器」(associative container)。 标准的STL「顺序容器」包括：vector、deque、list、forward_list、array 与 string。 标准的STL「关联容器」包括：关键字有序：map、set、multimap 和 multiset。关键字有序：unorder_map、unorder_set、 unorder_multimap 和 unorder_multiset。 string、vector string和vector将元素保存在连续的内存空间中，支持随机存取。由于元素是连续存储的，在这两种容器中间插入和删除元素，需要修改该位置之后所有元素的位置，效率较低。 list、forward_list list和forward_list分别对应数据结构中的双向链表和单向链表。两个容器将元素的设计目的是让容器在任何位置的插入和删除效率提高，但其代价是容器不支持随机存取，查找效率较低。 deque deque是一种更为复杂的数据结构。与string和vector类似，支持快速随机访问，并且在其两端添加和删除元素的效率都很高。但是，由于deque中元素也是连续存储，在其中间插入和删除元素的效率也较低。 array array是一种更安全的数组，与内置数组类似，不支持动态内存分配，支持元素随机访问。]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++,container</tag>
       </tags>
   </entry>
   <entry>
@@ -23,36 +34,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[TensorFlow安装教程]]></title>
-    <url>%2F2017%2F09%2F21%2Ftensorflow-install-tutorial%2F</url>
-    <content type="text"></content>
-      <categories>
-        <category>TensorFlow</category>
-      </categories>
-      <tags>
-        <tag>TensorFlow</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Linux 常用命令教程]]></title>
-    <url>%2F2017%2F08%2F08%2Flinux-commond-tutorial%2F</url>
-    <content type="text"></content>
+    <title><![CDATA[终端复用工具---「tmux」的安装及使用]]></title>
+    <url>%2F2017%2F08%2F09%2Ftmux-using-tutorial%2F</url>
+    <content type="text"><![CDATA[简介tmux 是一个优秀的终端复用软件，即使非正常掉线，也能保证当前的任务运行，这一点对于远程 ssh 访问特别有用，网络不好的情况下仍然能保证工作现场不丢失! tmux完全使用键盘控制窗口，实现窗口的切换。 安装在「Mac OS」中安装安装「Homebrew」如果没有homebrew，先安装homebrew，如果已经安装，则跳过此步。1ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; 安装「Tmux」1brew install tmux 查看是否安装成功通过如下命令查看tmux的版本号1tmux -V 当前安装版本为2.6，则终端显示如下：1tmux 2.6 ##在「Ubuntu」中安装在终端输入如下命令：1sudo apt-get install tmux 「Tmux」的配置文件Tmux 的配置文件为 ~/.tmux.conf ，每当开启一个新的会话时，Tmux 都会先读取这个文件。 「Tmux」的快捷键前缀（Prefix）为了使自身的快捷键和其他软件的快捷键互不干扰， Tmux 提供了一个快捷键前缀(Prefix)，默认是组合键 Ctrl-b（同时按下 Ctrl 键和 b 键）当想要使用快捷键时，需要先按下快捷键前缀，然后再按下快捷键，以下把前缀按键称为 Prefix。 下面介绍一下 Tmux 的三个核心概念(会话「session」、窗口「window」和 窗格「pane」)及其基本用法。 会话「session」创建session创建一个新的会话，只需要在终端运行如下的命令：1tmux new -s &lt;session_name&gt; -n &lt;window_name&gt; 参数说明： -s 参数表示会话名称，如果不加 -s 参数，那么 Tmux 默认会新建一个以数字(下标从0开始)命名的会话，并默认打开一个窗口。-n 参数表示默认打开的窗口的名称 中执行的不同命令而变化。在新建会话时可以通过-n参数指定默认打开的window名称，比如通过 tmux new -s basic -n win 命名一个win名称的会话 重命名session1Prefix + $ : 重命名当前的会话 断开session想要暂时从 Tmux 暂时分离，回到终端环境时，可以通过如下快捷键。1Prefix + d : 断开当前的会话 注意，即使是 detach 的状态，Tmux 中在运行的程序还会继续运行 回到session想要回到 session 时，只需执行：1tmux attach -t &lt;session_name&gt; 列出session在终端下，运行如下命令列出当前有多少个会话：1tmux ls 在会话中列出当前有多少个会话1Prefix + s : 列出所有会话 关闭session在终端下，要真正关闭一个会话，可以运行如下命令：1tmux kill-session -t &lt;session_name&gt; 参数说明： -t 参数表示会话名称。 窗口「window」如果说会话是个不可见的东西，那么窗口就是我们输入、执行命令的地方。一个会话 可以包含多个会话。 创建window在创建会话的时候默认会创建一个以 数字下标+bash 命名的窗口，并且名称随着 bash 中执行的不同命令而变化。1Prefix + c : 创建一个新窗口 重命名window1Prefix + , : 重命名当前窗口 切换window同一个会话下的多个window之间切换。 Prefix + p: 切换到上一个窗口。 Prefix + n: 切换到下一个窗口 。 Prefix + 0: 切换到0号window，依次类推，1、2、3… Prefix + w: 列出所有会话的全部窗口，通过上、下键选择要进入的窗口，按回车键即可进入所选择的窗口中。 关闭window1Prefix + &amp; : 关闭当前窗口。 窗格「pane」一个窗口可以切割成多个窗格，也就是所谓的分屏。 创建pane12Prefix + % : 垂直分屏，用一条垂线把当前窗口分成左右两屏。 Prefix + &quot; : 水平分屏，用一条水平线把当前窗口分成上下两屏。 切换pane1234Prefix + o : 依次切换当前窗口下的各个窗格。 Prefix + Up|Down|Left|Right : 根据按箭方向选择切换到某个窗格。 Prefix + Space(空格键): 对当前窗口下的所有窗格重新排列布局，每按一次，换一种样式。 Prefix + z : 最大化当前窗格。再按一次后恢复。 关闭pane1Prefix + x : 关闭当前使用中的窗格。 其他pane快捷键12345Prefix + q : 显示窗格的编号Prefix + &#125; : 与下一个窗格交换位置Prefix + &#123; : 与上一个窗格交换位置Prefix + ! : 在新窗口中显示当前窗格Prefix + t : 在当前窗格显示时间 滚屏1Prefix + [ : 滚屏 滚屏要进入copy-mode，然后就可以用上下键来滚动屏幕，配置了vi快捷键模式，就可以像操作vi一样来滚动屏幕，非常的方便。 退出直接回车键或q键即可退出]]></content>
       <categories>
         <category>Tool</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[SVN常用命令教程]]></title>
-    <url>%2F2017%2F08%2F06%2Fsvn-command-tutorial%2F</url>
-    <content type="text"></content>
-      <categories>
-        <category>Tool</category>
-      </categories>
-      <tags>
-        <tag>svn</tag>
+        <tag>linux, tmux</tag>
       </tags>
   </entry>
   <entry>
@@ -69,7 +58,7 @@
   <entry>
     <title><![CDATA[Vim常用命令教程]]></title>
     <url>%2F2017%2F08%2F04%2Fvim-command-tutorial%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[vim 的配置文件在根目录的 .vimrc 文件中，如果没有，自己创建一个。 打开 .vimrc 文件，输入配置，配置如下：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051set paste &quot; 进入paste模型set number &quot; 显示行号set tabstop=4 &quot; 一个tab为4个空格长度set shiftwidth=4 &quot; 将换行自动缩进设置成4个空格set expandtab &quot; 输入tab时自动将其转化为空格set sts=4 &quot; 敲入tab键时实际占有的列数set autoindent &quot; 设置自动缩进set smartindent &quot; 智能缩进set mouse=a &quot; 鼠标可用syntax on &quot; 语法高亮set hlsearch &quot; 开启查找匹配的高亮显示, 简写set hls&quot; set nohlsearch &quot; 关闭查找匹配的高亮显示, 简写set nohlsset encoding=utf-8 &quot; 屏幕显示的编码set fileencoding=utf-8 &quot; 正在被编辑的文件的编码set fileencodings=ucs-bom,utf-8,cp936,gbk,gb2312set termencoding=utf-8set showmatch &quot; 括号匹配 set ruler &quot; 右下角显示光标状态行 set incsearch &quot; 设置快速搜索 set foldenable &quot; 开启代码折叠 set fdm=manual &quot; 手动折叠 set foldmethod=syntax &quot; 自动语法折叠 set modeline &quot; 自动载入模式行set cursorline &quot; 开启光亮光标行set cursorcolumn &quot; 开启光亮光标列&quot; vundle 环境设置filetype offset rtp+=~/.vim/bundle/Vundle.vim vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间call vundle#begin()Plugin &apos;altercation/vim-colors-solarized&apos;Plugin &apos;tomasr/molokai&apos;Plugin &apos;vim-scripts/phd&apos;Plugin &apos;Lokaltog/vim-powerline&apos;Plugin &apos;octol/vim-cpp-enhanced-highlight&apos;Plugin &apos;Raimondi/delimitMate&apos;Plugin &apos;scrooloose/nerdtree&apos;Plugin &apos;vim-scripts/indentpython.vim&apos;Plugin &apos;davidhalter/jedi-vim&apos;&quot;Plugin &apos;w0rp/ale&apos;Plugin &apos;Shougo/neocomplete.vim&apos;Plugin &apos;majutsushi/tagbar&apos;&quot; 插件列表结束call vundle#end()filetype plugin indent onmap &lt;F3&gt; :nohlsearch&lt;CR&gt; &quot; 绑定快捷键来去掉当前显示的高亮（一次性）:set pastetoggle=&lt;F10&gt; &quot; 绑定快捷键来激活/取消 paste模式nnoremap &lt;silent&gt; &lt;F11&gt; :AV&lt;CR&gt; map &lt;F12&gt; :q&lt;CR&gt; &quot; 绑定快捷键来退出当前vim编辑： 设置说明： set shiftwidth(简写：sw) 这个是用于程序中自动缩进所使用的空白长度。一般来说为了保持程序的美观，和下面的参数最好一致。同时它也是符号移位长度的制定者。 set tabstop(简写：ts) 定义tab所等同的空格长度，linux 内核代码建议每个tab占用8列，因为如果是其它值的话，可能引起文件在打印之类的场合中看起来很别扭。 set expandtab(简写：et) 输入tab时自动将其转化为空格，这样的话就不会一起混淆，不过毕竟制表符为8是最常用最普遍的设置，所以一般还是不要改。举个例子，在多人一起开发项目时，为了使代码风格尽量保持一致，一般不允许在代码使用TAB符，而以4个空格代之。 set softtabstop(简写：sts) 敲入tab键时实际占有的列数。如果我们希望改变程序中的缩进怎么办？shiftwidth和tabstop不一样的话，你会发现程序比较难看的。这时候，softtabstop就起作用了。可以从vim的说明中看到，一旦设置了softtabstop的值时，你按下tab键，插入的是空格和tab制表符的混合，具体如何混合取决于你设定的softtabstop，举个例子，如果设定softtabstop=8, 那么按下tab键，插入的就是正常的一个制表符;如果设定 softtabstop=16,那么插入的就是两个制表符；如果softtabstop=12,那么插入的就是一个制表符加上4个空格；如果softtabstop=4呢？那么一开始，插入的就是4个空格，此时一旦你再按下一次tab，这次的四个空格就会和上次的四个空格组合起来变成一个制表符。换句话说，softtabstop是“逢8空格进1制表符”,前提是你tabstop=8。 set number(简写：nu) 显示行号 set nonumber(简写：nonu) 关闭行号显示 set ruler 设置在窗口右下角显示行号，与上面的好处是，节省空间 set autoindent(简写：ai) 设置自动缩进 syntax on 语法高亮 set smartindent 智能缩进 set encoding 屏幕显示的编码，目前大部分Linux系统已经将utf-8作为默认locale，encoding就应是utf-8以方便显示。该选项使用于缓冲的文本(你正在编辑的文件)，寄存器，Vim 脚本文件等等。你可以把 ‘encoding’ 选项当作是对 Vim 内部运行机制的设定。 set fileencoding 正在被编辑的文件的编码，它也决定新文件的编码。如果为空，表示与encoding相同。如果与encoding不同，vi将会在保存和读取时做二者之间的转换。 set fileencodings 供vim尝试的编码列表，vi会逐个尝试每一项，如果没有发生错误，就设置当前的fileencoding为与该项相同的值。如果均失败，fileencoding将为空。 set termencoding 输出到客户终端（Term）采用的编码类型，默认空值，也就是输出到终端不进行编码转换。 set showmatch 括号匹配 set ruler 右下角显示光标状态行 set incsearch 设置快速搜索 set foldenable 开启代码折叠 set fdm=manual 手动折叠 set foldmethod=syntax 自动语法折叠 set modeline 自动载入模式行 set ignorecase 大小写无关 set noignorecase 大小写敏感 set hlsearch 开启查找匹配的高亮显示, 简写set hls set nohlsearch 关闭查找匹配的高亮显示, 简写set nohls :nohlsearch 去掉当前显示的高亮（一次性） :set paste 进入paste模型,进入 paste 模式后，按 i 键进入插入模式，然后再粘帖，文本格式不会错乱了。但粘帖后还需要按 进入普通模式并执行如下命令结束 paste 模式： :set nopaste 结束 paste 模式 :set pastetoggle= paste有一个切换paste开关的选项，这就是pastetoggle。通过它可以绑定快捷键来激活/取消 paste模式 vim 的插件使用 vundle 管理： 安装 vundle：1git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 安装插件，先找到其在 github.com 的地址，再将配置信息加入 .vimrc 中的call vundle#begin() 和 call vundle#end() 之间，如我的配置文件所示，Plugin ‘插件地址’ 即为添加插件，例如:1Plugin &apos;majutsushi/tagbar&apos; 最后进入 vim 执行：1:PluginInstall 便安装完成插件。 如需删除插件，只需将 Plugin ‘插件地址’ 删除或者注释掉，再进入 vim 执行： 1:PluginClean 便将插件删除。 如需升级插件，进入 vim 执行：1:PluginUpdate 便完成升级。]]></content>
       <categories>
         <category>Tool</category>
       </categories>

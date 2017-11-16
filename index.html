@@ -819,27 +819,14 @@
 
       
         
-          
-            <p>本篇学习笔记是在 <strong><code>macOS</code></strong> 系统上进行的演示，<strong><code>python</code></strong> 版本为 <strong><code>2.7.10</code></strong>，如果大家想学习在 <strong><code>windows</code></strong>，<strong><code>linux</code></strong> 等系统上的安装步骤，可以参考一下官方的安装 <strong><code>TensorFlow</code></strong> 的方法：<a href="https://www.tensorflow.org/install/" target="_blank" rel="external">https://www.tensorflow.org/install/</a> ，个人建议在虚拟环境下安装 <strong><code>TensorFlow</code></strong>。下面介绍 <strong><code>TensorFlow</code></strong> 的2种安装方法。</p>
-<h1 id="安装「pip」"><a href="#安装「pip」" class="headerlink" title="安装「pip」"></a>安装「pip」</h1><p>如果已经安装，跳过此步<br>安装:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo easy_install pip</div></pre></td></tr></table></figure></p>
-<p>查看 <strong><code>pip</code></strong> 是否安装成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip —version</div></pre></td></tr></table></figure></p>
-<h1 id="安装「virtualenv」"><a href="#安装「virtualenv」" class="headerlink" title="安装「virtualenv」"></a>安装「virtualenv」</h1><p>如果已经安装，跳过此步<br>安装:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pip install virtualenv</div></pre></td></tr></table></figure></p>
-<p>查看 <strong><code>virtualenv</code></strong> 是否安装成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">virtualenv —version</div></pre></td></tr></table></figure></p>
-<h1 id="创建「virtualenv」环境"><a href="#创建「virtualenv」环境" class="headerlink" title="创建「virtualenv」环境"></a>创建「virtualenv」环境</h1><p>切换到虚拟环境要存放的目录，创建虚拟环境:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">virtualenv &lt;env_name&gt;</div></pre></td></tr></table></figure></p>
-<p>个人有几点建议：</p>
-<ul>
-<li>一个 <strong><code>python</code></strong> 项目最好对应一个虚拟环境，保证每个项目的环境独立，不会有 <strong><code>pip</code></strong> 包版本不兼容的问题。</li>
-<li>虚拟环境与项目在同一目录下，并且虚拟环境以前缀 <strong><code>env_</code></strong> 加项目名来命名。<br>示例：<strong><code>machine_learning</code></strong> 是项目目录，<strong><code>env_machine_learning</code></strong> 是虚拟环境目录。</li>
-</ul>
-<h1 id="激活「virtualenv」环境"><a href="#激活「virtualenv」环境" class="headerlink" title="激活「virtualenv」环境"></a>激活「virtualenv」环境</h1><p> 5、通过pip直接安装<br>        最新版本<br>            安装CPU版本：pip install tensorflow<br>            安装GPU版本：pip install tensorflow-gpu<br>        安装指定版本，例如安装1.0.0版本<br>            安装CPU版本：pip install tensorflow==1.0.0<br>            安装GPU版本：pip install tensorflow-gpu==1.0.0<br> 6、通过URL安装</p>
-<pre><code>例如安装Mac OS X，Python 2.7 下的Tensorflow 1.3.0 CPU版本    
-           pip3 install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.3.0-py2-none-any.whl
-</code></pre><p> 7、通过源码安装<br>         首先Mac下内置有gcc，可以通过终端命令gcc -v 查看：</p>
-<p>其中的4.2.1就是gcc的版本，或者大家也可以直接输入终端命令python进行查看</p>
-<p>里面有一个GCC 4.2.1，感觉比上面那个命令更直观一些。<br>然后就是要安装Google自家的编译工具bazel了，mac上最好的办法就是直接使用brew安装了：\<br>brew install bazel<br>安装好之后就要下载官方的TensorFlow源码了：<br>git clone <a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="external">https://github.com/tensorflow/tensorflow</a><br>下载完成后会在你的用户名的目录下生成一个tensorflow的文件夹，使用<br>cd tensorflow<br>进入这个文件夹，然后输入：<br>./configure<br>进行配置，通常情况下没有特殊的要求，一般全部都选择n，需要输入path的地方敲回车，使用默写path</p>
-<p>配置完成后就是编译过程了，输入终端命令:<br>bazel build –config=opt //tensorflow/tools/pip_package:build_pip_package<br>经过漫长的编译后，任务就基本上完成了，接下来就是输入下面的命令来生成pip安装包了：<br>bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg<br>接下来安装这个wheel。如果之前pip装过tf的话，最好先卸载掉：<br>pip uninstall tensorflow<br>再安装<br>pip install /tmp/tensorflow_pkg/tensorflow-1.3.0-cp27-cp27m-macosx_10_12_intel.whl<br>安装成功<br>Installing collected packages: tensorflow<br>Successfully installed tensorflow-1.2.0<br>验证安装<br>遇到的问题：<br>如果错误是bazel相关的，请卸载bazel重新安装。</p>
-
-          
+          <p>本篇学习笔记是在 <strong><code>macOS</code></strong> 系统上进行的演示，<strong><code>python</code></strong> 版本为 <strong><code>2.7.10</code></strong>，如果大家想学习在 <strong><code>windows</code></strong>，<strong><code>linux</code></strong> 等系统上的安装步骤，可以参考一下官方的安装 <strong><code>TensorFlow</code></strong> 的方法：<a href="https://www.tensorflow.org/install/" target="_blank" rel="external">https://www.tensorflow.org/install/</a> ，个人建议在虚拟环境下安装 <strong><code>TensorFlow</code></strong>。下面介绍 <strong><code>TensorFlow</code></strong> 的2种安装方法。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/01/tensorflow-install/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

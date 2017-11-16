@@ -979,7 +979,7 @@
 
       
         
-          <p>在开发 <strong><code>Python</code></strong> 应用程序的时候，系统安装的 <strong><code>Python</code></strong>只有一个版本，所有第三方的包都会被 <strong><code>pip</code></strong> 安装到 <strong><code>Python</code></strong> 的 <strong><code>site-packages</code></strong> 目录下。如果我们要同时开发多个应用程序，那这些应用程序都会共用这个安装在系统的 <strong><code>Python</code></strong>。如果 「应用A」 需要 <strong><code>Python 2.6</code></strong> 版本，而 「应用B」 需要 <strong><code>Python 2.7</code></strong> 版本，这种情况下共用这个安装在系统的 <strong><code>Python</code></strong> 版本就不能满足需求了，每个应用需要各自拥有一套「独立」的 <strong><code>Python</code></strong> 运行环境。<strong><code>virtualenv</code></strong> 就是用来为一个应用创建一套「独立」的 <strong><code>Python</code></strong> 运行环境。<br>
+          <p>在开发 <strong><code>Python</code></strong> 应用程序的时候，系统安装的 <strong><code>Python</code></strong>只有一个版本，所有第三方的包都会被 <strong><code>pip</code></strong> 安装到 <strong><code>Python</code></strong> 的 <strong><code>site-packages</code></strong> 目录下。如果我们要同时开发多个应用程序，那这些应用程序都会共用这个安装在系统的 <strong><code>Python</code></strong>。如果 「应用A」 需要 <strong><code>Python 2.6</code></strong> 版本，而 「应用B」 需要 <strong><code>Python 2.7</code></strong> 版本，这种情况下共用这个安装在系统的 <strong><code>Python</code></strong> 版本就不能满足需求了，每个应用需要各自拥有一套「独立」的 <strong><code>Python</code></strong> 运行环境。<strong><code>virtualenv</code></strong> 就是用来为一个应用创建一套「独立」的 <strong><code>Python</code></strong> 运行环境，在虚拟环境下，用 <strong><code>pip</code></strong> 安装的包都被安装到虚拟环境 <strong><code>Python</code></strong> 的 <strong><code>site-packages</code></strong> 下，系统 <strong><code>Python</code></strong> 环境不受任何影响。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/08/10/virtualenv-using-tutorial/#more" rel="contents">

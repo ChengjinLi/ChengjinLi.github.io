@@ -77,7 +77,7 @@
 <meta property="og:site_name" content="MJ&#39;s Learning Notes">
 <meta property="og:description" content="简介自然语言是一套用来表达含义的复杂系统。在这套系统中，词是表义的基本单元。在 NLP 领域中，如何量化词的表达也是关键问题之一。用某个固定维度的向量(vector)去表示词是一个很经典很基本的任务，我们称这个向量为「词向量」，通常也被认为是词的特征向量。我们之所以要把单词变成向量是因为我们需要把自然语言抽象成数学中的某个概念（这里是向量）。换一种更具体直白的说法，之所以要把单词变成固定维度的向量">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-20T10:31:07.395Z">
+<meta property="og:updated_time" content="2018-02-20T10:32:13.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="词向量简介">
 <meta name="twitter:description" content="简介自然语言是一套用来表达含义的复杂系统。在这套系统中，词是表义的基本单元。在 NLP 领域中，如何量化词的表达也是关键问题之一。用某个固定维度的向量(vector)去表示词是一个很经典很基本的任务，我们称这个向量为「词向量」，通常也被认为是词的特征向量。我们之所以要把单词变成向量是因为我们需要把自然语言抽象成数学中的某个概念（这里是向量）。换一种更具体直白的说法，之所以要把单词变成固定维度的向量">
@@ -385,10 +385,10 @@
 <blockquote>
 <ol>
 <li>独热编码(One-Hot Encoding)</li>
-<li>词嵌入(Word Embedding)<a id="more"></a>
-</li>
+<li>词嵌入(Word Embedding)</li>
 </ol>
 </blockquote>
+<a id="more"></a>
 <h1 id="独热编码-One-Hot-Encoding"><a href="#独热编码-One-Hot-Encoding" class="headerlink" title="独热编码(One-Hot Encoding)"></a>独热编码(One-Hot Encoding)</h1><p>独热编码即 <strong><code>One-Hot</code></strong> 编码，又称一位有效编码，直观来说就是使用 <strong><em><code>N</code></em></strong> 位状态寄存器对 <strong><em><code>N</code></em></strong> 个状态进行编码，每个状态都有其独立的寄存器位，并且在任意时候有且只有一位有效，即只有一个值为 <strong><code>1</code></strong>，其他值全为 <strong><code>0</code></strong> 的一种码制。在机器学习的任务中，对于离散型的分类型的数据，需要对其进行数字化，比如说「性别」这一属性，只能有「男性」、「女性」或者「其他」这三种值，如何对这三个值进行数字化表达呢？一种简单的方式就是「男性」为 <strong><code>0</code></strong>，「女性」为 <strong><code>1</code></strong>，「其他」为 <strong><code>2</code></strong>。使用上面简单的方式对分类值进行数字化后，进行模型训练时可能会产生一个问题：特征因为数字值的不同影响模型的训练效果，在模型训练的过程中不同的值使得同一特征在样本中的权重可能发生变化。假如直接编码成 <strong><code>100</code></strong>，是不是比编码成 <strong><code>1</code></strong> 对模型的的影响更大？为了解决上述的问题，使训练过程中不受到因为分类值数字化的问题对模型产生的负面影响，引入独热码对分类型的特征进行独热码编码。</p>
 <p>在 <strong><code>NLP</code></strong> 任务中，假设词典中不同词的数量为 <strong><em><code>N</code></em></strong>，每个词的 <strong><code>index</code></strong> 都与 <strong><code>0</code></strong> 到 <strong><em><code>N-1</code></em></strong> 的连续整数一一对应。假设一个词的下标为 <strong><em><code>i</code></em></strong>，为了得到该词的 <strong><code>One-Hot</code></strong> 向量表示，我们创建一个全 <strong><code>0</code></strong> 的长为 <strong><em><code>N</code></em></strong>的向量，并将其第 <strong><em><code>i</code></em></strong>位置成 <strong><code>1</code></strong>。<strong><code>One-Hot</code></strong> 编码使用了高维稀疏向量表示词，这样的特征可以反映词出现的频率，但这并不是最好的选择。一个主要的原因是，<strong><code>One-Hot</code></strong> 词向量无法表达不同词之间的关系，例如「相似度」这一度量关系。任何一对词的 <strong><code>One-Hot</code></strong> 向量的余弦相似度都为 <strong><code>0</code></strong>。</p>
 <p>那究竟用什么向量去表示词才是合理的呢？一个符合直觉的想法是，相似的词应该有相似的「词向量」，比如 <strong><code>dog</code></strong> 和 <strong><code>cat</code></strong> 这两个词，他们的意思很相近，那么他们的「词向量」也应该很相似，或者说他们的「词向量」在空间中位置很接近，距离很短。再比如 <strong><code>dog</code></strong> 和 <strong><code>rocket</code></strong> 这两个词，他们的「词向量」在空间中位置应该距离比较远。我们应该怎样做才能使得相似的词有相似的「词向量」呢？</p>

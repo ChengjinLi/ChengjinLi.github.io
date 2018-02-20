@@ -69,18 +69,18 @@
 
 
 
-<meta name="description" content="在C++的STL中常见的容器可分为「顺序容器」(sequential container)和「关联容器」(associative container)。">
+<meta name="description" content="在 C++ 的 STL 中，常见的容器可分为「顺序容器」(sequential container) 和「关联容器」(associative container)。">
 <meta name="keywords" content="C++,container">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++学习笔记---容器(container)使用教程">
 <meta property="og:url" content="http://yoursite.com/2017/10/20/cpp-container-use-tutorial/index.html">
 <meta property="og:site_name" content="MJ&#39;s Learning Notes">
-<meta property="og:description" content="在C++的STL中常见的容器可分为「顺序容器」(sequential container)和「关联容器」(associative container)。">
+<meta property="og:description" content="在 C++ 的 STL 中，常见的容器可分为「顺序容器」(sequential container) 和「关联容器」(associative container)。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-10T14:04:41.000Z">
+<meta property="og:updated_time" content="2017-11-30T14:19:00.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++学习笔记---容器(container)使用教程">
-<meta name="twitter:description" content="在C++的STL中常见的容器可分为「顺序容器」(sequential container)和「关联容器」(associative container)。">
+<meta name="twitter:description" content="在 C++ 的 STL 中，常见的容器可分为「顺序容器」(sequential container) 和「关联容器」(associative container)。">
 
 
 
@@ -381,17 +381,17 @@
       
 
       
-        <p>在C++的STL中常见的容器可分为「顺序容器」(sequential container)和「关联容器」(associative container)。<br><a id="more"></a></p>
-<p>标准的<code>STL</code>「顺序容器」包括：<code>vector</code>、<code>deque</code>、<code>list</code>、<code>forward_list</code>、<code>array</code> 与 <code>string</code>。</p>
-<p>标准的<code>STL</code>「关联容器」包括：<br>关键字有序：<code>map</code>、<code>set</code>、<code>multimap</code> 和 <code>multiset</code>。关键字有序：<code>unorder_map</code>、<code>unorder_set</code>、 <code>unorder_multimap</code> 和 <code>unorder_multiset</code>。</p>
-<p>string、vector</p>
-<p>string和vector将元素保存在连续的内存空间中，支持随机存取。由于元素是连续存储的，在这两种容器中间插入和删除元素，需要修改该位置之后所有元素的位置，效率较低。</p>
-<p>list、forward_list</p>
-<p>list和forward_list分别对应数据结构中的双向链表和单向链表。两个容器将元素的设计目的是让容器在任何位置的插入和删除效率提高，但其代价是容器不支持随机存取，查找效率较低。</p>
-<p>deque</p>
-<p>deque是一种更为复杂的数据结构。与string和vector类似，支持快速随机访问，并且在其两端添加和删除元素的效率都很高。但是，由于deque中元素也是连续存储，在其中间插入和删除元素的效率也较低。</p>
-<p>array</p>
-<p>array是一种更安全的数组，与内置数组类似，不支持动态内存分配，支持元素随机访问。</p>
+        <p>在 <strong><code>C++</code></strong> 的 <strong><code>STL</code></strong> 中，常见的容器可分为<strong>「顺序容器」(sequential container)</strong> 和<strong>「关联容器」(associative container)</strong>。<br><a id="more"></a></p>
+<p>标准的 <strong><code>STL</code> 「顺序容器」</strong>包括：</p>
+<p><strong><code>vector</code></strong>、<strong><code>deque</code></strong>、<strong><code>list</code></strong>、<strong><code>forward_list</code></strong>、<strong><code>array</code></strong> 与 <strong><code>string</code></strong>。</p>
+<p>标准的 <strong><code>STL</code>「关联容器」</strong>可分为<strong>「关键字有序」</strong>和<strong>「关键字无序」</strong>。</p>
+<p>关键字有序：<strong><code>map</code></strong>、<strong><code>set</code></strong>、<strong><code>multimap</code></strong>和<strong><code>multiset</code></strong>。</p>
+<p>关键字无序： <strong><code>unorder_map</code></strong>、<strong><code>unorder_set</code></strong>、<strong><code>unorder_multimap</code></strong>和<strong><code>unorder_multiset</code></strong>。</p>
+<h3 id="vector"><a href="#vector" class="headerlink" title="vector"></a><strong><code>vector</code></strong></h3><p><strong><code>vector</code></strong>将元素保存在连续的内存空间中，支持随机存取。由于元素是连续存储的，在这两种容器中间插入和删除元素，需要修改该位置之后所有元素的位置，效率较低。如果不清楚元素的确切个数，请使用<strong><code>vector</code></strong>，如果清楚元素的确切个数，请使用数组。</p>
+<h3 id="string、"><a href="#string、" class="headerlink" title="string、"></a><strong><code>string</code></strong>、</h3><p><strong><code>string</code></strong>将元素保存在连续的内存空间中，支持随机存取。由于元素是连续存储的，在这两种容器中间插入和删除元素，需要修改该位置之后所有元素的位置，效率较低。</p>
+<h3 id="list、forward-list"><a href="#list、forward-list" class="headerlink" title="list、forward_list"></a><strong><code>list</code></strong>、<strong><code>forward_list</code></strong></h3><p><strong><code>list</code></strong>和<strong><code>forward_list</code></strong>分别对应数据结构中的双向链表和单向链表。两个容器将元素的设计目的是让容器在任何位置的插入和删除效率提高，但其代价是容器不支持随机存取，查找效率较低。</p>
+<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a><strong><code>deque</code></strong></h3><p><strong><code>deque</code></strong>是一种更为复杂的数据结构。与<strong><code>string</code></strong>和<strong><code>vector</code></strong>类似，支持快速随机访问，并且在其两端添加和删除元素的效率都很高。但是，由于<strong><code>deque</code></strong>中元素也是连续存储，在其中间插入和删除元素的效率也较低。</p>
+<h3 id="array"><a href="#array" class="headerlink" title="array"></a><strong><code>array</code></strong></h3><p><strong><code>array</code></strong>是一种更安全的数组，与内置数组类似，不支持动态内存分配，支持元素随机访问。</p>
 
       
     </div>
@@ -548,8 +548,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -567,7 +576,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -578,7 +587,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -589,7 +598,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -659,6 +668,22 @@ var jiathis_config={
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#vector"><span class="nav-number">1.</span> <span class="nav-text">vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#string、"><span class="nav-number">2.</span> <span class="nav-text">string、</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list、forward-list"><span class="nav-number">3.</span> <span class="nav-text">list、forward_list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque"><span class="nav-number">4.</span> <span class="nav-text">deque</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array"><span class="nav-number">5.</span> <span class="nav-text">array</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -672,7 +697,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

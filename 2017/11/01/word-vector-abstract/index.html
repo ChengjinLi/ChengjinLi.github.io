@@ -69,18 +69,18 @@
 
 
 
-<meta name="description" content="自然语言是一套用来表达含义的复杂系统。在这套系统中，词是表义的基本单元。在 NLP 领域中，如何量化词的表达也是关键问题之一。用某个固定维度的向量(vector)去表示词是一个很经典很基本的任务，我们称这个向量为「词向量」，通常也被认为是词的特征向量。我们之所以要把单词变成向量是因为我们需要把自然语言抽象成数学中的某个概念（这里是向量）。换一种更具体直白的说法，之所以要把单词变成固定维度的向量，是">
+<meta name="description" content="简介自然语言是一套用来表达含义的复杂系统。在这套系统中，词是表义的基本单元。在 NLP 领域中，如何量化词的表达也是关键问题之一。用某个固定维度的向量(vector)去表示词是一个很经典很基本的任务，我们称这个向量为「词向量」，通常也被认为是词的特征向量。我们之所以要把单词变成向量是因为我们需要把自然语言抽象成数学中的某个概念（这里是向量）。换一种更具体直白的说法，之所以要把单词变成固定维度的向量">
 <meta name="keywords" content="词向量">
 <meta property="og:type" content="article">
-<meta property="og:title" content="训练词向量的几种方法和工具介绍">
+<meta property="og:title" content="词向量简介">
 <meta property="og:url" content="http://yoursite.com/2017/11/01/word-vector-abstract/index.html">
 <meta property="og:site_name" content="MJ&#39;s Learning Notes">
-<meta property="og:description" content="自然语言是一套用来表达含义的复杂系统。在这套系统中，词是表义的基本单元。在 NLP 领域中，如何量化词的表达也是关键问题之一。用某个固定维度的向量(vector)去表示词是一个很经典很基本的任务，我们称这个向量为「词向量」，通常也被认为是词的特征向量。我们之所以要把单词变成向量是因为我们需要把自然语言抽象成数学中的某个概念（这里是向量）。换一种更具体直白的说法，之所以要把单词变成固定维度的向量，是">
+<meta property="og:description" content="简介自然语言是一套用来表达含义的复杂系统。在这套系统中，词是表义的基本单元。在 NLP 领域中，如何量化词的表达也是关键问题之一。用某个固定维度的向量(vector)去表示词是一个很经典很基本的任务，我们称这个向量为「词向量」，通常也被认为是词的特征向量。我们之所以要把单词变成向量是因为我们需要把自然语言抽象成数学中的某个概念（这里是向量）。换一种更具体直白的说法，之所以要把单词变成固定维度的向量">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-20T10:28:29.996Z">
+<meta property="og:updated_time" content="2018-02-20T10:29:34.836Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="训练词向量的几种方法和工具介绍">
-<meta name="twitter:description" content="自然语言是一套用来表达含义的复杂系统。在这套系统中，词是表义的基本单元。在 NLP 领域中，如何量化词的表达也是关键问题之一。用某个固定维度的向量(vector)去表示词是一个很经典很基本的任务，我们称这个向量为「词向量」，通常也被认为是词的特征向量。我们之所以要把单词变成向量是因为我们需要把自然语言抽象成数学中的某个概念（这里是向量）。换一种更具体直白的说法，之所以要把单词变成固定维度的向量，是">
+<meta name="twitter:title" content="词向量简介">
+<meta name="twitter:description" content="简介自然语言是一套用来表达含义的复杂系统。在这套系统中，词是表义的基本单元。在 NLP 领域中，如何量化词的表达也是关键问题之一。用某个固定维度的向量(vector)去表示词是一个很经典很基本的任务，我们称这个向量为「词向量」，通常也被认为是词的特征向量。我们之所以要把单词变成向量是因为我们需要把自然语言抽象成数学中的某个概念（这里是向量）。换一种更具体直白的说法，之所以要把单词变成固定维度的向量">
 
 
 
@@ -116,7 +116,7 @@
 
 
 
-  <title>训练词向量的几种方法和工具介绍 | MJ's Learning Notes</title>
+  <title>词向量简介 | MJ's Learning Notes</title>
   
 
 
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">训练词向量的几种方法和工具介绍</h1>
+          <h1 class="post-title" itemprop="name headline">词向量简介</h1>
         
 
         <div class="post-meta">
@@ -381,7 +381,7 @@
       
 
       
-        <p>自然语言是一套用来表达含义的复杂系统。在这套系统中，词是表义的基本单元。在 <strong><code>NLP</code></strong> 领域中，如何量化词的表达也是关键问题之一。用某个固定维度的向量(<strong><code>vector</code></strong>)去表示词是一个很经典很基本的任务，我们称这个向量为「词向量」，通常也被认为是词的特征向量。我们之所以要把单词变成向量是因为我们需要把自然语言抽象成数学中的某个概念（这里是向量）。换一种更具体直白的说法，之所以要把单词变成固定维度的向量，是因为绝大多数的机器学习(<strong><code>Machine Learning</code></strong>)模型需要固定维度的向量作为输入。近年来，「词向量」已逐渐成为自然语言处理的基础知识，一份高质量的「词向量」是很多任务取得更好表现的关键。常见的方式有以下两种：</p>
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>自然语言是一套用来表达含义的复杂系统。在这套系统中，词是表义的基本单元。在 <strong><code>NLP</code></strong> 领域中，如何量化词的表达也是关键问题之一。用某个固定维度的向量(<strong><code>vector</code></strong>)去表示词是一个很经典很基本的任务，我们称这个向量为「词向量」，通常也被认为是词的特征向量。我们之所以要把单词变成向量是因为我们需要把自然语言抽象成数学中的某个概念（这里是向量）。换一种更具体直白的说法，之所以要把单词变成固定维度的向量，是因为绝大多数的机器学习(<strong><code>Machine Learning</code></strong>)模型需要固定维度的向量作为输入。近年来，「词向量」已逐渐成为自然语言处理的基础知识，一份高质量的「词向量」是很多任务取得更好表现的关键。常见的方式有以下两种：</p>
 <ol>
 <li>独热编码(One-Hot Encoding)</li>
 <li>词嵌入(Word Embedding)<a id="more"></a>
@@ -675,7 +675,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#独热编码-One-Hot-Encoding"><span class="nav-number">1.</span> <span class="nav-text">独热编码(One-Hot Encoding)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#词嵌入-Word-Embedding"><span class="nav-number">2.</span> <span class="nav-text">词嵌入(Word Embedding)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#词类比-Word-Analogy"><span class="nav-number">3.</span> <span class="nav-text">词类比(Word Analogy)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#独热编码-One-Hot-Encoding"><span class="nav-number">2.</span> <span class="nav-text">独热编码(One-Hot Encoding)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#词嵌入-Word-Embedding"><span class="nav-number">3.</span> <span class="nav-text">词嵌入(Word Embedding)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#词类比-Word-Analogy"><span class="nav-number">4.</span> <span class="nav-text">词类比(Word Analogy)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

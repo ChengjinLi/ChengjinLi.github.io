@@ -356,416 +356,15 @@
 
       
         
-          
-            <h1 id="XGBoost-参数"><a href="#XGBoost-参数" class="headerlink" title="XGBoost 参数"></a>XGBoost 参数</h1><p><a href="https://xgboost.readthedocs.io/en/latest//parameter.html" target="_blank" rel="external">XGBoost 官方参数说明文档</a>，XGBoost 版本：0.72。</p>
-<p>在运行 XGBoost 之前，必须设置三种类型参数：通用参数(General Parameters)、提升参数(Booster Parameters)和任务参数(Task Parameters)。</p>
-<ul>
-<li>通用参数(General Parameters)：设置整体功能，参数控制在提升(boosting)过程中使用哪种booster，常用的booster有树模型(tree model)和线性模型(linear model)。</li>
-<li>提升参数(Booster Parameters)：这取决于使用哪种booster(树or回归)。</li>
-<li>任务参数(Task Parameters)：控制学习的场景，例如在回归问题中会使用不同的参数控制排序。</li>
-</ul>
-<h2 id="通用参数-General-Parameters"><a href="#通用参数-General-Parameters" class="headerlink" title="通用参数(General Parameters)"></a>通用参数(General Parameters)</h2><p>下面这些参数定义了 XGBoost 的总体功能：</p>
-<ul>
-<li><p>booster [default=gbtree]</p>
-<ul>
-<li>选择每次迭代过程中需要运行的模型，一共有两种模型可以选择：</li>
-<li>gbtree：使用基于树的模型进行提升计算；</li>
-<li>gblinear：使用线性模型进行提升计算；</li>
-</ul>
-</li>
-<li><p>silent [default=0]</p>
-<ul>
-<li>设置模型是否打印运行时信息：</li>
-<li>0：打印出运行时信息 </li>
-<li>1：不打印出运行时信息</li>
-</ul>
-</li>
-<li><p>nthread [default=可用的最大线程数] </p>
-<ul>
-<li>XGBoost 运行时的线程数，默认值为当前系统可以获得的最大线程数。</li>
-</ul>
-</li>
-<li><p>num_pbuffer [由 XGBoost 自动设置，不需要用户设置]</p>
-<ul>
-<li>预测缓冲区的大小，通常设置为训练实例的数目。缓冲区用于保存最后一次升压步骤的预测结果。</li>
-</ul>
-</li>
-<li><p>num_feature [由 XGBoost 自动设置，不需要用户设置]</p>
-<ul>
-<li>boosting 过程中用到的特征维数，设置为特征个数。</li>
-</ul>
-</li>
-</ul>
-<h2 id="提升参数-Booster-Parameters"><a href="#提升参数-Booster-Parameters" class="headerlink" title="提升参数(Booster Parameters)"></a>提升参数(Booster Parameters)</h2><h3 id="树模型-Booster-参数"><a href="#树模型-Booster-参数" class="headerlink" title="树模型 Booster 参数"></a>树模型 Booster 参数</h3><ul>
-<li><p>eta [default=0.3，别名: learning_rate]</p>
-<ul>
-<li>为了防止过拟合，更新过程中用到的收缩步长。在每次提升计算之后，算法会直接获得新特征的权重。eta 通过缩减每一步特征的权重使提升计算过程更加保守，使得模型更加健壮。</li>
-<li>取值范围：[0，1]。典型值一般设置为：0.01~0.2。</li>
-</ul>
-</li>
-<li><p>gamma [default=0，别名：min_split_loss]</p>
-<ul>
-<li>在树的叶子节点上进行进一步分割，所需要的最小损失函数减少的大小。越大，算法就越保守。<br>这个值一般来说需要根据损失函数来调整。</li>
-<li>取值范围：[0,∞]</li>
-</ul>
-</li>
-<li><p>max_depth [default=6]</p>
-<ul>
-<li>树的最大深度，值越大，树越复杂。可以用来控制过拟合。</li>
-<li>取值范围：[1,∞]。典型值是3-10。</li>
-</ul>
-</li>
-<li><p>min_child_weight [default=1] </p>
-<ul>
-<li>孩子节点中最小的样本权重(hessian)和。如果一个叶子节点的样本权重和小于min_child_weight，则拆分过程将放弃进一步的划分。在线性回归任务中，这个参数是指建立每个模型所需要的最小样本数。该参数越大算法越保守。这个参数可以用来减少过拟合，但是过高的值也会导致欠拟合，因此可以通过交叉验证来调。</li>
-<li>取值范围: [0,∞]</li>
-</ul>
-</li>
-<li><p>max_delta_step [default=0] </p>
-<ul>
-<li>最大增量步骤，我们允许每个叶子输出。如果该值设置为0，则意味着没有约束。如果它被设置为正值，有助于更新步骤更加保守。通常不需要这个参数，当类是非常不平衡的时，它可能有助于 logistic 回归。将其设置为 1~10 的值可能有助于控制更新。</li>
-<li>取值范围：[0,∞]</li>
-</ul>
-</li>
-<li><p>subsample [default=1]</p>
-<ul>
-<li>用于训练模型的子样本占整个样本集合的比例。如果设置为0.5则意味着 XGBoost 将随机的从整个样本集合中随机的抽取出50%的子样本建立树模型，这能够防止过拟合。</li>
-<li>取值范围为：(0,1]</li>
-</ul>
-</li>
-<li><p>colsample_bytree [default=1]</p>
-<ul>
-<li>在构建每棵树时，列的采样比(一般是特征采样比)。在每次 boosting 迭代中都会出现一次采样。</li>
-<li>取值范围：(0,1]</li>
-</ul>
-</li>
-<li><p>colsample_bylevel [default=1]</p>
-<ul>
-<li>在每个级别上，每个样本的子样本比。每次进行新的分割时，都会出现次采样。<br>当 tree_method 设置为hist时，此参数没有任何影响。这个一般很少用，subsample 和 colsample_bytree 参数调节就足够了。</li>
-</ul>
-</li>
-<li><p>lambda [default=1, 别名: reg_lambda]</p>
-<ul>
-<li>权重的L2正则化项，增加这个值会使模型更保守。这个其实用的很少。</li>
-</ul>
-</li>
-<li><p>alpha [default=0, 别名: reg_alpha]</p>
-<ul>
-<li>权重的L1正则化项，增加这个值会使模型更保守。这个主要是用在数据维度很高的情况下，可以提高运行速度。</li>
-</ul>
-</li>
-<li><p>tree_method [default=auto]</p>
-<ul>
-<li>XGBoost 中使用的树构造算法。参见<a href="https://arxiv.org/abs/1603.02754" target="_blank" rel="external">参考文献</a>中的描述。</li>
-<li>分布式和外存版本只支持近似算法(tree_method=approx)。</li>
-<li>选项: ‘auto’、’approx’、’exact’、’hist’、’gpu_exact’、’gpu_hist’。<ul>
-<li>‘auto’: 用启发式方法去选择最快的一个。<ul>
-<li>对于小到中数据集，将使用精确的贪心算法。</li>
-<li>对于大数据集，会选择近似算法。</li>
-<li>由于之前总是在单台机器上使用精确的贪心算法，所以当选择近似算法时，用户会得到一条消息来通知这个选择。</li>
-</ul>
-</li>
-<li>‘exact’: 使用贪心算法</li>
-<li>‘approx’: 使用草图和直方图的近似贪心算法</li>
-<li>‘hist’: 快速直方图优化近似贪婪算法。它使用了一些性能改进，比如垃圾箱缓存。</li>
-<li>‘gpu_exact’: 使用gpu执行exact算法</li>
-<li>‘gpu_hist’: 使用gpu执行hist算法</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>sketch_eps [default=0.03] </p>
-<ul>
-<li>这个选项适用于近似贪心算法。</li>
-<li>这大概可以理解为O(1/sketcheps)数量的箱子。与直接选择的箱数相比，该方法具有一定的理论保证和梗概精度。</li>
-<li>通常用户不需要调整这个参数，但是使用一个较低的值唯一获得更多的精确的列举。</li>
-<li>取值范围：(0,1)</li>
-</ul>
-</li>
-<li><p>scale_pos_weight [default=1]</p>
-<ul>
-<li>用于类别不平衡的情况下，控制正负权重的平衡。将参数设置大于0，可以加快收敛。</li>
-</ul>
-</li>
-<li><p>updater [default=grow_colmaker,prune] </p>
-<ul>
-<li>一个逗号分隔的字符串，定义了要运行的树更新器的序列，提供了一种构造和修改树的模块化方法。这是一个高级的参数通常设置为自动的，取决于其他参数。它也可以被用户明确的定义。有下列的更新器插件: <ul>
-<li>‘grow_colmaker’: 非分布的基于列的树结构。</li>
-<li>‘discol’: 采用基于列的数据分割模式的分布式树结构。</li>
-<li>‘grow_histmaker’: 基于基于直方图计数的全局建议的基于行的数据分割的分布式树结构。</li>
-<li>‘grow_local_histmaker’: 基于局部直方图计数。</li>
-<li>‘grow_skmaker’: 使用近似的草图算法。</li>
-<li>‘refresh’: 根据当前数据刷新树的统计和/或叶值。注意，不执行任何随机的数据行子抽样。</li>
-<li>‘prune’: 在损失小于min_split_loss (or gamma)的情况下修剪。</li>
-</ul>
-</li>
-<li>在分布式设置中，updater序列应该调整为’grow_histmaker,prune’</li>
-</ul>
-</li>
-<li><p>refresh_leaf [default=1]</p>
-<ul>
-<li>设置一个刷新updater插件的参数。当标志为1时，树叶和树节点的统计信息都更新了。当标志为0时，只更新节点属性。</li>
-</ul>
-</li>
-<li><p>process_type [default=default]</p>
-<ul>
-<li>一种可运行的 boosting 过程</li>
-<li>选项: {‘default’，’update’} <ul>
-<li>‘default’: 普通的 boosting 过程来创建新的树。</li>
-<li>‘update’: 从一个已经存在的模型并且仅仅更新它的树。在每一次 boosting 迭代，从初始模型得到的树，一个指定序列的 updater 插件为这些树运行，修改后的树被添加到新的模型。新的模型可能有相同或者更少的树，取决于 boosting 迭代的次数。目前，以下内置的 updater 插件可以与此过程类型有意义的使用:’refresh’, ‘prune’。如果 process_type=update，你就不能使用 updater 插件来创建新的树。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>grow_policy [default=depthwise] </p>
-<ul>
-<li>控制节点被添加到树的方式</li>
-<li>目前仅仅支持 tree_method=hist 时的设置。</li>
-<li>选项: {‘depthwise’, ‘lossguide’} <ul>
-<li>‘depthwise’: 在离根最近的节点处分割</li>
-<li>‘lossguide’: 在最大的 loss 改变出分割</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>max_leaves [default=0] </p>
-<ul>
-<li>最多添加的节点数量。仅当 grow_policy=lossguide 时相关。</li>
-</ul>
-</li>
-<li><p>max_bin [default=256] </p>
-<ul>
-<li>仅当 tree_method=hist 时有用。</li>
-<li>最大的离散箱数，以存储连续的特性。</li>
-<li>增加这个数字可以减少计算时间成本。</li>
-</ul>
-</li>
-<li><p>predictor [default=cpu_predictor] </p>
-<ul>
-<li>选择预测算法的类型。提供同样的结果但是可以选择使用CPU或者GPU。 <ul>
-<li>cpu_predictor: 使用多核CPU预测算法。</li>
-<li>gpu_predictor: 使用gpu预测。如果 tree_method 设置为 gpu_exact 或者 gpu_hist，那么这个就是默认选项。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Dart-Booster-额外的参数-booster-dart"><a href="#Dart-Booster-额外的参数-booster-dart" class="headerlink" title="Dart Booster 额外的参数(booster=dart)"></a>Dart Booster 额外的参数(booster=dart)</h3><p>Dart Booster 将 dropout 引入模型，这里的 dropout 不是直接扔掉，而是变权值。</p>
-<ul>
-<li><p>sample_type [default=uniform]</p>
-<ul>
-<li>算法抽样的类型 <ul>
-<li>uniform: 均匀选择树 dropped。</li>
-<li>weighted: 按照权重来选择树dropped。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>normalize_type [default=tree] </p>
-<ul>
-<li>归一化算法的类型 <ul>
-<li>tree: 新的树和每一个 dropped 树有同样的权重。<ul>
-<li>新的树的权重为 1 / (k + learning_rate)。</li>
-<li>dropped 树乘以一个系数 k / (k + learning_rate)。</li>
-</ul>
-</li>
-<li>forest: 新的树和所有 dropped 树的和有相同的权重。<ul>
-<li>新的树的权重为 1 / (1 + learning_rate)。</li>
-<li>dropped 树乘以一个系数 1 / (1 + learning_rate)。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>rate_drop [default=0.0]</p>
-<ul>
-<li>dropout的概率(在生成的树中 dropped 一部分)。</li>
-<li>取值范围: [0.0, 1.0]</li>
-</ul>
-</li>
-<li><p>one_drop [default=0]</p>
-<ul>
-<li>当这个被设置时，至少有一个树始终会被 dropped（支持原始 DART 论文中的 Binomial-plus-one 或 epsilon-dropout）.</li>
-</ul>
-</li>
-<li><p>skip_drop [default=0.0]</p>
-<ul>
-<li>在 boosting 迭代的过程中略过 dropout 过程的概率。<ul>
-<li>如果一次 dropout 被略过，新的树被添加进 model 用和 gbtree 一样的方式。</li>
-<li>非0的 skip_drop 比 rate_drop 和 one_drop 有更高的优先级。</li>
-</ul>
-</li>
-<li>取值范围: [0.0, 1.0]</li>
-</ul>
-</li>
-</ul>
-<h3 id="线性Booster的参数-booster-gblinear"><a href="#线性Booster的参数-booster-gblinear" class="headerlink" title="线性Booster的参数(booster=gblinear)"></a>线性Booster的参数(booster=gblinear)</h3><ul>
-<li><p>lambda [default=0, 别名:reg_lambda]</p>
-<ul>
-<li>L2正则化的权重，增加该参数的值会让模型更保守</li>
-</ul>
-</li>
-<li><p>alpha [default=0, 别名:reg_alpha]</p>
-<ul>
-<li>L1正则化的权重，增加这个值会让模型更保守。归一化到训练实例的数量。</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>updater [default=shotgun]<ul>
-<li>选择算法拟合线性模型<ul>
-<li>shotgun: 基于 shotgun 算法的并行坐标下降算法。使用 ‘HOGRAVE’ 并行性，因此在每次运行时产生一个非确定性的解决方案。</li>
-<li>coord_descent: 普通坐标下降算法。而且多线程下仍然产生确定性的解决方案。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Tweedie-Regression-的参数-objective-reg-tweedie"><a href="#Tweedie-Regression-的参数-objective-reg-tweedie" class="headerlink" title="Tweedie Regression 的参数(objective=reg:tweedie)"></a>Tweedie Regression 的参数(objective=reg:tweedie)</h3><ul>
-<li>tweedie_variance_power [default=1.5]<ul>
-<li>在 Tweedie 分布上控制方差的参数 <ul>
-<li>var(y)~E(y)^tweedie_variance_power</li>
-</ul>
-</li>
-<li>取值范围: (1,2)</li>
-<li>值越接近2越接近 gamma 分布</li>
-<li>值越接近1越接近 Poisson 分布</li>
-</ul>
-</li>
-</ul>
-<h2 id="学习任务参数-Learning-Task-Parameters"><a href="#学习任务参数-Learning-Task-Parameters" class="headerlink" title="学习任务参数(Learning Task Parameters)"></a>学习任务参数(Learning Task Parameters)</h2><p>指定学习任务和相应的学习目标。下面的目标选项如下:</p>
-<ul>
-<li><p>objective [default=reg:linear]</p>
-<ul>
-<li>‘reg:linear’：线性回归。</li>
-<li>‘reg:logistic’：逻辑回归。</li>
-<li>‘binary:logistic’：二分类的逻辑回归，输出概率。</li>
-<li>‘binary:logitraw’：二分类的逻辑回归，在逻辑变换前输出得分。</li>
-<li>‘binary:hinge’：二分类的 hinge loss。使得预测结果为0或1，而不是产生概率。</li>
-<li>‘gpu:reg:linear, gpu:reg:logistic, gpu:binary:logistic, gpu:binary:logitraw’: 对应在 GPU 上评价的目标函数版本。注意，像 GPU 直方图算法一样，它们只能在整个训练期间使用相同数据集时使用。</li>
-<li>‘count:poisson’：用于统计数据的 poisson 回归，输出 poisson 分布均值。<ul>
-<li>max_delta_step：在 poisson 回归中默认值设置为0.7(用于维护优化)。</li>
-</ul>
-</li>
-<li>‘survival:cox’：用于正确删除的生存时间数据的 Cox 回归(被正确删除的作为负例)。注意，预测是按危害比表中的值返回。(例如：在比例风险函数h(t) = h0(t) * HR中，HR = exp(marginal_prediction)。</li>
-<li>‘multi:softmax’：设置 XGBoost 做多分类任务用 softmax 目标，你需要指定 num_class。</li>
-<li>‘multi:softprob’：和 softmax 一样，但是输出的是一个 ndata <em> nclass 的向量，可以进一步变形为 ndata </em> nclass 的矩阵。结果包含预测的每个数据属于每个类的概率值。</li>
-<li>‘rank:pairwise’：通过最小化 pairwise loss，设置 XGBoost 用于排序任务。</li>
-<li>‘reg:gamma’：用 log-link 的 gamma 回归。输出是 gamma 分布的均值。他是有用的，例如：为了模拟保险索赔的严谨性，或者任何输出结果可能是 gamma 分布的。</li>
-<li>‘reg:tweedie’：用 log-link 的 Tweedie 回归。他是有用的，例如：模拟保险全损，或者任何输出结果可能是 Tweedie 分布的。</li>
-</ul>
-</li>
-<li><p>base_score [default=0.5]</p>
-<ul>
-<li>初始化的所有例子的越策得分，全局 bias</li>
-<li>对于足够多的迭代次数，改变这个值不会有太大的效果</li>
-</ul>
-</li>
-<li><p>eval_metric [default according to objective] </p>
-<ul>
-<li>对于验证集的评测指标，一个默认的指标是根据目标分配的(对于回归任务用rmse，对于分类任务用error，mean average precision for ranking)</li>
-<li>用户可以添加多个评测指标，对于python用户，记得将这些指标存入一个参数对的list而不是map，不然后面的指标将会失效。</li>
-<li>可选项如下: <ul>
-<li>rmse：root mean square error(均方根误差)。</li>
-<li>mae：mean absolute error(绝对值误差)。</li>
-<li>logloss：negative log-likelihood(负对数似然)。</li>
-<li>error：二分类错误率。他可以用公式 #(wrong cases)/#(all cases)计算。对于预测，指标会把预测结果大于0.5的当做正类，其他当做负类。</li>
-<li>error@t：与阈值为0.5的二分类不同，可以通过 t 设置阈值。</li>
-<li>merror：多分类错误率，可以用公式 #(wrong cases)/#(all cases)计算。</li>
-<li>mlogloss：Multiclass logloss(多分类对数似然)。</li>
-<li>auc：Area under the curve(曲线下面积)。</li>
-<li>ndcg：Normalized Discounted Cumulative Gain(归一化累积获得收益)</li>
-<li>map：Mean average precision(平均准确率，排名任务)。</li>
-<li>ndcg@n,map@n：n 可以设置为整数，以切断列表中的顶部位置进行评估。</li>
-<li>ndcg-,map-,ndcg@n-,map@n-：在XGBoost，NDCG 和 MAP 将评估没有任何正例样本的列表的得分为1。通过在评价度量中添加“-”，XGBoost 将在某些条件下将这些分数评估为0，反复训练。</li>
-<li>poisson-nloglik：Poisson 回归的负对数似然。</li>
-<li>gamma-nloglik：gamma 回归的负对数似然。</li>
-<li>gamma-deviance：gamma 回归中的差残差</li>
-<li>tweedie-nloglik：Tweedie 回归的负对数似然(在tweedie_variance_power参数为特定值)。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>seed [default=0] </p>
-<ul>
-<li>随机数种子</li>
-</ul>
-</li>
-</ul>
-<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><p>下列的参数仅仅被用在命令行版本的xgboost中</p>
-<ul>
-<li><p>use_buffer [default=1]</p>
-<ul>
-<li>是否创建一个二进制缓冲从输入文本中。这样做通常会加快加载时间。</li>
-</ul>
-</li>
-<li><p>num_round </p>
-<ul>
-<li>boosting 的轮数</li>
-</ul>
-</li>
-<li><p>data </p>
-<ul>
-<li>训练集的路径</li>
-</ul>
-</li>
-<li><p>test:data </p>
-<ul>
-<li>要预测的测试集的路径</li>
-</ul>
-</li>
-<li><p>save_period [default=0] </p>
-<ul>
-<li>保存模型的周期，设置 save_period=10 表示每10次 boosting 就会保存一次模型，设置为0表示在训练期间不保存任何模型。</li>
-</ul>
-</li>
-<li><p>task [default=train] 选项:train、pred、eval、dump </p>
-<ul>
-<li>train：用数据训练</li>
-<li>pred：预测test:data</li>
-<li>eval：设置eval[name]=filename，评估指定的统计数据</li>
-<li>dump：将学习到的模型转换为文本形式</li>
-</ul>
-</li>
-<li><p>model_in [default=NULL]</p>
-<ul>
-<li>输入模型的路径，用于task为test、eval、dump ，如果被明确地指明训练，xgboost会从输入模型继续训练。</li>
-</ul>
-</li>
-<li><p>model_out [default=NULL]</p>
-<ul>
-<li>在训练结束后输出模型的路径，如果不知名，会输出0003.model，这里的0003是 boosting 的轮数。</li>
-</ul>
-</li>
-<li><p>model_dir [default=models/]</p>
-<ul>
-<li>用保存训练期间的模型输出的目录。</li>
-</ul>
-</li>
-<li><p>fmap </p>
-<ul>
-<li>特征图，用于转换模型。</li>
-</ul>
-</li>
-<li><p>name_dump [default=dump.txt] </p>
-<ul>
-<li>模型转储文件的名称。</li>
-</ul>
-</li>
-<li><p>name_pred [default=pred.txt] </p>
-<ul>
-<li>预测文件的名字，用于预测模式。</li>
-</ul>
-</li>
-<li><p>pred_margin [default=0] </p>
-<ul>
-<li>预测 margin 而不是转换概率。</li>
-</ul>
-</li>
-</ul>
-
-          
+          <h1 id="XGBoost-参数"><a href="#XGBoost-参数" class="headerlink" title="XGBoost 参数"></a>XGBoost 参数</h1><p><a href="https://xgboost.readthedocs.io/en/latest//parameter.html" target="_blank" rel="external">XGBoost 官方参数说明文档</a>，XGBoost 版本：0.72。</p>
+<p>在运行 XGBoost 之前，必须设置三种类型参数：通用参数(General Parameters)、提升参数(Booster Parameters)和任务参数(Task Parameters)。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/05/xgboost-parameter-description/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -883,10 +482,14 @@
 
       
         
-          
-            <p><a href="http://xgboost.readthedocs.io/en/latest/" target="_blank" rel="external">XGBoost官方文档</a></p>
-
-          
+          <p><a href="http://xgboost.readthedocs.io/en/latest/" target="_blank" rel="external">XGBoost官方文档</a><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/04/xgboost-using-tutorial/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1005,7 +608,7 @@
       
         
           
-            
+            <a id="more"></a>
           
         
       
@@ -1124,26 +727,14 @@
 
       
         
-          
-            <p>macOS Sierra (10.12.3)编译Faiss<br>最近Facebook AI实验室开源了相似性搜索库Faiss。<br>Faiss是用于有效的相似性搜索（similarity search）和稠密矢量聚类（clustering of dense vectors）的库。它包含了可在任何大小向量集合里进行搜索的算法，向量集合的大小甚至可达到RAM容纳不下的地步。另外，它还包含了用于评估和参数调优的支持代码。Faiss用C++编写，有Python/numpy的完整包装。其中最有用的一些算法则在GPU上实现。</p>
-<p>机器上没有安装HomeBrew的，请参考让Mac也能拥有apt-get类似的功能——Brew。</p>
-<p>下面，我们介绍一下如何在macOS Sierra (10.12.3)上编译Faiss。</p>
-<p>1.下载Faiss源代码</p>
-<p>Shell</p>
-<p>$ git clone <a href="https://github.com/facebookresearch/faiss.git" target="_blank" rel="external">https://github.com/facebookresearch/faiss.git</a><br>1<br>$ git clone <a href="https://github.com/facebookresearch/faiss.git" target="_blank" rel="external">https://github.com/facebookresearch/faiss.git</a><br>2.安装编译需要的工具</p>
-<p>Shell</p>
-<p>$ brew install llvm<br>1<br>$ brew install llvm<br>3.修改调整源代码，准备编译</p>
-<p>Shell</p>
-<p>$ cd faiss<br>$ cp example_makefiles/makefile.inc.Mac.brew makefile.inc<br>1<br>2<br>$ cd faiss<br>$ cp example_makefiles/makefile.inc.Mac.brew makefile.inc<br>4.编译</p>
-<p>Shell</p>
-<p>$ make all<br>1<br>$ make all<br>5.执行测试用例</p>
-<p>Shell</p>
-<p>#需要手工指定动态库的搜索路径，否则会提示“dyld: Library not loaded: @rpath/libomp.dylib”，导致进程无法启动</p>
-<p>$ export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/opt/llvm/lib/<br>$ ./tests/demo_ivfpq_indexing<br>1<br>2<br>3<br>4</p>
-<p>#需要手工指定动态库的搜索路径，否则会提示“dyld: Library not loaded: @rpath/libomp.dylib”，导致进程无法启动</p>
-<p>$ export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/opt/llvm/lib/<br>$ ./tests/demo_ivfpq_indexing<br>其余的示例，参考源代码中的INSTALL文件中的内容即可。</p>
-
-          
+          <p>macOS Sierra (10.12.3)编译Faiss<br>最近Facebook AI实验室开源了相似性搜索库Faiss。<br>Faiss是用于有效的相似性搜索（similarity search）和稠密矢量聚类（clustering of dense vectors）的库。它包含了可在任何大小向量集合里进行搜索的算法，向量集合的大小甚至可达到RAM容纳不下的地步。另外，它还包含了用于评估和参数调优的支持代码。Faiss用C++编写，有Python/numpy的完整包装。其中最有用的一些算法则在GPU上实现。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/28/faiss-install-tutorial/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1261,17 +852,18 @@
 
       
         
-          
-            <p>标签说明<br>标签方案中通常都使用一些简短的英文字符[串]来编码。</p>
+          <p>标签说明<br>标签方案中通常都使用一些简短的英文字符[串]来编码。</p>
 <p>标签是打在token上的。</p>
 <p>对于英文，token可以是一个单词（e.g. awesome），也可以是一个字符（e.g. a）。</p>
 <p>对于中文，token可以是一个词语（分词后的结果），也可以是单个汉字字符。</p>
-<p>为便于说明，以下都将token试作等同于字符。</p>
-<p>标签列表如下：</p>
-<p>B，即Begin，表示开始<br>I，即Intermediate，表示中间<br>E，即End，表示结尾<br>S，即Single，表示单个字符<br>O，即Other，表示其他，用于标记无关字符<br>常见标签方案<br>基于上面的标签列表，通过选择该列表的子集，可以得到不同的标签方案。同样的标签列表，不同的使用方法，也可以得到不同的标签方案。</p>
-<p>分词、词性标注任务常用的序列表示法有IOB/BIO和start/end。<br>IOB表示法可以分为IOB1，IOB2，IOE1，IOE2四种。四种表示法大同小异，相同点是「I」代表当前词在一个组块中，「O」表示当前的词不在任意一个组块中。不同点是四种表示法对组块的开始或者结束的表达方式所有区别。具体如下：<br>IOB1: 标签I用于文本块中的字符，标签O用于文本块之外的字符，标签B用于当前词是紧跟前一个组块的新组块的开始。非紧邻的新组块开始标记位I。<br>例如：<br>序 I<br>列 I<br>标 B<br>注 I<br>中 O<br>的 O<br>几 O<br>种 O<br>标 I<br>签 I<br>方 B<br>案 I<br>IOB2: 每个文本块都以标签B开始，除此之外，跟IOB1一样。<br>例如：<br>序 B<br>列 I<br>标 B<br>注 I<br>中 O<br>的 O<br>几 O<br>种 O<br>标 B<br>签 I<br>方 B<br>案 I<br>IOE1: 标签I用于独立文本块中，标签E仅用于同类型文本块连续的情况，假如有两个同类型的文本块，那么标签E会被打在第一个文本块的最后一个字符。<br>例如：<br>序 I<br>列 E<br>标 I<br>注 I<br>中 O<br>的 O<br>几 O<br>种 O<br>标 I<br>签 E<br>方 I<br>案 I<br>IOE2: 每个文本块都以标签E结尾，无论该文本块有多少个字符，除此之外，跟IOE1一样。<br>例如：<br>序 I<br>列 E<br>标 I<br>注 E<br>中 O<br>的 O<br>几 O<br>种 O<br>标 I<br>签 E<br>方 I<br>案 E<br>start/end （也叫SBEIO、IOBES）: 是另一个类型的表示法，该表示法表达的更为细致，包含了全部的5种标签，文本块由单个字符组成的时候，使用S标签来表示，由一个以上的字符组成时，首字符总是使用B标签，尾字符总是使用E标签，中间的字符使用I标签。<br>例如：<br>广 B<br>东 I<br>省 E<br>的 O<br>别 B<br>称 E<br>粤 S<br>其中最常用的是IOB2、IOBS、IOBES。</p>
-
-          
+<p>为便于说明，以下都将token试作等同于字符。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/02/sequence-label-Label-scheme/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1390,7 +982,7 @@
       
         
           
-            
+            <a id="more"></a>
           
         
       
@@ -1531,21 +1123,16 @@
 
       
         
-          
-            <p>首先我们还是看一下fasttext的目录。所有的C++代码都在src中。然后就是一些linux脚本文件</p>
+          <p>首先我们还是看一下fasttext的目录。所有的C++代码都在src中。然后就是一些linux脚本文件</p>
 <p>我们进入src目录看看有哪些C++文件。从上往下看，<br>args是专门存储超参的类。<br>dictionary是词典类，构建存储词典，支持把单词转成id。<br>fasttext是训练测试等的核心文件，会调用model进行词向量文本向量的训练。<br>main是主函数负责接受超参转成args类，根据不同目的调用不同的方法。<br>剩下的matrix，vector等文件都是辅助fasttext，model以及dictionary词典的。</p>
 <p>fasttext中文本向量就是词向量的平均，得到文本向量并进行分类的代码和word2vec中的CBOW非常像。我们先看一下classification-example.sh。这个脚本文件会对来自于dbpedia的文本进行分类。分类前要对文本进行预处理并且打乱。</p>
-<h1 id="参数方面"><a href="#参数方面" class="headerlink" title="参数方面"></a>参数方面</h1><ul>
-<li>loss function选用hs（hierarchical softmax）要比ns(negative sampling) 训练速度要快很多倍，并且准确率也更高。</li>
-<li>wordNgrams 默认为1，设置为2以上可以明显提高准确率。</li>
-<li>如果词数不是很多，可以把bucket设置的小一点，否则预留会预留太多bucket使模型太大。</li>
-</ul>
-<p>因为facebook提供的只是C++版本的代码，上github已经有封装的python接口。用起来特别方便，觉得还不能满足自己的使用要求，修改源码也非常方便。<br>所以对于文本分类，先用fasttext做一个简单的baseline是很适合的。</p>
-<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><p><img src="/images/fasttext/fasttext-arch.png" alt="fastText的代码结构以及各模块的功能图"></p>
-<h1 id="训练数据格式"><a href="#训练数据格式" class="headerlink" title="训练数据格式"></a>训练数据格式</h1><p>训练数据格式为一行一个句子，每个词用空格分割，如果一个词带有前缀 <strong>label</strong>，那么它就作为一个类标签，在文本分类时使用，这个前缀可以通过-label参数自定义。训练文件支持 UTF-8 格式。</p>
-<h1 id="fasttext-模块"><a href="#fasttext-模块" class="headerlink" title="fasttext 模块"></a>fasttext 模块</h1><p>fasttext 是最顶层的模块，它的主要功能是训练和预测，首先是训练功能的调用路径，第一个函数是 train，它的主要作用是 初始化参数，启动多线程训练。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/18/fasttext-source-code-analysis/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1685,57 +1272,16 @@
 
       
         
-          
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong><code>fastText</code></strong> 是 <strong><code>Facebook 2016</code></strong> 年开源的一个词向量计算以及文本分类的工具，word2vec 的作者 mikolov 也参与了制作，目前已经引起了广泛的关注。这个工具包的 <a href="https://github.com/facebookresearch/fastText" target="_blank" rel="external">GitHub链接</a>，该项目是 C++ 写的，和之前的项目相比这个项目更加专业，涉及的内容也比之前的项目多很多。在学术上没有什么创新点，但是好处就是模型简单，性能比肩深度学习而且速度更快，用起来很顺手，做出来的结果也可以达到上线使用的标准。该工具其实是由两部分组成，一部分是高效文本分类，一部分是词向量学习。该工具的理论基础是以下两篇论文：</p>
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong><code>fastText</code></strong> 是 <strong><code>Facebook 2016</code></strong> 年开源的一个词向量计算以及文本分类的工具，word2vec 的作者 mikolov 也参与了制作，目前已经引起了广泛的关注。这个工具包的 <a href="https://github.com/facebookresearch/fastText" target="_blank" rel="external">GitHub链接</a>，该项目是 C++ 写的，和之前的项目相比这个项目更加专业，涉及的内容也比之前的项目多很多。在学术上没有什么创新点，但是好处就是模型简单，性能比肩深度学习而且速度更快，用起来很顺手，做出来的结果也可以达到上线使用的标准。该工具其实是由两部分组成，一部分是高效文本分类，一部分是词向量学习。该工具的理论基础是以下两篇论文：</p>
 <blockquote>
-<p><a href="https://arxiv.org/pdf/1607.01759.pdf" target="_blank" rel="external">Bag of Tricks for Efficient Text Classification</a></p>
-</blockquote>
-<p>这篇论文提出了 fastText 算法，介绍高效文本分类技巧，该算法实际上是将目前用来算 word2vec 的 CBOW 模型架构做了个小修改，原先使用一个词的上下文的所有词向量之和来预测词本身，现在改为用一段短文本的词向量之和来对文本进行分类。在生成文本向量的时候用到了ngram的信息，用这个文档所有单词的词向量的平均预测标签。对这种简单的任务，用简单的模型效果就不错了。具体方法就是把句子每个 word 的 vector 求平均，然后直接用简单的LR分类就行。fastText 的 fast 指的是这个。 这个 <a href="https://www.zhihu.com/question/48345431/answer/111513229" target="_blank" rel="external">知乎答案</a> 总结得挺好的，取平均其实算 Deep Learning 的 average pooling。</p>
-<p> <img src="/images/fasttext/architecture" alt="fastText文本分类架构图"></p>
-<blockquote>
-<p><a href="https://arxiv.org/pdf/1607.04606.pdf" target="_blank" rel="external">Enriching Word Vectors with Subword Information</a></p>
-</blockquote>
-<p>这篇论文使用 subword 信息，也就是连续的字符信息来丰富词汇向量，提出了用 subword 的向量之和来代替简单的词向量的方法，从而使得词的微变形关系也能映射到嵌入空间中，以解决简单 word2vec 无法处理同一词的不同形态的问题。每个词被看做是 n-gram 字母串包。为了区分前后缀情况，”&lt;”， “&gt;” 符号被加到了词的前后端。除了词的子串外，词本身也被包含进了 n-gram 字母串包。以  where 为例，n=3 的情况下，其子串分别为<br>&lt;wh, whe, her, ere, re>，以及其本身 &lt;where><br>注意，这里的 her 与单词 &lt; her> 是不同的。fastText 中提供了 maxn 这个参数来确定 subword 的大小。词向量学习部分可说是一个 word2vec 优化版，用了 subword 的信息，速度是不会提升的，只是效果方面的改进。这个改进能提升模型对 morphology 的效果, 即”字面上”相似的词语 distance 也会小一些. 有人在question-words 数据集上跑过 fastText 和 gensim-word2vec 的对比, 结果在 Jupyter Notebook Viewer .可以看出fastText在 “adjective-to-adverb”, “opposite”之类的数据集上效果还是相当好的. 不过像 “family” 这样的字面上不一样的数据集, fastText效果反而不如 gensim-word2vec.推广到中文上, 结果也类似. “字面上”相似对 vector 的影响非常大. 一个简单的例子是, gensim 训练的模型中与”交易”最相似的是”买卖”, 而 fastText 的结果是”交易法”注：在代码实现中，对于中文是不计算 subword 的。</p>
-<h1 id="fastText-用于文本分类"><a href="#fastText-用于文本分类" class="headerlink" title="fastText 用于文本分类"></a>fastText 用于文本分类</h1><p>fastText文本分类模型 = word2vec 中 CBOW 模型 + h-softmax 的灵活使用。<br>模型输入一个词的序列（一段文本或者一句话)，输出这个词序列属于不同类别的概率。<br>序列中的词和词组组成特征向量，特征向量通过线性变换映射到中间层，中间层再映射到标签。fastText 在预测标签时使用了非线性激活函数，但在中间层不使用非线性激活函数。对于有大量类别的数据集，fastText 使用了一个分层分类器（而非扁平式架构）。不同的类别被整合进树形结构中（想象下二叉树而非 列表）。在某些文本分类任务中类别很多，计算线性分类器的复杂度高。为了减少了训练复杂性和测试文本分类器的时间，fastText 利用了类别（class）不均衡这个事实（一些类别出现次数比其他的更多），使用层次 Softmax 技巧。层次 Softmax 通过使用 Huffman 算法建立用于表征类别的树形结构，对标签进行编码，频繁出现的类别的深度要比不频繁出现类别的深度要小，这也使得进一步的计算效率更高。fastText 能在五分钟内将50万个句子分成超过30万个类别。</p>
-<blockquote>
-<p>注：</p>
-<ol>
-<li>fastText 只能做多类别分类，从多个类别里预测出一个类。</li>
-<li>文本分类单层网络就够了，非线性的问题用多层的。fasttext只有1层神经网络，属于所谓的 shallow learning，比deep learning 模型的优点是训练和预测速度极快，但是 fasttext 的效果并不差，在工业界这点非常重要。</li>
-</ol>
-</blockquote>
-<h1 id="fastText-用于词向量表征"><a href="#fastText-用于词向量表征" class="headerlink" title="fastText 用于词向量表征"></a>fastText 用于词向量表征</h1><p>在 fastText 中一个低维度向量与每个单词都相关。隐藏表征在不同类别所有分类器中进行共享，使得文本信息在不同类别中能够共同使用。常用的特征是词袋模型( Bag-of-Words )，但词袋模型忽略了词序信息，因此 fastText 还加入了 n-gram ，n-gram 来将局部词序考虑在内，特征这对很多文本分类问题来说十分重要。<br>“我 爱 你” 这句话中的词袋模型特征是 “我”，“爱”, “你”。这些特征和句子 “你 爱 我” 的特征是一样的。如果加入 2-gram，第一句话的特征还有 “我-爱” 和 “爱-你”，这两句话 “我 爱 你” 和 “你 爱 我” 就能区别开来了。当然，为了提高效率，我们需要过滤掉低频的 n-gram。</p>
-<p>举例来说：fastText 能够学会“男孩”、“女孩”、“男人”、“女人”指代的是特定的性别，并且能够将这些数值存在相关文档中。然后，当某个程序在提出一个用户请求（假设是“我女友现在在儿？”），它能够马上在 fastText 生成的文档中进行查找并且理解用户想要问的是有关女性的问题。 </p>
-<blockquote>
-<p>facebook 公开了90种语言的 Pre-trained word vectors(词向量维度为300维)，<a href="https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md" target="_blank" rel="external">点击了解更多详情</a> 。</p>
-</blockquote>
-<h1 id="fastText词向量优势"><a href="#fastText词向量优势" class="headerlink" title="fastText词向量优势"></a>fastText词向量优势</h1><ol>
-<li>适合大型数据+高效的训练速度：能够训练模型“在使用标准多核CPU的情况下10分钟内处理超过10亿个词汇”，特别是与深度模型对比，fastText 能将训练时间由数天缩短到几秒钟。使用一个标准多核 CPU，得到了在10分钟内训练完超过10亿词汇量模型的结果。此外，fastText 还能在五分钟内将50万个句子分成超过30万个类别。</li>
-<li>支持多语言表达：利用其语言形态结构，fastText能够被设计用来支持包括英语、德语、西班牙语、法语以及捷克语等多种语言。它还使用了一种简单高效的纳入子字信息的方式，在用于像捷克语这样词态丰富的语言时，这种方式表现得非常好，这也证明了精心设计的字符 n-gram 特征是丰富词汇表征的重要来源。fastText的性能要比时下流行的word2vec工具明显好上不少，也比其他目前最先进的词态词汇表征要好。 </li>
-<li>fastText 专注于文本分类，在许多标准问题上实现当下最好的表现（例如文本倾向性分析或标签预测）。fastText 与基于深度学习方法的 Char-CNN 以及 VDCNN 对比：<br><img src="/images/fasttext/test_accuracy.png" alt="fastText与其他模型的实验结果对比图"> </li>
-<li>比word2vec更考虑了同一词的不同形态的问题，比如 fastText 的词向量学习能够考虑 english-born 和 british-born 之间有相同的后缀，但 word2vec 却不能。 </li>
-</ol>
-<h1 id="fastText-vs-word2vec"><a href="#fastText-vs-word2vec" class="headerlink" title="fastText vs word2vec"></a>fastText vs word2vec</h1><h2 id="相同之处"><a href="#相同之处" class="headerlink" title="相同之处"></a>相同之处</h2><ol>
-<li>图模型结构很像，都是采用 embedding 向量的形式，得到 word 的隐向量表达。</li>
-<li>采用很多相似的优化方法，比如使用 Hierarchical softmax 优化训练和预测中的打分速度。</li>
-<li>训练词向量时，两者都是无监督算法。输入层是 context window 内的 term。输出层对应的是每一个 term，计算某 term 的概率最大；</li>
-<li>在使用层次softmax的时候，huffman 树叶子节点处是训练语料里所有词的向量。</li>
-</ol>
-<h2 id="不同之处"><a href="#不同之处" class="headerlink" title="不同之处"></a>不同之处</h2><ol>
-<li>fastText 用于学习词向量时，加入了词的 subword 信息和 n-gram 信息。 </li>
-<li>fastText 用于文本分类时，是有监督算法。输入层对应整个 sentence 的内容，包括term，也包括 n-gram 的内容。输出层对应的是分类的 label。huffmax树叶子节点处是每一个类别标签的词向量</li>
-<li>fastText 用于文本分类时，遍历分类树的所有叶节点，找到概率最大的 label（一个或者 N 个）。</li>
-</ol>
-<h1 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h1><ul>
-<li>loss function选用hs（hierarchical softmax）要比ns(negative sampling) 训练速度要快很多倍，并且准确率也更高。</li>
-<li>wordNgrams 默认为1，设置为2以上可以明显提高准确率。</li>
-<li>如果词数不是很多，可以把bucket设置的小一点，否则预留会预留太多bucket使模型太大。</li>
-</ul>
-<p>因为facebook提供的只是C++版本的代码，上github已经有封装的python接口。用起来特别方便，觉得还不能满足自己的使用要求，修改源码也非常方便。<br>所以对于文本分类，先用fasttext做一个简单的baseline是很适合的。</p>
-<h1 id="fastText-分类示例"><a href="#fastText-分类示例" class="headerlink" title="fastText 分类示例"></a>fastText 分类示例</h1><p>classification-example.sh 示例说明，包含训练、测试和预测示例。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/usr/bin/env bash</div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#</span> Copyright (c) 2016-present, Facebook, Inc.</div><div class="line"><span class="meta">#</span> All rights reserved.</div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#</span> This source code is licensed under the BSD-style license found in the</div><div class="line"><span class="meta">#</span> LICENSE file in the root directory of this source tree. An additional grant</div><div class="line"><span class="meta">#</span> of patent rights can be found in the PATENTS file in the same directory.</div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#</span> 对文本进行预处理并且打乱</div><div class="line">myshuf() &#123;</div><div class="line">  perl -MList::Util=shuffle -e 'print shuffle(&lt;&gt;);' "$@";</div><div class="line">&#125;</div><div class="line"></div><div class="line">normalize_text() &#123;</div><div class="line">  tr '[:upper:]' '[:lower:]' | sed -e 's/^/__label__/g' | \</div><div class="line">    sed -e "s/'/ ' /g" -e 's/"//g' -e 's/\./ \. /g' -e 's/&lt;br \/&gt;/ /g' \</div><div class="line">        -e 's/,/ , /g' -e 's/(/ ( /g' -e 's/)/ ) /g' -e 's/\!/ \! /g' \</div><div class="line">        -e 's/\?/ \? /g' -e 's/\;/ /g' -e 's/\:/ /g' | tr -s " " | myshuf</div><div class="line">&#125;</div><div class="line"><span class="meta">#</span> 然后就是下载数据集，normalize数据集，normalize_text()包括了myshuf。训练集是dbpedia.train，测试集是dbpedia.test</div><div class="line">RESULTDIR=result</div><div class="line">DATADIR=data</div><div class="line"></div><div class="line">mkdir -p "$&#123;RESULTDIR&#125;"</div><div class="line">mkdir -p "$&#123;DATADIR&#125;"</div><div class="line"></div><div class="line">if [ ! -f "$&#123;DATADIR&#125;/dbpedia.train" ]</div><div class="line">then</div><div class="line">  wget -c "https://github.com/le-scientifique/torchDatasets/raw/master/dbpedia_csv.tar.gz" -O "$&#123;DATADIR&#125;/dbpedia_csv.tar.gz"</div><div class="line">  tar -xzvf "$&#123;DATADIR&#125;/dbpedia_csv.tar.gz" -C "$&#123;DATADIR&#125;"</div><div class="line">  cat "$&#123;DATADIR&#125;/dbpedia_csv/train.csv" | normalize_text &gt; "$&#123;DATADIR&#125;/dbpedia.train"</div><div class="line">  cat "$&#123;DATADIR&#125;/dbpedia_csv/test.csv" | normalize_text &gt; "$&#123;DATADIR&#125;/dbpedia.test"</div><div class="line">fi</div><div class="line"><span class="meta">#</span> 编译C++代码</div><div class="line">make</div><div class="line"><span class="meta">#</span> 根据训练集训练fasttext，输出训练的结果</div><div class="line">./fasttext supervised -input "$&#123;DATADIR&#125;/dbpedia.train" -output "$&#123;RESULTDIR&#125;/dbpedia" -dim 10 -lr 0.1 -wordNgrams 2 -minCount 1 -bucket 10000000 -epoch 5 -thread 4</div><div class="line"><span class="meta">#</span> 根据训练的结果以及测试集进行测试，得到准确率</div><div class="line">./fasttext test "$&#123;RESULTDIR&#125;/dbpedia.bin" "$&#123;DATADIR&#125;/dbpedia.test"</div><div class="line"><span class="meta">#</span> 根据训练的结果以及测试集，输出测试集的结果</div><div class="line">./fasttext predict "$&#123;RESULTDIR&#125;/dbpedia.bin" "$&#123;DATADIR&#125;/dbpedia.test" &gt; "$&#123;RESULTDIR&#125;/dbpedia.test.predict"</div></pre></td></tr></table></figure></p>
-<h1 id="fastText-词向量示例"><a href="#fastText-词向量示例" class="headerlink" title="fastText 词向量示例"></a>fastText 词向量示例</h1><p>word-vector-example.sh 示例说明，包括用skip-gram模式训练和评估词向量的示例。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/usr/bin/env bash</div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#</span> Copyright (c) 2016-present, Facebook, Inc.</div><div class="line"><span class="meta">#</span> All rights reserved.</div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#</span> This source code is licensed under the BSD-style license found in the</div><div class="line"><span class="meta">#</span> LICENSE file in the root directory of this source tree. An additional grant</div><div class="line"><span class="meta">#</span> of patent rights can be found in the PATENTS file in the same directory.</div><div class="line"><span class="meta">#</span></div><div class="line"></div><div class="line">RESULTDIR=result</div><div class="line">DATADIR=data</div><div class="line"></div><div class="line">mkdir -p "$&#123;RESULTDIR&#125;"</div><div class="line">mkdir -p "$&#123;DATADIR&#125;"</div><div class="line"><span class="meta">#</span> 下载语料</div><div class="line">if [ ! -f "$&#123;DATADIR&#125;/fil9" ]</div><div class="line">then</div><div class="line">  wget -c http://mattmahoney.net/dc/enwik9.zip -P "$&#123;DATADIR&#125;"</div><div class="line">  unzip "$&#123;DATADIR&#125;/enwik9.zip" -d "$&#123;DATADIR&#125;"</div><div class="line">  perl wikifil.pl "$&#123;DATADIR&#125;/enwik9" &gt; "$&#123;DATADIR&#125;"/fil9</div><div class="line">fi</div><div class="line"><span class="meta">#</span> 下载测试集</div><div class="line">if [ ! -f "$&#123;DATADIR&#125;/rw/rw.txt" ]</div><div class="line">then</div><div class="line">  wget -c https://nlp.stanford.edu/~lmthang/morphoNLM/rw.zip -P "$&#123;DATADIR&#125;"</div><div class="line">  unzip "$&#123;DATADIR&#125;/rw.zip" -d "$&#123;DATADIR&#125;"</div><div class="line">fi</div><div class="line"><span class="meta">#</span> 编译源代码</div><div class="line">make</div><div class="line"><span class="meta">#</span> 用skipgram模式进行训练</div><div class="line">./fasttext skipgram -input "$&#123;DATADIR&#125;"/fil9 -output "$&#123;RESULTDIR&#125;"/fil9 -lr 0.025 -dim 100 \</div><div class="line">  -ws 5 -epoch 1 -minCount 5 -neg 5 -loss ns -bucket 2000000 \</div><div class="line">  -minn 3 -maxn 6 -thread 4 -t 1e-4 -lrUpdateRate 100</div><div class="line"></div><div class="line">cut -f 1,2 "$&#123;DATADIR&#125;"/rw/rw.txt | awk '&#123;print tolower($0)&#125;' | tr '\t' '\n' &gt; "$&#123;DATADIR&#125;"/queries.txt</div><div class="line"></div><div class="line">cat "$&#123;DATADIR&#125;"/queries.txt | ./fasttext print-word-vectors "$&#123;RESULTDIR&#125;"/fil9.bin &gt; "$&#123;RESULTDIR&#125;"/vectors.txt</div><div class="line"><span class="meta">#</span> 评估训练的词向量</div><div class="line">python eval.py -m "$&#123;RESULTDIR&#125;"/vectors.txt -d "$&#123;DATADIR&#125;"/rw/rw.txt</div></pre></td></tr></table></figure></p>
-
-          
+<p><a href="https://arxiv.org/pdf/1607.01759.pdf" target="_blank" rel="external">Bag of Tricks for Efficient Text Classification</a><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/18/fasttext-tools-using-tutorial/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1853,32 +1399,14 @@
 
       
         
-          
-            <p>基于统计的词向量模型以基于SVD分解技术的LSA模型为代表，通过构建一个共现矩阵得到隐层的语义向量，充分利用了全局的统计信息。然而这类模型得到的语义向量往往很难把握词与词之间的线性关系（例如著名的King、Queen、Man、Woman等式）。基于预测的词向量模型则以基于神经网络的Skip-gram模型为代表，通过预测一个词出现在上下文里的概率得到embedding词向量。这类模型的缺陷在于其对统计信息的利用不充分，训练时间与语料大小息息相关。不过，其得到的词向量能够较好地把握词与词之间的线性关系，因此在很多任务上的表现都要略优于SVD模型。既然两种模型各有优劣，那么能不能二者各取其长，构造一个更强大的词向量模型呢？这就是接下来要介绍的GloVe模型。<br>GloVe是斯坦福大学提出的一种新的词矩阵生成的方法，GloVe全称应该是 Global Vectors for Word Representation，综合运用词的全局统计信息和局部统计信息来生成语言模型和词的向量化表示。<a href="http://nlp.stanford.edu/projects/glove/" target="_blank" rel="external">官方主页链接</a>，上面还有训练好的模型可以下载。<br>在GloVe的原始论文里，作者首先分析了Skip-gram模型能够挖掘出词与词之间线性关系的背后成因，然后通过在共现矩阵上构造相似的条件，得到一个基于全局信息的词向量模型——GloVe模型。<br>与Skip-gram模型相比，GloVe在充分利用了语料库的全局统计信息的同时，也提高了词向量在大语料上的训练速度（一个共现矩阵的遍历要比整个语料库的遍历容易的多）。而与传统的SVD技术相比，SGD的训练也更加简单高效。同时，GloVe得到的词向量更能把握住词与词之间的线性关系。<br>GloVe综合了LSA、CBOW的优点，训练更快、对于大规模语料算法的扩展性也很好、在小语料或者小向量上性能表现也很好。<br>和绝大多数的词向量不同，glove的目标是通过训练词向量和上下文向量，使得它们能够重构共现矩阵。<br>需要注意的是，在运行glove时，对内存要求比较高，1.4G的语料，20G的内存都无法运行，一直死机；后面降到300M的语料，20G的内存基本上能够运行。而gensim中的word2vec，对于1.4G的语料，20G完全可以运行，而且只需要几个小时就能跑出结果。</p>
-<p>glove在三元组上面进行训练, glove是根据每个三元组去更新一次词向量和上下文向量<br>GloVe训练参数:</p>
-<ul>
-<li>最佳的向量维度：300左右，之后变化比较轻微</li>
-<li>对于GloVe向量来说最佳的窗口长度是8</li>
-<li>训练迭代次数越大，对于GloVe来说确实有助于达到更好的效果<br><img src="/images/glove/paper_figure3.png" alt="在不同语料库训练的300维向量在类比任务上的精度对比"></li>
-<li>更多的数据有助于帮助提高训练精度<br><img src="/images/glove/paper_figure4.png" alt="GloVe与CBOW、Skip-Gram的对比"></li>
-</ul>
-<p><a href="https://nlp.stanford.edu/pubs/glove.pdf" target="_blank" rel="external">论文链接</a></p>
-<p>GloVe实现：<br>目前开源的有C语言版本、Python版本和R语言版本。<br>python：python-glove</p>
-<p>Python版本<a href="https://github.com/maciejkula/glove-python" target="_blank" rel="external">GitHub地址</a><br>安装<br>pip install glove_python</p>
-<p><strong><code>GloVe</code></strong>之<strong><code>C</code></strong>语言版本<a href="https://github.com/stanfordnlp/GloVe" target="_blank" rel="external">GitHub地址</a><br>跑在linux下<br>那就只能用C的代码训练，然后再用python来处理结果。让人欣喜的是，GloVe训练的结果，是可以用gensim里面word2vec的load直接加载并且使用的(将参数write_header设置为1，会在 <strong><code>vectors.txt</code></strong> 的首行添加&lt;词表大小&gt;/&lt;词向量大小&gt;)，那就简单了。</p>
-<h1 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git clone http://github.com/stanfordnlp/glove</div></pre></td></tr></table></figure>
-<h1 id="切换到glove目录"><a href="#切换到glove目录" class="headerlink" title="切换到glove目录"></a>切换到glove目录</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> cd glove</div></pre></td></tr></table></figure>
-<p>首先先参考 <strong><code>README.txt</code></strong>，里面主要介绍这个程序包含了四部分子程序，按步骤分别是<strong><code>vocab_count</code></strong>、<strong><code>cooccur</code></strong>、<strong><code>shuffle</code></strong>、<strong><code>glove</code></strong>。</p>
-<h2 id="vocab-count"><a href="#vocab-count" class="headerlink" title="vocab_count"></a>vocab_count</h2><p>用于统计文本中的词的词频，生成 <strong><code>vocab.txt</code></strong>，每一行为：词  词频。</p>
-<h2 id="cooccur"><a href="#cooccur" class="headerlink" title="cooccur"></a>cooccur</h2><p>用于统计词与词的共现，目测类似与 <strong><code>word2vec</code></strong> 的窗口内的任意两个词，生成二进制文件 <strong><code>cooccurrence.bin</code></strong>。</p>
-<h2 id="shuffle"><a href="#shuffle" class="headerlink" title="shuffle"></a>shuffle</h2><p>对 <strong><code>cooccurrence.bin</code></strong>中的共现结果重新整理。对于大文件，文件自动分割成块，每个块 <strong><code>shuffle</code></strong> 后再合并在一起，生成二进制文件 <strong><code>cooccurrence.shuf.bin</code></strong>。</p>
-<h2 id="glove"><a href="#glove" class="headerlink" title="glove"></a>glove</h2><p><strong><code>GloVe</code></strong> 算法的训练模型，使用之前生成的<strong><code>vocab.txt</code></strong>和 <strong><code>cooccurrence.shuf.bin</code></strong>，最终会输出词典中词对应的词向量 <strong><code>vectors.txt</code></strong>和词向量二进制文件 <strong><code>vectors.bin</code></strong>。（</p>
-<h1 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> make</div></pre></td></tr></table></figure>
-<p>确保安装了 <strong><code>gcc</code></strong> ，生成一个 <strong><code>build</code></strong> 的文件夹</p>
-<h1 id="Demo测试"><a href="#Demo测试" class="headerlink" title="Demo测试"></a><strong><code>Demo</code></strong>测试</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> ./demo.sh</div></pre></td></tr></table></figure>
-<p><a href="https://github.com/stanfordnlp/GloVe" target="_blank" rel="external">GitHub地址</a></p>
-
-          
+          <p>基于统计的词向量模型以基于SVD分解技术的LSA模型为代表，通过构建一个共现矩阵得到隐层的语义向量，充分利用了全局的统计信息。然而这类模型得到的语义向量往往很难把握词与词之间的线性关系（例如著名的King、Queen、Man、Woman等式）。基于预测的词向量模型则以基于神经网络的Skip-gram模型为代表，通过预测一个词出现在上下文里的概率得到embedding词向量。这类模型的缺陷在于其对统计信息的利用不充分，训练时间与语料大小息息相关。不过，其得到的词向量能够较好地把握词与词之间的线性关系，因此在很多任务上的表现都要略优于SVD模型。既然两种模型各有优劣，那么能不能二者各取其长，构造一个更强大的词向量模型呢？这就是接下来要介绍的GloVe模型。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/11/glove-tools-using-tutorial/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2018,26 +1546,18 @@
 
       
         
-          
-            <p>word2vec 是 Google 于 2013 年开源推出的一个用于获取词向量的工具包，它简单、高效，因此引起了很多人的关注。word2vec 的作者 Tomas Mikolov 在以下两篇论文介绍了相应的理论基础：</p>
+          <p>word2vec 是 Google 于 2013 年开源推出的一个用于获取词向量的工具包，它简单、高效，因此引起了很多人的关注。word2vec 的作者 Tomas Mikolov 在以下两篇论文介绍了相应的理论基础：</p>
 <blockquote>
 <p><a href="https://arxiv.org/pdf/1301.3781.pdf" target="_blank" rel="external">Efficient Estimation of Word Representations in Vector Space</a> </p>
 <p><a href="https://arxiv.org/pdf/1310.4546.pdf" target="_blank" rel="external">Distributed Representations of Words and Phrases and their Compositionality</a></p>
 </blockquote>
-<p>原始论文没有谈及太多算法细节，解释得不够清晰，因而在一定程度上增加了这个工具包的神秘感并没有中文。想了解一下 word2vec 的数学原理，推荐 peghoty 大神的系列博客<a href="http://blog.csdn.net/itplus/article/details/37969519" target="_blank" rel="external">《word2vec 中的数学原理详解》</a> ，博主也是通过阅读该系列博客学习 word2vec 中的数学原理和实现细节，在此推荐给大家。</p>
-<p>word2vec 就是“两个训练方案＋两个提速手段”，两两组合，因此也就有了四个备选的模型。</p>
-<h2 id="两个训练方案"><a href="#两个训练方案" class="headerlink" title="两个训练方案"></a>两个训练方案</h2><p>CBOW (Continuous Bag-of-Words Model) 和 Skip-gram（Continuous Skip-gram Model）。<br>结构如图所示：<br><img src="/images/word2vec/architectures" alt="word2vec的CBOW和Skip-gram结构图"></p>
-<p>两个模型都是只有三层，即输入层、映射层和输出层。<br>CBOW 可以理解为”将周围词叠加来预测当前次”，用上下文的词向量作为输入，映射层在所有的词间共享，输出层为一个分类器，目标是使当前词的概率最大。<br>Skip-gram 可以理解为”根据当前词分别预测周围词”，输入层为当前词向量，输出层是使得上下文的预测概率最大。训练采用SGD。<br>按理论来说，skip gram比cbow需要花window ~ 2 * window倍的时间。cbow是把2<em>window个词作为输入，一个词作为输出，这样构成训练样本。而skip gram相当于将这2 \</em> window个词拆成了2 * window个样本。</p>
-<h2 id="两个提速手段"><a href="#两个提速手段" class="headerlink" title="两个提速手段"></a>两个提速手段</h2><p>Hierarchical Softmax 和 Negative Sampling。<br>Hierarchical Softmax 是对softmax的简化，精度会比原生的softmax略差，但是预测概率的效率从O(|V|)降到O(log2|V|)，是word2vec中用于提高性能的一项关键技术。<br>Negative Sampling 是 NCE(Noise Contrastive Estimation) 的一个简化版本，目的是用来提高训练速度并改善所得词向量的质量。与Hierarchical Softmax不同，Negative Sampling 不再使用复杂的Huffman树，而是利用相对简单的随机负采样，达到大幅度提高性能。</p>
-<p>word2vec 将词的上下文关系嵌入到低维空间。更具体而言，word2vec 将词的上下文关系转换为分类关系，并以此同时训练词嵌入向量和 logistic regression 分类器。<br>逻辑回归logistic regression 是经典的线性分类模型。广义上而言，线性模型由三个部分组成， 1. 输入向量 2. 线性系数 3. 偏移(bias)，而 bias 可以进一步表示成线性系数。所以，二分类的线性分类问题可以表示为输入 $x$ 和系数 $w$ 的内积结果 $w^Tx$，结果的正负决定了数据的类别。分类器参数通过最小化损失函数 $l(y, w^Tx)$来完成，不同的损失函数定义了不同的分类模型。<br>logistic regression 也广泛地应用在多分类问题中，通过 softmax 函数计算数据属于每个类别的概率完成分类。因为分类神经网络的输出层通常也设定为 softmax 函数，所以多分类 lr 也可以表示为浅层神经网络。</p>
-<p>cbow 用上下文词向量的加和结果来预测其中心词汇。<br>skip-gram我们将词的上下文定义为以词 $w_i$ 为中心，窗口为 $k$ 前后范围内的词 $C<em>i = {w</em>{i-k}, w<em>{i-k+1}, …, w</em>{i-1}, w<em>{i+1}, … w</em>{i+k}}$。<br>skip-gram 将词之间的关系变成了 $|V|$ 多分类问题，其中 $|V|$ 是词库大小。每个词有两个变量 $x_i, w_i$，前者为词嵌入向量，后者是线性分类器的系数，在相关文章中又称为上下文向量。<br>skip-gram 用中心词汇来预测其上下文<br>针对多分类的计算优化word2vec 将上下文关系转化为多分类任务，进而训练逻辑回归模型，这里的类别数量是 $|V|$ 词库大小。通常的文本数据中，词库少则数万，多则百万，在训练中直接训练多分类逻辑回归并不现实。<br>word2vec [5] 中提供了两种针对大规模多分类问题的优化手段， negative sampling 和 hierarchical softmax。以 skip-gram 为例，中心词对上下文的词类是正面例子，对所有其它的词则是负面例子。在优化中，negative sampling 只更新少量负面类，从而减轻了计算量。hierarchical softmax 将词库表示成前缀树，从树根到叶子的路径可以表示为一系列二分类器，一次多分类计算的复杂度从 $|V|$ 降低到了树的高度。<br>嵌入技术将词的上下文关系嵌入到低维空间。word2vec 将词的局部上下文转化为了多分类任务，从而训练逻辑回归模型，并将逻辑回归模型中的输入部分作为词嵌入输出。<br>首先简单说一下word2vec的使用方式。word2vec的官方下载地址是 <a href="https://code.google.com/archive/p/word2vec/" target="_blank" rel="external">https://code.google.com/archive/p/word2vec/</a> 。到source里面找到download下载就可以。word2vec可以直接在linux上和macos上面运行，但是不能直接在windows上面运行，原因是windows没有pthread库。把pthread依赖去掉可以单线程跑，但是实在是太慢了。也可以安装这个库，但是比较麻烦，这里就不深入探讨了。</p>
-<h2 id="测试数据集"><a href="#测试数据集" class="headerlink" title="测试数据集"></a>测试数据集</h2><p>question-words.txt和question-phrases.txt是用来衡量词向量/短语向量质量的词类比（analogy）数据集。<br>question-words.txt每一行是四个单词，我们需要根据前三个单词推断出第四个单词是什么。每一行像这样：Berlin Germany London England。<br>question-phrases.txt数据集中是包含了短语的analogy问题，像这样：Jeff_Bezos Amazon Tim_Cook Apple</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>makefile文件对几个c语言文件进行编译生成可执行文件。<br>word2vec.c<br>这个工具包中最重要的文件就是word2vec.c。它读入语料然后训练得到词向量。其他的c文件实现了一些边角辅助功能。<br>word2phrase.c<br>会过滤一遍要训练的语料，识别出语料中哪些是短语（比如把Tim Cook识别成一个短语Tim_Cook），把短语当做一个新词，输出出去。<br>distance.c<br>的功能是输入一个单词，返回最接近的单词（比如给beijing返回shanghai，heilongjiang）以及它们的词向量和输入单词的词向量的Cosine夹角。<br>word-analogy.c<br>的功能是输入三个单词（比如wife king queen），返回第四个单词（比如husband）。<br>compute-accuracy.c的功能是定量的给出词向量在analogy数据集上面的准确率。</p>
-<p>1、word2vec<br>word2vec：与一般的共现计数不同，word2vec主要来预测单词周边的单词,在嵌入空间里相似度的维度可以用向量的减法来进行类别测试。</p>
-<p>弊端：</p>
-<p>1、对每个local context window单独训练，没有利用包含在global co-corrence矩阵中的统计信息<br>2、多义词处理乏力，因为使用了唯一词向量</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/05/word2vec-tools-using-tutorial/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

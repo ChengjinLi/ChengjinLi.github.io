@@ -79,7 +79,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/fasttext/architecture">
 <meta property="og:image" content="http://yoursite.com/images/fasttext/test_accuracy.png">
-<meta property="og:updated_time" content="2018-01-24T13:52:50.297Z">
+<meta property="og:updated_time" content="2018-11-19T13:32:52.878Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="词向量工具---fastText简介、使用教程及源码分析">
 <meta name="twitter:description" content="简介fastText 是 Facebook 2016 年开源的一个词向量计算以及文本分类的工具，word2vec 的作者 mikolov 也参与了制作，目前已经引起了广泛的关注。这个工具包的 GitHub链接，该项目是 C++ 写的，和之前的项目相比这个项目更加专业，涉及的内容也比之前的项目多很多。在学术上没有什么创新点，但是好处就是模型简单，性能比肩深度学习而且速度更快，用起来很顺手，做出来的结">
@@ -386,7 +386,7 @@
       
         <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong><code>fastText</code></strong> 是 <strong><code>Facebook 2016</code></strong> 年开源的一个词向量计算以及文本分类的工具，word2vec 的作者 mikolov 也参与了制作，目前已经引起了广泛的关注。这个工具包的 <a href="https://github.com/facebookresearch/fastText" target="_blank" rel="external">GitHub链接</a>，该项目是 C++ 写的，和之前的项目相比这个项目更加专业，涉及的内容也比之前的项目多很多。在学术上没有什么创新点，但是好处就是模型简单，性能比肩深度学习而且速度更快，用起来很顺手，做出来的结果也可以达到上线使用的标准。该工具其实是由两部分组成，一部分是高效文本分类，一部分是词向量学习。该工具的理论基础是以下两篇论文：</p>
 <blockquote>
-<p><a href="https://arxiv.org/pdf/1607.01759.pdf" target="_blank" rel="external">Bag of Tricks for Efficient Text Classification</a></p>
+<p><a href="https://arxiv.org/pdf/1607.01759.pdf" target="_blank" rel="external">Bag of Tricks for Efficient Text Classification</a><br><a id="more"></a></p>
 </blockquote>
 <p>这篇论文提出了 fastText 算法，介绍高效文本分类技巧，该算法实际上是将目前用来算 word2vec 的 CBOW 模型架构做了个小修改，原先使用一个词的上下文的所有词向量之和来预测词本身，现在改为用一段短文本的词向量之和来对文本进行分类。在生成文本向量的时候用到了ngram的信息，用这个文档所有单词的词向量的平均预测标签。对这种简单的任务，用简单的模型效果就不错了。具体方法就是把句子每个 word 的 vector 求平均，然后直接用简单的LR分类就行。fastText 的 fast 指的是这个。 这个 <a href="https://www.zhihu.com/question/48345431/answer/111513229" target="_blank" rel="external">知乎答案</a> 总结得挺好的，取平均其实算 Deep Learning 的 average pooling。</p>
 <p> <img src="/images/fasttext/architecture" alt="fastText文本分类架构图"></p>

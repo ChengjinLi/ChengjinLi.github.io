@@ -78,7 +78,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/glove/paper_figure3.png">
 <meta property="og:image" content="http://yoursite.com/images/glove/paper_figure4.png">
-<meta property="og:updated_time" content="2018-01-18T02:56:54.657Z">
+<meta property="og:updated_time" content="2018-11-19T13:32:57.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="词向量工具---GloVe使用教程">
 <meta name="twitter:description" content="基于统计的词向量模型以基于SVD分解技术的LSA模型为代表，通过构建一个共现矩阵得到隐层的语义向量，充分利用了全局的统计信息。然而这类模型得到的语义向量往往很难把握词与词之间的线性关系（例如著名的King、Queen、Man、Woman等式）。基于预测的词向量模型则以基于神经网络的Skip-gram模型为代表，通过预测一个词出现在上下文里的概率得到embedding词向量。这类模型的缺陷在于其对统">
@@ -361,7 +361,7 @@
       
 
       
-        <p>基于统计的词向量模型以基于SVD分解技术的LSA模型为代表，通过构建一个共现矩阵得到隐层的语义向量，充分利用了全局的统计信息。然而这类模型得到的语义向量往往很难把握词与词之间的线性关系（例如著名的King、Queen、Man、Woman等式）。基于预测的词向量模型则以基于神经网络的Skip-gram模型为代表，通过预测一个词出现在上下文里的概率得到embedding词向量。这类模型的缺陷在于其对统计信息的利用不充分，训练时间与语料大小息息相关。不过，其得到的词向量能够较好地把握词与词之间的线性关系，因此在很多任务上的表现都要略优于SVD模型。既然两种模型各有优劣，那么能不能二者各取其长，构造一个更强大的词向量模型呢？这就是接下来要介绍的GloVe模型。<br>GloVe是斯坦福大学提出的一种新的词矩阵生成的方法，GloVe全称应该是 Global Vectors for Word Representation，综合运用词的全局统计信息和局部统计信息来生成语言模型和词的向量化表示。<a href="http://nlp.stanford.edu/projects/glove/" target="_blank" rel="external">官方主页链接</a>，上面还有训练好的模型可以下载。<br>在GloVe的原始论文里，作者首先分析了Skip-gram模型能够挖掘出词与词之间线性关系的背后成因，然后通过在共现矩阵上构造相似的条件，得到一个基于全局信息的词向量模型——GloVe模型。<br>与Skip-gram模型相比，GloVe在充分利用了语料库的全局统计信息的同时，也提高了词向量在大语料上的训练速度（一个共现矩阵的遍历要比整个语料库的遍历容易的多）。而与传统的SVD技术相比，SGD的训练也更加简单高效。同时，GloVe得到的词向量更能把握住词与词之间的线性关系。<br>GloVe综合了LSA、CBOW的优点，训练更快、对于大规模语料算法的扩展性也很好、在小语料或者小向量上性能表现也很好。<br>和绝大多数的词向量不同，glove的目标是通过训练词向量和上下文向量，使得它们能够重构共现矩阵。<br>需要注意的是，在运行glove时，对内存要求比较高，1.4G的语料，20G的内存都无法运行，一直死机；后面降到300M的语料，20G的内存基本上能够运行。而gensim中的word2vec，对于1.4G的语料，20G完全可以运行，而且只需要几个小时就能跑出结果。</p>
+        <p>基于统计的词向量模型以基于SVD分解技术的LSA模型为代表，通过构建一个共现矩阵得到隐层的语义向量，充分利用了全局的统计信息。然而这类模型得到的语义向量往往很难把握词与词之间的线性关系（例如著名的King、Queen、Man、Woman等式）。基于预测的词向量模型则以基于神经网络的Skip-gram模型为代表，通过预测一个词出现在上下文里的概率得到embedding词向量。这类模型的缺陷在于其对统计信息的利用不充分，训练时间与语料大小息息相关。不过，其得到的词向量能够较好地把握词与词之间的线性关系，因此在很多任务上的表现都要略优于SVD模型。既然两种模型各有优劣，那么能不能二者各取其长，构造一个更强大的词向量模型呢？这就是接下来要介绍的GloVe模型。<br><a id="more"></a><br>GloVe是斯坦福大学提出的一种新的词矩阵生成的方法，GloVe全称应该是 Global Vectors for Word Representation，综合运用词的全局统计信息和局部统计信息来生成语言模型和词的向量化表示。<a href="http://nlp.stanford.edu/projects/glove/" target="_blank" rel="external">官方主页链接</a>，上面还有训练好的模型可以下载。<br>在GloVe的原始论文里，作者首先分析了Skip-gram模型能够挖掘出词与词之间线性关系的背后成因，然后通过在共现矩阵上构造相似的条件，得到一个基于全局信息的词向量模型——GloVe模型。<br>与Skip-gram模型相比，GloVe在充分利用了语料库的全局统计信息的同时，也提高了词向量在大语料上的训练速度（一个共现矩阵的遍历要比整个语料库的遍历容易的多）。而与传统的SVD技术相比，SGD的训练也更加简单高效。同时，GloVe得到的词向量更能把握住词与词之间的线性关系。<br>GloVe综合了LSA、CBOW的优点，训练更快、对于大规模语料算法的扩展性也很好、在小语料或者小向量上性能表现也很好。<br>和绝大多数的词向量不同，glove的目标是通过训练词向量和上下文向量，使得它们能够重构共现矩阵。<br>需要注意的是，在运行glove时，对内存要求比较高，1.4G的语料，20G的内存都无法运行，一直死机；后面降到300M的语料，20G的内存基本上能够运行。而gensim中的word2vec，对于1.4G的语料，20G完全可以运行，而且只需要几个小时就能跑出结果。</p>
 <p>glove在三元组上面进行训练, glove是根据每个三元组去更新一次词向量和上下文向量<br>GloVe训练参数:</p>
 <ul>
 <li>最佳的向量维度：300左右，之后变化比较轻微</li>

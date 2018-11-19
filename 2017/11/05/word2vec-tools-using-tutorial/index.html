@@ -78,7 +78,7 @@
 <meta property="og:description" content="word2vec 是 Google 于 2013 年开源推出的一个用于获取词向量的工具包，它简单、高效，因此引起了很多人的关注。word2vec 的作者 Tomas Mikolov 在以下两篇论文介绍了相应的理论基础：  Efficient Estimation of Word Representations in Vector Space  Distributed Representations">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/word2vec/architectures">
-<meta property="og:updated_time" content="2018-02-20T10:21:39.867Z">
+<meta property="og:updated_time" content="2018-11-19T13:33:03.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="词向量工具---word2vec简介、使用教程及源码分析">
 <meta name="twitter:description" content="word2vec 是 Google 于 2013 年开源推出的一个用于获取词向量的工具包，它简单、高效，因此引起了很多人的关注。word2vec 的作者 Tomas Mikolov 在以下两篇论文介绍了相应的理论基础：  Efficient Estimation of Word Representations in Vector Space  Distributed Representations">
@@ -388,6 +388,7 @@
 <p><a href="https://arxiv.org/pdf/1301.3781.pdf" target="_blank" rel="external">Efficient Estimation of Word Representations in Vector Space</a> </p>
 <p><a href="https://arxiv.org/pdf/1310.4546.pdf" target="_blank" rel="external">Distributed Representations of Words and Phrases and their Compositionality</a></p>
 </blockquote>
+<a id="more"></a>
 <p>原始论文没有谈及太多算法细节，解释得不够清晰，因而在一定程度上增加了这个工具包的神秘感并没有中文。想了解一下 word2vec 的数学原理，推荐 peghoty 大神的系列博客<a href="http://blog.csdn.net/itplus/article/details/37969519" target="_blank" rel="external">《word2vec 中的数学原理详解》</a> ，博主也是通过阅读该系列博客学习 word2vec 中的数学原理和实现细节，在此推荐给大家。</p>
 <p>word2vec 就是“两个训练方案＋两个提速手段”，两两组合，因此也就有了四个备选的模型。</p>
 <h2 id="两个训练方案"><a href="#两个训练方案" class="headerlink" title="两个训练方案"></a>两个训练方案</h2><p>CBOW (Continuous Bag-of-Words Model) 和 Skip-gram（Continuous Skip-gram Model）。<br>结构如图所示：<br><img src="/images/word2vec/architectures" alt="word2vec的CBOW和Skip-gram结构图"></p>

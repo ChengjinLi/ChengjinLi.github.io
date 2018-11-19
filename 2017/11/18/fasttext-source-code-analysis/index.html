@@ -78,7 +78,7 @@
 <meta property="og:description" content="首先我们还是看一下fasttext的目录。所有的C++代码都在src中。然后就是一些linux脚本文件 我们进入src目录看看有哪些C++文件。从上往下看，args是专门存储超参的类。dictionary是词典类，构建存储词典，支持把单词转成id。fasttext是训练测试等的核心文件，会调用model进行词向量文本向量的训练。main是主函数负责接受超参转成args类，根据不同目的调用不同的方法">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/fasttext/fasttext-arch.png">
-<meta property="og:updated_time" content="2018-01-25T03:35:48.454Z">
+<meta property="og:updated_time" content="2018-11-19T13:32:41.085Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="词向量工具---fastText简介、使用教程及源码分析">
 <meta name="twitter:description" content="首先我们还是看一下fasttext的目录。所有的C++代码都在src中。然后就是一些linux脚本文件 我们进入src目录看看有哪些C++文件。从上往下看，args是专门存储超参的类。dictionary是词典类，构建存储词典，支持把单词转成id。fasttext是训练测试等的核心文件，会调用model进行词向量文本向量的训练。main是主函数负责接受超参转成args类，根据不同目的调用不同的方法">
@@ -386,6 +386,7 @@
         <p>首先我们还是看一下fasttext的目录。所有的C++代码都在src中。然后就是一些linux脚本文件</p>
 <p>我们进入src目录看看有哪些C++文件。从上往下看，<br>args是专门存储超参的类。<br>dictionary是词典类，构建存储词典，支持把单词转成id。<br>fasttext是训练测试等的核心文件，会调用model进行词向量文本向量的训练。<br>main是主函数负责接受超参转成args类，根据不同目的调用不同的方法。<br>剩下的matrix，vector等文件都是辅助fasttext，model以及dictionary词典的。</p>
 <p>fasttext中文本向量就是词向量的平均，得到文本向量并进行分类的代码和word2vec中的CBOW非常像。我们先看一下classification-example.sh。这个脚本文件会对来自于dbpedia的文本进行分类。分类前要对文本进行预处理并且打乱。</p>
+<a id="more"></a>
 <h1 id="参数方面"><a href="#参数方面" class="headerlink" title="参数方面"></a>参数方面</h1><ul>
 <li>loss function选用hs（hierarchical softmax）要比ns(negative sampling) 训练速度要快很多倍，并且准确率也更高。</li>
 <li>wordNgrams 默认为1，设置为2以上可以明显提高准确率。</li>

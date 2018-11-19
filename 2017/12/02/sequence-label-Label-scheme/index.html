@@ -69,17 +69,17 @@
 
 
 
-<meta name="description" content="标签说明标签方案中通常都使用一些简短的英文字符[串]来编码。 标签是打在token上的。 对于英文，token可以是一个单词（e.g. awesome），也可以是一个字符（e.g. a）。 对于中文，token可以是一个词语（分词后的结果），也可以是单个汉字字符。 为便于说明，以下都将token试作等同于字符。 标签列表如下： B，即Begin，表示开始I，即Intermediate，表示中间E，">
+<meta name="description" content="标签说明标签方案中通常都使用一些简短的英文字符[串]来编码。 标签是打在token上的。 对于英文，token可以是一个单词（e.g. awesome），也可以是一个字符（e.g. a）。 对于中文，token可以是一个词语（分词后的结果），也可以是单个汉字字符。 为便于说明，以下都将token试作等同于字符。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="序列标注中的几种标签方案">
 <meta property="og:url" content="http://yoursite.com/2017/12/02/sequence-label-Label-scheme/index.html">
 <meta property="og:site_name" content="MJ&#39;s Learning Notes">
-<meta property="og:description" content="标签说明标签方案中通常都使用一些简短的英文字符[串]来编码。 标签是打在token上的。 对于英文，token可以是一个单词（e.g. awesome），也可以是一个字符（e.g. a）。 对于中文，token可以是一个词语（分词后的结果），也可以是单个汉字字符。 为便于说明，以下都将token试作等同于字符。 标签列表如下： B，即Begin，表示开始I，即Intermediate，表示中间E，">
+<meta property="og:description" content="标签说明标签方案中通常都使用一些简短的英文字符[串]来编码。 标签是打在token上的。 对于英文，token可以是一个单词（e.g. awesome），也可以是一个字符（e.g. a）。 对于中文，token可以是一个词语（分词后的结果），也可以是单个汉字字符。 为便于说明，以下都将token试作等同于字符。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-21T06:47:03.889Z">
+<meta property="og:updated_time" content="2018-11-19T13:32:24.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="序列标注中的几种标签方案">
-<meta name="twitter:description" content="标签说明标签方案中通常都使用一些简短的英文字符[串]来编码。 标签是打在token上的。 对于英文，token可以是一个单词（e.g. awesome），也可以是一个字符（e.g. a）。 对于中文，token可以是一个词语（分词后的结果），也可以是单个汉字字符。 为便于说明，以下都将token试作等同于字符。 标签列表如下： B，即Begin，表示开始I，即Intermediate，表示中间E，">
+<meta name="twitter:description" content="标签说明标签方案中通常都使用一些简短的英文字符[串]来编码。 标签是打在token上的。 对于英文，token可以是一个单词（e.g. awesome），也可以是一个字符（e.g. a）。 对于中文，token可以是一个词语（分词后的结果），也可以是单个汉字字符。 为便于说明，以下都将token试作等同于字符。">
 
 
 
@@ -362,8 +362,7 @@
 <p>标签是打在token上的。</p>
 <p>对于英文，token可以是一个单词（e.g. awesome），也可以是一个字符（e.g. a）。</p>
 <p>对于中文，token可以是一个词语（分词后的结果），也可以是单个汉字字符。</p>
-<p>为便于说明，以下都将token试作等同于字符。</p>
-<p>标签列表如下：</p>
+<p>为便于说明，以下都将token试作等同于字符。<br><a id="more"></a><br>标签列表如下：</p>
 <p>B，即Begin，表示开始<br>I，即Intermediate，表示中间<br>E，即End，表示结尾<br>S，即Single，表示单个字符<br>O，即Other，表示其他，用于标记无关字符<br>常见标签方案<br>基于上面的标签列表，通过选择该列表的子集，可以得到不同的标签方案。同样的标签列表，不同的使用方法，也可以得到不同的标签方案。</p>
 <p>分词、词性标注任务常用的序列表示法有IOB/BIO和start/end。<br>IOB表示法可以分为IOB1，IOB2，IOE1，IOE2四种。四种表示法大同小异，相同点是「I」代表当前词在一个组块中，「O」表示当前的词不在任意一个组块中。不同点是四种表示法对组块的开始或者结束的表达方式所有区别。具体如下：<br>IOB1: 标签I用于文本块中的字符，标签O用于文本块之外的字符，标签B用于当前词是紧跟前一个组块的新组块的开始。非紧邻的新组块开始标记位I。<br>例如：<br>序 I<br>列 I<br>标 B<br>注 I<br>中 O<br>的 O<br>几 O<br>种 O<br>标 I<br>签 I<br>方 B<br>案 I<br>IOB2: 每个文本块都以标签B开始，除此之外，跟IOB1一样。<br>例如：<br>序 B<br>列 I<br>标 B<br>注 I<br>中 O<br>的 O<br>几 O<br>种 O<br>标 B<br>签 I<br>方 B<br>案 I<br>IOE1: 标签I用于独立文本块中，标签E仅用于同类型文本块连续的情况，假如有两个同类型的文本块，那么标签E会被打在第一个文本块的最后一个字符。<br>例如：<br>序 I<br>列 E<br>标 I<br>注 I<br>中 O<br>的 O<br>几 O<br>种 O<br>标 I<br>签 E<br>方 I<br>案 I<br>IOE2: 每个文本块都以标签E结尾，无论该文本块有多少个字符，除此之外，跟IOE1一样。<br>例如：<br>序 I<br>列 E<br>标 I<br>注 E<br>中 O<br>的 O<br>几 O<br>种 O<br>标 I<br>签 E<br>方 I<br>案 E<br>start/end （也叫SBEIO、IOBES）: 是另一个类型的表示法，该表示法表达的更为细致，包含了全部的5种标签，文本块由单个字符组成的时候，使用S标签来表示，由一个以上的字符组成时，首字符总是使用B标签，尾字符总是使用E标签，中间的字符使用I标签。<br>例如：<br>广 B<br>东 I<br>省 E<br>的 O<br>别 B<br>称 E<br>粤 S<br>其中最常用的是IOB2、IOBS、IOBES。</p>
 

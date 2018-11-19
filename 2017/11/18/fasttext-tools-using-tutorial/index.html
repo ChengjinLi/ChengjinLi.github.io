@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="fastText," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="简介fastText 是 Facebook 2016 年开源的一个词向量计算以及文本分类的工具，word2vec 的作者 mikolov 也参与了制作，目前已经引起了广泛的关注。这个工具包的 GitHub链接，该项目是 C++ 写的，和之前的项目相比这个项目更加专业，涉及的内容也比之前的项目多很多。在学术上没有什么创新点，但是好处就是模型简单，性能比肩深度学习而且速度更快，用起来很顺手，做出来的结">
+<meta name="keywords" content="fastText">
+<meta property="og:type" content="article">
+<meta property="og:title" content="词向量工具---fastText简介、使用教程及源码分析">
+<meta property="og:url" content="http://yoursite.com/2017/11/18/fasttext-tools-using-tutorial/index.html">
+<meta property="og:site_name" content="MJ&#39;s Learning Notes">
+<meta property="og:description" content="简介fastText 是 Facebook 2016 年开源的一个词向量计算以及文本分类的工具，word2vec 的作者 mikolov 也参与了制作，目前已经引起了广泛的关注。这个工具包的 GitHub链接，该项目是 C++ 写的，和之前的项目相比这个项目更加专业，涉及的内容也比之前的项目多很多。在学术上没有什么创新点，但是好处就是模型简单，性能比肩深度学习而且速度更快，用起来很顺手，做出来的结">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/fasttext/architecture">
+<meta property="og:image" content="http://yoursite.com/images/fasttext/test_accuracy.png">
+<meta property="og:updated_time" content="2018-01-24T13:52:50.297Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="词向量工具---fastText简介、使用教程及源码分析">
+<meta name="twitter:description" content="简介fastText 是 Facebook 2016 年开源的一个词向量计算以及文本分类的工具，word2vec 的作者 mikolov 也参与了制作，目前已经引起了广泛的关注。这个工具包的 GitHub链接，该项目是 C++ 写的，和之前的项目相比这个项目更加专业，涉及的内容也比之前的项目多很多。在学术上没有什么创新点，但是好处就是模型简单，性能比肩深度学习而且速度更快，用起来很顺手，做出来的结">
+<meta name="twitter:image" content="http://yoursite.com/images/fasttext/architecture">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/18/fasttext-tools-using-tutorial/"/>
+
+
+
+
+
+  <title>词向量工具---fastText简介、使用教程及源码分析 | MJ's Learning Notes</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MJ's Learning Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">ML&NLP&DL</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/18/fasttext-tools-using-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/MJ.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MJ's Learning Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">词向量工具---fastText简介、使用教程及源码分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-18T10:19:10+08:00">
+                2017-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WordEmbedding/" itemprop="url" rel="index">
+                    <span itemprop="name">WordEmbedding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong><code>fastText</code></strong> 是 <strong><code>Facebook 2016</code></strong> 年开源的一个词向量计算以及文本分类的工具，word2vec 的作者 mikolov 也参与了制作，目前已经引起了广泛的关注。这个工具包的 <a href="https://github.com/facebookresearch/fastText" target="_blank" rel="external">GitHub链接</a>，该项目是 C++ 写的，和之前的项目相比这个项目更加专业，涉及的内容也比之前的项目多很多。在学术上没有什么创新点，但是好处就是模型简单，性能比肩深度学习而且速度更快，用起来很顺手，做出来的结果也可以达到上线使用的标准。该工具其实是由两部分组成，一部分是高效文本分类，一部分是词向量学习。该工具的理论基础是以下两篇论文：</p>
+<blockquote>
+<p><a href="https://arxiv.org/pdf/1607.01759.pdf" target="_blank" rel="external">Bag of Tricks for Efficient Text Classification</a></p>
+</blockquote>
+<p>这篇论文提出了 fastText 算法，介绍高效文本分类技巧，该算法实际上是将目前用来算 word2vec 的 CBOW 模型架构做了个小修改，原先使用一个词的上下文的所有词向量之和来预测词本身，现在改为用一段短文本的词向量之和来对文本进行分类。在生成文本向量的时候用到了ngram的信息，用这个文档所有单词的词向量的平均预测标签。对这种简单的任务，用简单的模型效果就不错了。具体方法就是把句子每个 word 的 vector 求平均，然后直接用简单的LR分类就行。fastText 的 fast 指的是这个。 这个 <a href="https://www.zhihu.com/question/48345431/answer/111513229" target="_blank" rel="external">知乎答案</a> 总结得挺好的，取平均其实算 Deep Learning 的 average pooling。</p>
+<p> <img src="/images/fasttext/architecture" alt="fastText文本分类架构图"></p>
+<blockquote>
+<p><a href="https://arxiv.org/pdf/1607.04606.pdf" target="_blank" rel="external">Enriching Word Vectors with Subword Information</a></p>
+</blockquote>
+<p>这篇论文使用 subword 信息，也就是连续的字符信息来丰富词汇向量，提出了用 subword 的向量之和来代替简单的词向量的方法，从而使得词的微变形关系也能映射到嵌入空间中，以解决简单 word2vec 无法处理同一词的不同形态的问题。每个词被看做是 n-gram 字母串包。为了区分前后缀情况，”&lt;”， “&gt;” 符号被加到了词的前后端。除了词的子串外，词本身也被包含进了 n-gram 字母串包。以  where 为例，n=3 的情况下，其子串分别为<br>&lt;wh, whe, her, ere, re>，以及其本身 &lt;where><br>注意，这里的 her 与单词 &lt; her> 是不同的。fastText 中提供了 maxn 这个参数来确定 subword 的大小。词向量学习部分可说是一个 word2vec 优化版，用了 subword 的信息，速度是不会提升的，只是效果方面的改进。这个改进能提升模型对 morphology 的效果, 即”字面上”相似的词语 distance 也会小一些. 有人在question-words 数据集上跑过 fastText 和 gensim-word2vec 的对比, 结果在 Jupyter Notebook Viewer .可以看出fastText在 “adjective-to-adverb”, “opposite”之类的数据集上效果还是相当好的. 不过像 “family” 这样的字面上不一样的数据集, fastText效果反而不如 gensim-word2vec.推广到中文上, 结果也类似. “字面上”相似对 vector 的影响非常大. 一个简单的例子是, gensim 训练的模型中与”交易”最相似的是”买卖”, 而 fastText 的结果是”交易法”注：在代码实现中，对于中文是不计算 subword 的。</p>
+<h1 id="fastText-用于文本分类"><a href="#fastText-用于文本分类" class="headerlink" title="fastText 用于文本分类"></a>fastText 用于文本分类</h1><p>fastText文本分类模型 = word2vec 中 CBOW 模型 + h-softmax 的灵活使用。<br>模型输入一个词的序列（一段文本或者一句话)，输出这个词序列属于不同类别的概率。<br>序列中的词和词组组成特征向量，特征向量通过线性变换映射到中间层，中间层再映射到标签。fastText 在预测标签时使用了非线性激活函数，但在中间层不使用非线性激活函数。对于有大量类别的数据集，fastText 使用了一个分层分类器（而非扁平式架构）。不同的类别被整合进树形结构中（想象下二叉树而非 列表）。在某些文本分类任务中类别很多，计算线性分类器的复杂度高。为了减少了训练复杂性和测试文本分类器的时间，fastText 利用了类别（class）不均衡这个事实（一些类别出现次数比其他的更多），使用层次 Softmax 技巧。层次 Softmax 通过使用 Huffman 算法建立用于表征类别的树形结构，对标签进行编码，频繁出现的类别的深度要比不频繁出现类别的深度要小，这也使得进一步的计算效率更高。fastText 能在五分钟内将50万个句子分成超过30万个类别。</p>
+<blockquote>
+<p>注：</p>
+<ol>
+<li>fastText 只能做多类别分类，从多个类别里预测出一个类。</li>
+<li>文本分类单层网络就够了，非线性的问题用多层的。fasttext只有1层神经网络，属于所谓的 shallow learning，比deep learning 模型的优点是训练和预测速度极快，但是 fasttext 的效果并不差，在工业界这点非常重要。</li>
+</ol>
+</blockquote>
+<h1 id="fastText-用于词向量表征"><a href="#fastText-用于词向量表征" class="headerlink" title="fastText 用于词向量表征"></a>fastText 用于词向量表征</h1><p>在 fastText 中一个低维度向量与每个单词都相关。隐藏表征在不同类别所有分类器中进行共享，使得文本信息在不同类别中能够共同使用。常用的特征是词袋模型( Bag-of-Words )，但词袋模型忽略了词序信息，因此 fastText 还加入了 n-gram ，n-gram 来将局部词序考虑在内，特征这对很多文本分类问题来说十分重要。<br>“我 爱 你” 这句话中的词袋模型特征是 “我”，“爱”, “你”。这些特征和句子 “你 爱 我” 的特征是一样的。如果加入 2-gram，第一句话的特征还有 “我-爱” 和 “爱-你”，这两句话 “我 爱 你” 和 “你 爱 我” 就能区别开来了。当然，为了提高效率，我们需要过滤掉低频的 n-gram。</p>
+<p>举例来说：fastText 能够学会“男孩”、“女孩”、“男人”、“女人”指代的是特定的性别，并且能够将这些数值存在相关文档中。然后，当某个程序在提出一个用户请求（假设是“我女友现在在儿？”），它能够马上在 fastText 生成的文档中进行查找并且理解用户想要问的是有关女性的问题。 </p>
+<blockquote>
+<p>facebook 公开了90种语言的 Pre-trained word vectors(词向量维度为300维)，<a href="https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md" target="_blank" rel="external">点击了解更多详情</a> 。</p>
+</blockquote>
+<h1 id="fastText词向量优势"><a href="#fastText词向量优势" class="headerlink" title="fastText词向量优势"></a>fastText词向量优势</h1><ol>
+<li>适合大型数据+高效的训练速度：能够训练模型“在使用标准多核CPU的情况下10分钟内处理超过10亿个词汇”，特别是与深度模型对比，fastText 能将训练时间由数天缩短到几秒钟。使用一个标准多核 CPU，得到了在10分钟内训练完超过10亿词汇量模型的结果。此外，fastText 还能在五分钟内将50万个句子分成超过30万个类别。</li>
+<li>支持多语言表达：利用其语言形态结构，fastText能够被设计用来支持包括英语、德语、西班牙语、法语以及捷克语等多种语言。它还使用了一种简单高效的纳入子字信息的方式，在用于像捷克语这样词态丰富的语言时，这种方式表现得非常好，这也证明了精心设计的字符 n-gram 特征是丰富词汇表征的重要来源。fastText的性能要比时下流行的word2vec工具明显好上不少，也比其他目前最先进的词态词汇表征要好。 </li>
+<li>fastText 专注于文本分类，在许多标准问题上实现当下最好的表现（例如文本倾向性分析或标签预测）。fastText 与基于深度学习方法的 Char-CNN 以及 VDCNN 对比：<br><img src="/images/fasttext/test_accuracy.png" alt="fastText与其他模型的实验结果对比图"> </li>
+<li>比word2vec更考虑了同一词的不同形态的问题，比如 fastText 的词向量学习能够考虑 english-born 和 british-born 之间有相同的后缀，但 word2vec 却不能。 </li>
+</ol>
+<h1 id="fastText-vs-word2vec"><a href="#fastText-vs-word2vec" class="headerlink" title="fastText vs word2vec"></a>fastText vs word2vec</h1><h2 id="相同之处"><a href="#相同之处" class="headerlink" title="相同之处"></a>相同之处</h2><ol>
+<li>图模型结构很像，都是采用 embedding 向量的形式，得到 word 的隐向量表达。</li>
+<li>采用很多相似的优化方法，比如使用 Hierarchical softmax 优化训练和预测中的打分速度。</li>
+<li>训练词向量时，两者都是无监督算法。输入层是 context window 内的 term。输出层对应的是每一个 term，计算某 term 的概率最大；</li>
+<li>在使用层次softmax的时候，huffman 树叶子节点处是训练语料里所有词的向量。</li>
+</ol>
+<h2 id="不同之处"><a href="#不同之处" class="headerlink" title="不同之处"></a>不同之处</h2><ol>
+<li>fastText 用于学习词向量时，加入了词的 subword 信息和 n-gram 信息。 </li>
+<li>fastText 用于文本分类时，是有监督算法。输入层对应整个 sentence 的内容，包括term，也包括 n-gram 的内容。输出层对应的是分类的 label。huffmax树叶子节点处是每一个类别标签的词向量</li>
+<li>fastText 用于文本分类时，遍历分类树的所有叶节点，找到概率最大的 label（一个或者 N 个）。</li>
+</ol>
+<h1 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h1><ul>
+<li>loss function选用hs（hierarchical softmax）要比ns(negative sampling) 训练速度要快很多倍，并且准确率也更高。</li>
+<li>wordNgrams 默认为1，设置为2以上可以明显提高准确率。</li>
+<li>如果词数不是很多，可以把bucket设置的小一点，否则预留会预留太多bucket使模型太大。</li>
+</ul>
+<p>因为facebook提供的只是C++版本的代码，上github已经有封装的python接口。用起来特别方便，觉得还不能满足自己的使用要求，修改源码也非常方便。<br>所以对于文本分类，先用fasttext做一个简单的baseline是很适合的。</p>
+<h1 id="fastText-分类示例"><a href="#fastText-分类示例" class="headerlink" title="fastText 分类示例"></a>fastText 分类示例</h1><p>classification-example.sh 示例说明，包含训练、测试和预测示例。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/usr/bin/env bash</div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#</span> Copyright (c) 2016-present, Facebook, Inc.</div><div class="line"><span class="meta">#</span> All rights reserved.</div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#</span> This source code is licensed under the BSD-style license found in the</div><div class="line"><span class="meta">#</span> LICENSE file in the root directory of this source tree. An additional grant</div><div class="line"><span class="meta">#</span> of patent rights can be found in the PATENTS file in the same directory.</div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#</span> 对文本进行预处理并且打乱</div><div class="line">myshuf() &#123;</div><div class="line">  perl -MList::Util=shuffle -e 'print shuffle(&lt;&gt;);' "$@";</div><div class="line">&#125;</div><div class="line"></div><div class="line">normalize_text() &#123;</div><div class="line">  tr '[:upper:]' '[:lower:]' | sed -e 's/^/__label__/g' | \</div><div class="line">    sed -e "s/'/ ' /g" -e 's/"//g' -e 's/\./ \. /g' -e 's/&lt;br \/&gt;/ /g' \</div><div class="line">        -e 's/,/ , /g' -e 's/(/ ( /g' -e 's/)/ ) /g' -e 's/\!/ \! /g' \</div><div class="line">        -e 's/\?/ \? /g' -e 's/\;/ /g' -e 's/\:/ /g' | tr -s " " | myshuf</div><div class="line">&#125;</div><div class="line"><span class="meta">#</span> 然后就是下载数据集，normalize数据集，normalize_text()包括了myshuf。训练集是dbpedia.train，测试集是dbpedia.test</div><div class="line">RESULTDIR=result</div><div class="line">DATADIR=data</div><div class="line"></div><div class="line">mkdir -p "$&#123;RESULTDIR&#125;"</div><div class="line">mkdir -p "$&#123;DATADIR&#125;"</div><div class="line"></div><div class="line">if [ ! -f "$&#123;DATADIR&#125;/dbpedia.train" ]</div><div class="line">then</div><div class="line">  wget -c "https://github.com/le-scientifique/torchDatasets/raw/master/dbpedia_csv.tar.gz" -O "$&#123;DATADIR&#125;/dbpedia_csv.tar.gz"</div><div class="line">  tar -xzvf "$&#123;DATADIR&#125;/dbpedia_csv.tar.gz" -C "$&#123;DATADIR&#125;"</div><div class="line">  cat "$&#123;DATADIR&#125;/dbpedia_csv/train.csv" | normalize_text &gt; "$&#123;DATADIR&#125;/dbpedia.train"</div><div class="line">  cat "$&#123;DATADIR&#125;/dbpedia_csv/test.csv" | normalize_text &gt; "$&#123;DATADIR&#125;/dbpedia.test"</div><div class="line">fi</div><div class="line"><span class="meta">#</span> 编译C++代码</div><div class="line">make</div><div class="line"><span class="meta">#</span> 根据训练集训练fasttext，输出训练的结果</div><div class="line">./fasttext supervised -input "$&#123;DATADIR&#125;/dbpedia.train" -output "$&#123;RESULTDIR&#125;/dbpedia" -dim 10 -lr 0.1 -wordNgrams 2 -minCount 1 -bucket 10000000 -epoch 5 -thread 4</div><div class="line"><span class="meta">#</span> 根据训练的结果以及测试集进行测试，得到准确率</div><div class="line">./fasttext test "$&#123;RESULTDIR&#125;/dbpedia.bin" "$&#123;DATADIR&#125;/dbpedia.test"</div><div class="line"><span class="meta">#</span> 根据训练的结果以及测试集，输出测试集的结果</div><div class="line">./fasttext predict "$&#123;RESULTDIR&#125;/dbpedia.bin" "$&#123;DATADIR&#125;/dbpedia.test" &gt; "$&#123;RESULTDIR&#125;/dbpedia.test.predict"</div></pre></td></tr></table></figure></p>
+<h1 id="fastText-词向量示例"><a href="#fastText-词向量示例" class="headerlink" title="fastText 词向量示例"></a>fastText 词向量示例</h1><p>word-vector-example.sh 示例说明，包括用skip-gram模式训练和评估词向量的示例。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/usr/bin/env bash</div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#</span> Copyright (c) 2016-present, Facebook, Inc.</div><div class="line"><span class="meta">#</span> All rights reserved.</div><div class="line"><span class="meta">#</span></div><div class="line"><span class="meta">#</span> This source code is licensed under the BSD-style license found in the</div><div class="line"><span class="meta">#</span> LICENSE file in the root directory of this source tree. An additional grant</div><div class="line"><span class="meta">#</span> of patent rights can be found in the PATENTS file in the same directory.</div><div class="line"><span class="meta">#</span></div><div class="line"></div><div class="line">RESULTDIR=result</div><div class="line">DATADIR=data</div><div class="line"></div><div class="line">mkdir -p "$&#123;RESULTDIR&#125;"</div><div class="line">mkdir -p "$&#123;DATADIR&#125;"</div><div class="line"><span class="meta">#</span> 下载语料</div><div class="line">if [ ! -f "$&#123;DATADIR&#125;/fil9" ]</div><div class="line">then</div><div class="line">  wget -c http://mattmahoney.net/dc/enwik9.zip -P "$&#123;DATADIR&#125;"</div><div class="line">  unzip "$&#123;DATADIR&#125;/enwik9.zip" -d "$&#123;DATADIR&#125;"</div><div class="line">  perl wikifil.pl "$&#123;DATADIR&#125;/enwik9" &gt; "$&#123;DATADIR&#125;"/fil9</div><div class="line">fi</div><div class="line"><span class="meta">#</span> 下载测试集</div><div class="line">if [ ! -f "$&#123;DATADIR&#125;/rw/rw.txt" ]</div><div class="line">then</div><div class="line">  wget -c https://nlp.stanford.edu/~lmthang/morphoNLM/rw.zip -P "$&#123;DATADIR&#125;"</div><div class="line">  unzip "$&#123;DATADIR&#125;/rw.zip" -d "$&#123;DATADIR&#125;"</div><div class="line">fi</div><div class="line"><span class="meta">#</span> 编译源代码</div><div class="line">make</div><div class="line"><span class="meta">#</span> 用skipgram模式进行训练</div><div class="line">./fasttext skipgram -input "$&#123;DATADIR&#125;"/fil9 -output "$&#123;RESULTDIR&#125;"/fil9 -lr 0.025 -dim 100 \</div><div class="line">  -ws 5 -epoch 1 -minCount 5 -neg 5 -loss ns -bucket 2000000 \</div><div class="line">  -minn 3 -maxn 6 -thread 4 -t 1e-4 -lrUpdateRate 100</div><div class="line"></div><div class="line">cut -f 1,2 "$&#123;DATADIR&#125;"/rw/rw.txt | awk '&#123;print tolower($0)&#125;' | tr '\t' '\n' &gt; "$&#123;DATADIR&#125;"/queries.txt</div><div class="line"></div><div class="line">cat "$&#123;DATADIR&#125;"/queries.txt | ./fasttext print-word-vectors "$&#123;RESULTDIR&#125;"/fil9.bin &gt; "$&#123;RESULTDIR&#125;"/vectors.txt</div><div class="line"><span class="meta">#</span> 评估训练的词向量</div><div class="line">python eval.py -m "$&#123;RESULTDIR&#125;"/vectors.txt -d "$&#123;DATADIR&#125;"/rw/rw.txt</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持整理学习笔记，您的支持将鼓励我继续整理下去！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="MJ 微信打赏"/>
+        <p>微信打赏</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="MJ 支付宝打赏"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/fastText/" rel="tag"><i class="fa fa-tag"></i> fastText</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/11/glove-tools-using-tutorial/" rel="next" title="词向量工具---GloVe使用教程">
+                <i class="fa fa-chevron-left"></i> 词向量工具---GloVe使用教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/18/fasttext-source-code-analysis/" rel="prev" title="词向量工具---fastText简介、使用教程及源码分析">
+                词向量工具---fastText简介、使用教程及源码分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_cqq">QQ</a>
+<a class="jiathis_button_tsina">微博</a>
+<a class="jiathis_button_fav">收藏夹</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/MJ.jpg"
+              alt="MJ" />
+          
+            <p class="site-author-name" itemprop="name">MJ</p>
+            <p class="site-description motion-element" itemprop="description">机器之法，学习之道</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ChengjinLi" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="lichengjin606@gmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="369387335" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>QQ</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/lcjpiglet" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>微博</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://liam0205.me/" title="liam0205" target="_blank">liam0205</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ilewseu.github.io" title="ilewseu" target="_blank">ilewseu</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fastText-用于文本分类"><span class="nav-number">2.</span> <span class="nav-text">fastText 用于文本分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fastText-用于词向量表征"><span class="nav-number">3.</span> <span class="nav-text">fastText 用于词向量表征</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fastText词向量优势"><span class="nav-number">4.</span> <span class="nav-text">fastText词向量优势</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fastText-vs-word2vec"><span class="nav-number">5.</span> <span class="nav-text">fastText vs word2vec</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#相同之处"><span class="nav-number">5.1.</span> <span class="nav-text">相同之处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同之处"><span class="nav-number">5.2.</span> <span class="nav-text">不同之处</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数说明"><span class="nav-number">6.</span> <span class="nav-text">参数说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fastText-分类示例"><span class="nav-number">7.</span> <span class="nav-text">fastText 分类示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fastText-词向量示例"><span class="nav-number">8.</span> <span class="nav-text">fastText 词向量示例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MJ</span>
+
+  
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: true,
+        notify: false,
+        app_id: 'VL24cclbEHBOjN5qy6msI2jv-gzGzoHsz',
+        app_key: 'XJuFdy33xViWJWN0KRz6OO0C',
+        placeholder: '期待你的评论...'
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="XGBoost 参数XGBoost 官方参数说明文档，XGBoost 版本：0.72。 在运行 XGBoost 之前，必须设置三种类型参数：通用参数(General Parameters)、提升参数(Booster Parameters)和任务参数(Task Parameters)。  通用参数(General Parameters)：设置整体功能，参数控制在提升(boosting)过程中使用哪种">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XGBoost 参数说明">
+<meta property="og:url" content="http://yoursite.com/2018/08/05/xgboost-parameter-description/index.html">
+<meta property="og:site_name" content="MJ&#39;s Learning Notes">
+<meta property="og:description" content="XGBoost 参数XGBoost 官方参数说明文档，XGBoost 版本：0.72。 在运行 XGBoost 之前，必须设置三种类型参数：通用参数(General Parameters)、提升参数(Booster Parameters)和任务参数(Task Parameters)。  通用参数(General Parameters)：设置整体功能，参数控制在提升(boosting)过程中使用哪种">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-14T07:04:40.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XGBoost 参数说明">
+<meta name="twitter:description" content="XGBoost 参数XGBoost 官方参数说明文档，XGBoost 版本：0.72。 在运行 XGBoost 之前，必须设置三种类型参数：通用参数(General Parameters)、提升参数(Booster Parameters)和任务参数(Task Parameters)。  通用参数(General Parameters)：设置整体功能，参数控制在提升(boosting)过程中使用哪种">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/05/xgboost-parameter-description/"/>
+
+
+
+
+
+  <title>XGBoost 参数说明 | MJ's Learning Notes</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MJ's Learning Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">ML&NLP&DL</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/xgboost-parameter-description/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/MJ.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MJ's Learning Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">XGBoost 参数说明</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T10:20:49+08:00">
+                2018-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="XGBoost-参数"><a href="#XGBoost-参数" class="headerlink" title="XGBoost 参数"></a>XGBoost 参数</h1><p><a href="https://xgboost.readthedocs.io/en/latest//parameter.html" target="_blank" rel="external">XGBoost 官方参数说明文档</a>，XGBoost 版本：0.72。</p>
+<p>在运行 XGBoost 之前，必须设置三种类型参数：通用参数(General Parameters)、提升参数(Booster Parameters)和任务参数(Task Parameters)。</p>
+<ul>
+<li>通用参数(General Parameters)：设置整体功能，参数控制在提升(boosting)过程中使用哪种booster，常用的booster有树模型(tree model)和线性模型(linear model)。</li>
+<li>提升参数(Booster Parameters)：这取决于使用哪种booster(树or回归)。</li>
+<li>任务参数(Task Parameters)：控制学习的场景，例如在回归问题中会使用不同的参数控制排序。</li>
+</ul>
+<h2 id="通用参数-General-Parameters"><a href="#通用参数-General-Parameters" class="headerlink" title="通用参数(General Parameters)"></a>通用参数(General Parameters)</h2><p>下面这些参数定义了 XGBoost 的总体功能：</p>
+<ul>
+<li><p>booster [default=gbtree]</p>
+<ul>
+<li>选择每次迭代过程中需要运行的模型，一共有两种模型可以选择：</li>
+<li>gbtree：使用基于树的模型进行提升计算；</li>
+<li>gblinear：使用线性模型进行提升计算；</li>
+</ul>
+</li>
+<li><p>silent [default=0]</p>
+<ul>
+<li>设置模型是否打印运行时信息：</li>
+<li>0：打印出运行时信息 </li>
+<li>1：不打印出运行时信息</li>
+</ul>
+</li>
+<li><p>nthread [default=可用的最大线程数] </p>
+<ul>
+<li>XGBoost 运行时的线程数，默认值为当前系统可以获得的最大线程数。</li>
+</ul>
+</li>
+<li><p>num_pbuffer [由 XGBoost 自动设置，不需要用户设置]</p>
+<ul>
+<li>预测缓冲区的大小，通常设置为训练实例的数目。缓冲区用于保存最后一次升压步骤的预测结果。</li>
+</ul>
+</li>
+<li><p>num_feature [由 XGBoost 自动设置，不需要用户设置]</p>
+<ul>
+<li>boosting 过程中用到的特征维数，设置为特征个数。</li>
+</ul>
+</li>
+</ul>
+<h2 id="提升参数-Booster-Parameters"><a href="#提升参数-Booster-Parameters" class="headerlink" title="提升参数(Booster Parameters)"></a>提升参数(Booster Parameters)</h2><h3 id="树模型-Booster-参数"><a href="#树模型-Booster-参数" class="headerlink" title="树模型 Booster 参数"></a>树模型 Booster 参数</h3><ul>
+<li><p>eta [default=0.3，别名: learning_rate]</p>
+<ul>
+<li>为了防止过拟合，更新过程中用到的收缩步长。在每次提升计算之后，算法会直接获得新特征的权重。eta 通过缩减每一步特征的权重使提升计算过程更加保守，使得模型更加健壮。</li>
+<li>取值范围：[0，1]。典型值一般设置为：0.01~0.2。</li>
+</ul>
+</li>
+<li><p>gamma [default=0，别名：min_split_loss]</p>
+<ul>
+<li>在树的叶子节点上进行进一步分割，所需要的最小损失函数减少的大小。越大，算法就越保守。<br>这个值一般来说需要根据损失函数来调整。</li>
+<li>取值范围：[0,∞]</li>
+</ul>
+</li>
+<li><p>max_depth [default=6]</p>
+<ul>
+<li>树的最大深度，值越大，树越复杂。可以用来控制过拟合。</li>
+<li>取值范围：[1,∞]。典型值是3-10。</li>
+</ul>
+</li>
+<li><p>min_child_weight [default=1] </p>
+<ul>
+<li>孩子节点中最小的样本权重(hessian)和。如果一个叶子节点的样本权重和小于min_child_weight，则拆分过程将放弃进一步的划分。在线性回归任务中，这个参数是指建立每个模型所需要的最小样本数。该参数越大算法越保守。这个参数可以用来减少过拟合，但是过高的值也会导致欠拟合，因此可以通过交叉验证来调。</li>
+<li>取值范围: [0,∞]</li>
+</ul>
+</li>
+<li><p>max_delta_step [default=0] </p>
+<ul>
+<li>最大增量步骤，我们允许每个叶子输出。如果该值设置为0，则意味着没有约束。如果它被设置为正值，有助于更新步骤更加保守。通常不需要这个参数，当类是非常不平衡的时，它可能有助于 logistic 回归。将其设置为 1~10 的值可能有助于控制更新。</li>
+<li>取值范围：[0,∞]</li>
+</ul>
+</li>
+<li><p>subsample [default=1]</p>
+<ul>
+<li>用于训练模型的子样本占整个样本集合的比例。如果设置为0.5则意味着 XGBoost 将随机的从整个样本集合中随机的抽取出50%的子样本建立树模型，这能够防止过拟合。</li>
+<li>取值范围为：(0,1]</li>
+</ul>
+</li>
+<li><p>colsample_bytree [default=1]</p>
+<ul>
+<li>在构建每棵树时，列的采样比(一般是特征采样比)。在每次 boosting 迭代中都会出现一次采样。</li>
+<li>取值范围：(0,1]</li>
+</ul>
+</li>
+<li><p>colsample_bylevel [default=1]</p>
+<ul>
+<li>在每个级别上，每个样本的子样本比。每次进行新的分割时，都会出现次采样。<br>当 tree_method 设置为hist时，此参数没有任何影响。这个一般很少用，subsample 和 colsample_bytree 参数调节就足够了。</li>
+</ul>
+</li>
+<li><p>lambda [default=1, 别名: reg_lambda]</p>
+<ul>
+<li>权重的L2正则化项，增加这个值会使模型更保守。这个其实用的很少。</li>
+</ul>
+</li>
+<li><p>alpha [default=0, 别名: reg_alpha]</p>
+<ul>
+<li>权重的L1正则化项，增加这个值会使模型更保守。这个主要是用在数据维度很高的情况下，可以提高运行速度。</li>
+</ul>
+</li>
+<li><p>tree_method [default=auto]</p>
+<ul>
+<li>XGBoost 中使用的树构造算法。参见<a href="https://arxiv.org/abs/1603.02754" target="_blank" rel="external">参考文献</a>中的描述。</li>
+<li>分布式和外存版本只支持近似算法(tree_method=approx)。</li>
+<li>选项: ‘auto’、’approx’、’exact’、’hist’、’gpu_exact’、’gpu_hist’。<ul>
+<li>‘auto’: 用启发式方法去选择最快的一个。<ul>
+<li>对于小到中数据集，将使用精确的贪心算法。</li>
+<li>对于大数据集，会选择近似算法。</li>
+<li>由于之前总是在单台机器上使用精确的贪心算法，所以当选择近似算法时，用户会得到一条消息来通知这个选择。</li>
+</ul>
+</li>
+<li>‘exact’: 使用贪心算法</li>
+<li>‘approx’: 使用草图和直方图的近似贪心算法</li>
+<li>‘hist’: 快速直方图优化近似贪婪算法。它使用了一些性能改进，比如垃圾箱缓存。</li>
+<li>‘gpu_exact’: 使用gpu执行exact算法</li>
+<li>‘gpu_hist’: 使用gpu执行hist算法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>sketch_eps [default=0.03] </p>
+<ul>
+<li>这个选项适用于近似贪心算法。</li>
+<li>这大概可以理解为O(1/sketcheps)数量的箱子。与直接选择的箱数相比，该方法具有一定的理论保证和梗概精度。</li>
+<li>通常用户不需要调整这个参数，但是使用一个较低的值唯一获得更多的精确的列举。</li>
+<li>取值范围：(0,1)</li>
+</ul>
+</li>
+<li><p>scale_pos_weight [default=1]</p>
+<ul>
+<li>用于类别不平衡的情况下，控制正负权重的平衡。将参数设置大于0，可以加快收敛。</li>
+</ul>
+</li>
+<li><p>updater [default=grow_colmaker,prune] </p>
+<ul>
+<li>一个逗号分隔的字符串，定义了要运行的树更新器的序列，提供了一种构造和修改树的模块化方法。这是一个高级的参数通常设置为自动的，取决于其他参数。它也可以被用户明确的定义。有下列的更新器插件: <ul>
+<li>‘grow_colmaker’: 非分布的基于列的树结构。</li>
+<li>‘discol’: 采用基于列的数据分割模式的分布式树结构。</li>
+<li>‘grow_histmaker’: 基于基于直方图计数的全局建议的基于行的数据分割的分布式树结构。</li>
+<li>‘grow_local_histmaker’: 基于局部直方图计数。</li>
+<li>‘grow_skmaker’: 使用近似的草图算法。</li>
+<li>‘refresh’: 根据当前数据刷新树的统计和/或叶值。注意，不执行任何随机的数据行子抽样。</li>
+<li>‘prune’: 在损失小于min_split_loss (or gamma)的情况下修剪。</li>
+</ul>
+</li>
+<li>在分布式设置中，updater序列应该调整为’grow_histmaker,prune’</li>
+</ul>
+</li>
+<li><p>refresh_leaf [default=1]</p>
+<ul>
+<li>设置一个刷新updater插件的参数。当标志为1时，树叶和树节点的统计信息都更新了。当标志为0时，只更新节点属性。</li>
+</ul>
+</li>
+<li><p>process_type [default=default]</p>
+<ul>
+<li>一种可运行的 boosting 过程</li>
+<li>选项: {‘default’，’update’} <ul>
+<li>‘default’: 普通的 boosting 过程来创建新的树。</li>
+<li>‘update’: 从一个已经存在的模型并且仅仅更新它的树。在每一次 boosting 迭代，从初始模型得到的树，一个指定序列的 updater 插件为这些树运行，修改后的树被添加到新的模型。新的模型可能有相同或者更少的树，取决于 boosting 迭代的次数。目前，以下内置的 updater 插件可以与此过程类型有意义的使用:’refresh’, ‘prune’。如果 process_type=update，你就不能使用 updater 插件来创建新的树。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>grow_policy [default=depthwise] </p>
+<ul>
+<li>控制节点被添加到树的方式</li>
+<li>目前仅仅支持 tree_method=hist 时的设置。</li>
+<li>选项: {‘depthwise’, ‘lossguide’} <ul>
+<li>‘depthwise’: 在离根最近的节点处分割</li>
+<li>‘lossguide’: 在最大的 loss 改变出分割</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>max_leaves [default=0] </p>
+<ul>
+<li>最多添加的节点数量。仅当 grow_policy=lossguide 时相关。</li>
+</ul>
+</li>
+<li><p>max_bin [default=256] </p>
+<ul>
+<li>仅当 tree_method=hist 时有用。</li>
+<li>最大的离散箱数，以存储连续的特性。</li>
+<li>增加这个数字可以减少计算时间成本。</li>
+</ul>
+</li>
+<li><p>predictor [default=cpu_predictor] </p>
+<ul>
+<li>选择预测算法的类型。提供同样的结果但是可以选择使用CPU或者GPU。 <ul>
+<li>cpu_predictor: 使用多核CPU预测算法。</li>
+<li>gpu_predictor: 使用gpu预测。如果 tree_method 设置为 gpu_exact 或者 gpu_hist，那么这个就是默认选项。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Dart-Booster-额外的参数-booster-dart"><a href="#Dart-Booster-额外的参数-booster-dart" class="headerlink" title="Dart Booster 额外的参数(booster=dart)"></a>Dart Booster 额外的参数(booster=dart)</h3><p>Dart Booster 将 dropout 引入模型，这里的 dropout 不是直接扔掉，而是变权值。</p>
+<ul>
+<li><p>sample_type [default=uniform]</p>
+<ul>
+<li>算法抽样的类型 <ul>
+<li>uniform: 均匀选择树 dropped。</li>
+<li>weighted: 按照权重来选择树dropped。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>normalize_type [default=tree] </p>
+<ul>
+<li>归一化算法的类型 <ul>
+<li>tree: 新的树和每一个 dropped 树有同样的权重。<ul>
+<li>新的树的权重为 1 / (k + learning_rate)。</li>
+<li>dropped 树乘以一个系数 k / (k + learning_rate)。</li>
+</ul>
+</li>
+<li>forest: 新的树和所有 dropped 树的和有相同的权重。<ul>
+<li>新的树的权重为 1 / (1 + learning_rate)。</li>
+<li>dropped 树乘以一个系数 1 / (1 + learning_rate)。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>rate_drop [default=0.0]</p>
+<ul>
+<li>dropout的概率(在生成的树中 dropped 一部分)。</li>
+<li>取值范围: [0.0, 1.0]</li>
+</ul>
+</li>
+<li><p>one_drop [default=0]</p>
+<ul>
+<li>当这个被设置时，至少有一个树始终会被 dropped（支持原始 DART 论文中的 Binomial-plus-one 或 epsilon-dropout）.</li>
+</ul>
+</li>
+<li><p>skip_drop [default=0.0]</p>
+<ul>
+<li>在 boosting 迭代的过程中略过 dropout 过程的概率。<ul>
+<li>如果一次 dropout 被略过，新的树被添加进 model 用和 gbtree 一样的方式。</li>
+<li>非0的 skip_drop 比 rate_drop 和 one_drop 有更高的优先级。</li>
+</ul>
+</li>
+<li>取值范围: [0.0, 1.0]</li>
+</ul>
+</li>
+</ul>
+<h3 id="线性Booster的参数-booster-gblinear"><a href="#线性Booster的参数-booster-gblinear" class="headerlink" title="线性Booster的参数(booster=gblinear)"></a>线性Booster的参数(booster=gblinear)</h3><ul>
+<li><p>lambda [default=0, 别名:reg_lambda]</p>
+<ul>
+<li>L2正则化的权重，增加该参数的值会让模型更保守</li>
+</ul>
+</li>
+<li><p>alpha [default=0, 别名:reg_alpha]</p>
+<ul>
+<li>L1正则化的权重，增加这个值会让模型更保守。归一化到训练实例的数量。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>updater [default=shotgun]<ul>
+<li>选择算法拟合线性模型<ul>
+<li>shotgun: 基于 shotgun 算法的并行坐标下降算法。使用 ‘HOGRAVE’ 并行性，因此在每次运行时产生一个非确定性的解决方案。</li>
+<li>coord_descent: 普通坐标下降算法。而且多线程下仍然产生确定性的解决方案。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Tweedie-Regression-的参数-objective-reg-tweedie"><a href="#Tweedie-Regression-的参数-objective-reg-tweedie" class="headerlink" title="Tweedie Regression 的参数(objective=reg:tweedie)"></a>Tweedie Regression 的参数(objective=reg:tweedie)</h3><ul>
+<li>tweedie_variance_power [default=1.5]<ul>
+<li>在 Tweedie 分布上控制方差的参数 <ul>
+<li>var(y)~E(y)^tweedie_variance_power</li>
+</ul>
+</li>
+<li>取值范围: (1,2)</li>
+<li>值越接近2越接近 gamma 分布</li>
+<li>值越接近1越接近 Poisson 分布</li>
+</ul>
+</li>
+</ul>
+<h2 id="学习任务参数-Learning-Task-Parameters"><a href="#学习任务参数-Learning-Task-Parameters" class="headerlink" title="学习任务参数(Learning Task Parameters)"></a>学习任务参数(Learning Task Parameters)</h2><p>指定学习任务和相应的学习目标。下面的目标选项如下:</p>
+<ul>
+<li><p>objective [default=reg:linear]</p>
+<ul>
+<li>‘reg:linear’：线性回归。</li>
+<li>‘reg:logistic’：逻辑回归。</li>
+<li>‘binary:logistic’：二分类的逻辑回归，输出概率。</li>
+<li>‘binary:logitraw’：二分类的逻辑回归，在逻辑变换前输出得分。</li>
+<li>‘binary:hinge’：二分类的 hinge loss。使得预测结果为0或1，而不是产生概率。</li>
+<li>‘gpu:reg:linear, gpu:reg:logistic, gpu:binary:logistic, gpu:binary:logitraw’: 对应在 GPU 上评价的目标函数版本。注意，像 GPU 直方图算法一样，它们只能在整个训练期间使用相同数据集时使用。</li>
+<li>‘count:poisson’：用于统计数据的 poisson 回归，输出 poisson 分布均值。<ul>
+<li>max_delta_step：在 poisson 回归中默认值设置为0.7(用于维护优化)。</li>
+</ul>
+</li>
+<li>‘survival:cox’：用于正确删除的生存时间数据的 Cox 回归(被正确删除的作为负例)。注意，预测是按危害比表中的值返回。(例如：在比例风险函数h(t) = h0(t) * HR中，HR = exp(marginal_prediction)。</li>
+<li>‘multi:softmax’：设置 XGBoost 做多分类任务用 softmax 目标，你需要指定 num_class。</li>
+<li>‘multi:softprob’：和 softmax 一样，但是输出的是一个 ndata <em> nclass 的向量，可以进一步变形为 ndata </em> nclass 的矩阵。结果包含预测的每个数据属于每个类的概率值。</li>
+<li>‘rank:pairwise’：通过最小化 pairwise loss，设置 XGBoost 用于排序任务。</li>
+<li>‘reg:gamma’：用 log-link 的 gamma 回归。输出是 gamma 分布的均值。他是有用的，例如：为了模拟保险索赔的严谨性，或者任何输出结果可能是 gamma 分布的。</li>
+<li>‘reg:tweedie’：用 log-link 的 Tweedie 回归。他是有用的，例如：模拟保险全损，或者任何输出结果可能是 Tweedie 分布的。</li>
+</ul>
+</li>
+<li><p>base_score [default=0.5]</p>
+<ul>
+<li>初始化的所有例子的越策得分，全局 bias</li>
+<li>对于足够多的迭代次数，改变这个值不会有太大的效果</li>
+</ul>
+</li>
+<li><p>eval_metric [default according to objective] </p>
+<ul>
+<li>对于验证集的评测指标，一个默认的指标是根据目标分配的(对于回归任务用rmse，对于分类任务用error，mean average precision for ranking)</li>
+<li>用户可以添加多个评测指标，对于python用户，记得将这些指标存入一个参数对的list而不是map，不然后面的指标将会失效。</li>
+<li>可选项如下: <ul>
+<li>rmse：root mean square error(均方根误差)。</li>
+<li>mae：mean absolute error(绝对值误差)。</li>
+<li>logloss：negative log-likelihood(负对数似然)。</li>
+<li>error：二分类错误率。他可以用公式 #(wrong cases)/#(all cases)计算。对于预测，指标会把预测结果大于0.5的当做正类，其他当做负类。</li>
+<li>error@t：与阈值为0.5的二分类不同，可以通过 t 设置阈值。</li>
+<li>merror：多分类错误率，可以用公式 #(wrong cases)/#(all cases)计算。</li>
+<li>mlogloss：Multiclass logloss(多分类对数似然)。</li>
+<li>auc：Area under the curve(曲线下面积)。</li>
+<li>ndcg：Normalized Discounted Cumulative Gain(归一化累积获得收益)</li>
+<li>map：Mean average precision(平均准确率，排名任务)。</li>
+<li>ndcg@n,map@n：n 可以设置为整数，以切断列表中的顶部位置进行评估。</li>
+<li>ndcg-,map-,ndcg@n-,map@n-：在XGBoost，NDCG 和 MAP 将评估没有任何正例样本的列表的得分为1。通过在评价度量中添加“-”，XGBoost 将在某些条件下将这些分数评估为0，反复训练。</li>
+<li>poisson-nloglik：Poisson 回归的负对数似然。</li>
+<li>gamma-nloglik：gamma 回归的负对数似然。</li>
+<li>gamma-deviance：gamma 回归中的差残差</li>
+<li>tweedie-nloglik：Tweedie 回归的负对数似然(在tweedie_variance_power参数为特定值)。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>seed [default=0] </p>
+<ul>
+<li>随机数种子</li>
+</ul>
+</li>
+</ul>
+<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><p>下列的参数仅仅被用在命令行版本的xgboost中</p>
+<ul>
+<li><p>use_buffer [default=1]</p>
+<ul>
+<li>是否创建一个二进制缓冲从输入文本中。这样做通常会加快加载时间。</li>
+</ul>
+</li>
+<li><p>num_round </p>
+<ul>
+<li>boosting 的轮数</li>
+</ul>
+</li>
+<li><p>data </p>
+<ul>
+<li>训练集的路径</li>
+</ul>
+</li>
+<li><p>test:data </p>
+<ul>
+<li>要预测的测试集的路径</li>
+</ul>
+</li>
+<li><p>save_period [default=0] </p>
+<ul>
+<li>保存模型的周期，设置 save_period=10 表示每10次 boosting 就会保存一次模型，设置为0表示在训练期间不保存任何模型。</li>
+</ul>
+</li>
+<li><p>task [default=train] 选项:train、pred、eval、dump </p>
+<ul>
+<li>train：用数据训练</li>
+<li>pred：预测test:data</li>
+<li>eval：设置eval[name]=filename，评估指定的统计数据</li>
+<li>dump：将学习到的模型转换为文本形式</li>
+</ul>
+</li>
+<li><p>model_in [default=NULL]</p>
+<ul>
+<li>输入模型的路径，用于task为test、eval、dump ，如果被明确地指明训练，xgboost会从输入模型继续训练。</li>
+</ul>
+</li>
+<li><p>model_out [default=NULL]</p>
+<ul>
+<li>在训练结束后输出模型的路径，如果不知名，会输出0003.model，这里的0003是 boosting 的轮数。</li>
+</ul>
+</li>
+<li><p>model_dir [default=models/]</p>
+<ul>
+<li>用保存训练期间的模型输出的目录。</li>
+</ul>
+</li>
+<li><p>fmap </p>
+<ul>
+<li>特征图，用于转换模型。</li>
+</ul>
+</li>
+<li><p>name_dump [default=dump.txt] </p>
+<ul>
+<li>模型转储文件的名称。</li>
+</ul>
+</li>
+<li><p>name_pred [default=pred.txt] </p>
+<ul>
+<li>预测文件的名字，用于预测模式。</li>
+</ul>
+</li>
+<li><p>pred_margin [default=0] </p>
+<ul>
+<li>预测 margin 而不是转换概率。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持整理学习笔记，您的支持将鼓励我继续整理下去！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="MJ 微信打赏"/>
+        <p>微信打赏</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="MJ 支付宝打赏"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/04/xgboost-using-tutorial/" rel="next" title="XGBoost使用教程">
+                <i class="fa fa-chevron-left"></i> XGBoost使用教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_cqq">QQ</a>
+<a class="jiathis_button_tsina">微博</a>
+<a class="jiathis_button_fav">收藏夹</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/MJ.jpg"
+              alt="MJ" />
+          
+            <p class="site-author-name" itemprop="name">MJ</p>
+            <p class="site-description motion-element" itemprop="description">机器之法，学习之道</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ChengjinLi" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="lichengjin606@gmail.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="369387335" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>QQ</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/lcjpiglet" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>微博</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://liam0205.me/" title="liam0205" target="_blank">liam0205</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://ilewseu.github.io" title="ilewseu" target="_blank">ilewseu</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XGBoost-参数"><span class="nav-number">1.</span> <span class="nav-text">XGBoost 参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通用参数-General-Parameters"><span class="nav-number">1.1.</span> <span class="nav-text">通用参数(General Parameters)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提升参数-Booster-Parameters"><span class="nav-number">1.2.</span> <span class="nav-text">提升参数(Booster Parameters)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树模型-Booster-参数"><span class="nav-number">1.2.1.</span> <span class="nav-text">树模型 Booster 参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dart-Booster-额外的参数-booster-dart"><span class="nav-number">1.2.2.</span> <span class="nav-text">Dart Booster 额外的参数(booster=dart)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性Booster的参数-booster-gblinear"><span class="nav-number">1.2.3.</span> <span class="nav-text">线性Booster的参数(booster=gblinear)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tweedie-Regression-的参数-objective-reg-tweedie"><span class="nav-number">1.2.4.</span> <span class="nav-text">Tweedie Regression 的参数(objective=reg:tweedie)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习任务参数-Learning-Task-Parameters"><span class="nav-number">1.3.</span> <span class="nav-text">学习任务参数(Learning Task Parameters)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行参数"><span class="nav-number">1.4.</span> <span class="nav-text">命令行参数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MJ</span>
+
+  
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: true,
+        notify: false,
+        app_id: 'VL24cclbEHBOjN5qy6msI2jv-gzGzoHsz',
+        app_key: 'XJuFdy33xViWJWN0KRz6OO0C',
+        placeholder: '期待你的评论...'
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

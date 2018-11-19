@@ -77,7 +77,7 @@
 <meta property="og:site_name" content="MJ&#39;s Learning Notes">
 <meta property="og:description" content="简介tmux 是一个优秀的终端复用软件，即使非正常掉线，也能保证当前的任务运行，这一点对于远程 ssh 访问特别有用，网络不好的情况下仍然能保证工作现场不丢失! tmux  完全使用键盘控制窗口，实现窗口的切换。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-13T03:39:30.000Z">
+<meta property="og:updated_time" content="2018-06-20T06:39:49.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="终端复用工具---「tmux」的安装及使用">
 <meta name="twitter:description" content="简介tmux 是一个优秀的终端复用软件，即使非正常掉线，也能保证当前的任务运行，这一点对于远程 ssh 访问特别有用，网络不好的情况下仍然能保证工作现场不丢失! tmux  完全使用键盘控制窗口，实现窗口的切换。">
@@ -387,7 +387,8 @@
 <h3 id="查看是否安装成功"><a href="#查看是否安装成功" class="headerlink" title="查看是否安装成功"></a>查看是否安装成功</h3><p>通过如下命令查看 <strong><code>tmux</code></strong> 的版本号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmux -V</div></pre></td></tr></table></figure></p>
 <p>当前安装版本为 <strong><code>2.6</code></strong>，则终端显示如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmux 2.6</div></pre></td></tr></table></figure></p>
 <h2 id="在「Ubuntu」中安装"><a href="#在「Ubuntu」中安装" class="headerlink" title="在「Ubuntu」中安装"></a>在「Ubuntu」中安装</h2><p>在终端输入如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install tmux</div></pre></td></tr></table></figure></p>
-<h1 id="「Tmux」的配置文件"><a href="#「Tmux」的配置文件" class="headerlink" title="「Tmux」的配置文件"></a>「Tmux」的配置文件</h1><p><strong><code>tmux</code></strong> 的配置文件为 <strong><code>~/.tmux.conf</code></strong> ，每当开启一个新的会话时，<strong><code>tmux</code></strong>  都会先读取这个文件。</p>
+<h1 id="「Tmux」的配置文件"><a href="#「Tmux」的配置文件" class="headerlink" title="「Tmux」的配置文件"></a>「Tmux」的配置文件</h1><p><strong><code>tmux</code></strong> 的配置文件为 <strong><code>~/.tmux.conf</code></strong> ，每当开启一个新的会话时，<strong><code>tmux</code></strong>  都会先读取这个文件。本人使用的配置文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># 状态栏</div><div class="line"># 颜色</div><div class="line">set -g status-bg black</div><div class="line">set -g status-fg white</div><div class="line"></div><div class="line"># 对齐方式</div><div class="line">set-option -g status-justify centre</div><div class="line"></div><div class="line"># 左下角</div><div class="line">set-option -g status-left &apos;#[bg=black,fg=green][#[fg=cyan]#S#[fg=green]]&apos;</div><div class="line">set-option -g status-left-length 20</div><div class="line"></div><div class="line"># 窗口列表</div><div class="line">setw -g automatic-rename on</div><div class="line">set-window-option -g window-status-format &apos;#[dim]#I:#[default]#W#[fg=grey,dim]&apos;</div><div class="line">set-window-option -g window-status-current-format &apos;#[fg=cyan,bold]#I#[fg=blue]:#[fg=cyan]#W#[fg=dim]&apos;</div><div class="line"></div><div class="line"># 右下角</div><div class="line">set -g status-right &apos;#[fg=green][#[fg=cyan]%Y-%m-%d#[fg=green]]&apos;</div></pre></td></tr></table></figure>
 <h1 id="「Tmux」的快捷键前缀-Prefix"><a href="#「Tmux」的快捷键前缀-Prefix" class="headerlink" title="「Tmux」的快捷键前缀(Prefix)"></a>「Tmux」的快捷键前缀(Prefix)</h1><p>为了使自身的快捷键和其他软件的快捷键互不干扰， <strong><code>tmux</code></strong> 提供了一个快捷键前缀(<strong><code>Prefix</code></strong>)，默认是组合键 <strong><code>Ctrl-b</code></strong>（同时按下 <strong><code>Ctrl</code></strong> 键和 <strong><code>b</code></strong> 键）<br>当想要使用快捷键时，需要先按下快捷键前缀，然后再按下快捷键，以下把前缀按键称为 <strong><code>Prefix</code></strong>。</p>
 <p>下面介绍一下 <strong><code>tmux</code></strong> 的三个核心概念，会话(<strong><code>session</code></strong>)、窗口(<strong><code>window</code></strong>)和窗格(<strong><code>pane</code></strong>)及其基本用法。</p>
 <h1 id="会话「session」"><a href="#会话「session」" class="headerlink" title="会话「session」"></a>会话「session」</h1><h2 id="创建session"><a href="#创建session" class="headerlink" title="创建session"></a>创建session</h2><p>创建一个新的会话，只需要在终端运行如下的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmux new -s &lt;session_name&gt; -n &lt;window_name&gt;</div></pre></td></tr></table></figure></p>
@@ -602,7 +603,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -613,7 +614,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -624,7 +625,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -746,8 +747,7 @@ var jiathis_config={
 
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
     <span class="site-uv">
       <i class="fa fa-user"></i> 本站访客数
